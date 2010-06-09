@@ -25,7 +25,6 @@ EXTRA_DIST = paths ChangeLog.0 summary.sh.in CHECKLIST
 SUBDIRS = lib \
 	libinetutils libtelnet libicmp libls \
 	src telnet telnetd ftp ftpd talk talkd whois ping ifconfig \
-	doc man \
 	tests
 
 DISTCLEANFILES = pathdefs.make paths.defs \

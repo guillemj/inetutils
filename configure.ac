@@ -143,7 +143,6 @@ AC_PROG_RANLIB
 AC_PROG_YACC
 AC_PROG_LN_S
 AC_PROG_SED
-AM_MISSING_PROG(HELP2MAN, help2man, $missing_dir)
 AC_ARG_VAR(GREP, [Location of preferred 'grep' utility.])
 AC_ARG_VAR(EGREP, [Location of preferred 'egrep' utility.])
 AC_ARG_VAR(FGREP, [Location of preferred 'fgrep' utility.])
@@ -1073,8 +1072,6 @@ whois/Makefile
 ping/Makefile
 ifconfig/Makefile
 ifconfig/system/Makefile
-doc/Makefile
-man/Makefile
 tests/Makefile
 confpaths.h:confpaths.h.in
 ])
