@@ -1110,9 +1110,9 @@ getconfigent (FILE *fconfig, const char *file, size_t *line)
       sep->se_proto = newstr (argv[INETD_PROTOCOL]);
 
 #ifdef IPV6
-      /* We default to IPv4. */
+      /* We default to IPv4.  */
       sep->se_family = AF_INET;
-      sep->se_v4mapped = 1;
+      sep->se_v4mapped = 0;
 
       if ((strncmp (sep->se_proto, "tcp", 3) == 0)
 	  || (strncmp (sep->se_proto, "udp", 3) == 0))
@@ -1120,10 +1120,11 @@ getconfigent (FILE *fconfig, const char *file, size_t *line)
 	  if (sep->se_proto[3] == '6')
 	    {
 	      sep->se_family = AF_INET6;
-	      sep->se_v4mapped = 0;
 	      /* Check for tcp6only and udp6only.  */
 	      if (strcmp (&sep->se_proto[3], "6only") == 0)
 	        sep->se_v4mapped = 0;
+	      else
+	        sep->se_v4mapped = 1;
 	    }
 	  else if (sep->se_proto[3] == '4')
 	    {
