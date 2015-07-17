@@ -719,24 +719,32 @@ fh_brdaddr_query (format_data_t form, int argc, char *argv[])
 # ifdef SIOCGIFFLAGS
   int f;
   int rev;
-  unsigned int uflags = (unsigned short) form->ifr->ifr_flags;
+  unsigned int uflags;
 
-# ifdef ifr_flagshigh
-  uflags |= (unsigned short) form->ifr->ifr_flagshigh << 16;
-# endif /* ifr_flagshigh */
+  f = if_nameztoflag ("BROADCAST", &rev);
 
-  if (0 == (f = if_nameztoflag ("BROADCAST", &rev))
-      || (ioctl (form->sfd, SIOCGIFFLAGS, form->ifr) < 0)
-      || ((f & uflags) == 0))
+  if (f == 0 || (ioctl (form->sfd, SIOCGIFFLAGS, form->ifr) < 0))
     {
       select_arg (form, argc, argv, 1);
       return;
     }
-# endif
+
+  uflags = (unsigned short) form->ifr->ifr_flags;
+#  ifdef ifr_flagshigh
+  uflags |= (unsigned short) form->ifr->ifr_flagshigh << 16;
+#  endif /* ifr_flagshigh */
+
+  if ((f & uflags) == 0)
+    {
+      select_arg (form, argc, argv, 1);
+      return;
+    }
+# endif /* SIOCGIFFLAGS */
+
   if (ioctl (form->sfd, SIOCGIFBRDADDR, form->ifr) >= 0)
     select_arg (form, argc, argv, 0);
   else
-#endif
+#endif /* SIOCGIFBRDADDR */
     select_arg (form, argc, argv, 1);
 }
 
@@ -763,24 +771,32 @@ fh_dstaddr_query (format_data_t form, int argc, char *argv[])
 # ifdef SIOCGIFFLAGS
   int f;
   int rev;
-  unsigned int uflags = (unsigned short) form->ifr->ifr_flags;
+  unsigned int uflags;
 
-#  ifdef ifr_flagshigh
-  uflags |= (unsigned short) form->ifr->ifr_flagshigh << 16;
-#  endif /* ifr_flagshigh */
+  f = if_nameztoflag ("POINTOPOINT", &rev);
 
-  if (0 == (f = if_nameztoflag ("POINTOPOINT", &rev))
-      || (ioctl (form->sfd, SIOCGIFFLAGS, form->ifr) < 0)
-      || ((f & uflags) == 0))
+  if (f == 0 || (ioctl (form->sfd, SIOCGIFFLAGS, form->ifr) < 0))
     {
       select_arg (form, argc, argv, 1);
       return;
     }
-# endif
+
+  uflags = (unsigned short) form->ifr->ifr_flags;
+#  ifdef ifr_flagshigh
+  uflags |= (unsigned short) form->ifr->ifr_flagshigh << 16;
+#  endif /* ifr_flagshigh */
+
+  if ((f & uflags) == 0)
+    {
+      select_arg (form, argc, argv, 1);
+      return;
+    }
+# endif /* SIOCGIFFLAGS */
+
   if (ioctl (form->sfd, SIOCGIFDSTADDR, form->ifr) >= 0)
     select_arg (form, argc, argv, 0);
   else
-#endif
+#endif /* SIOCGIFDSTADDR */
     select_arg (form, argc, argv, 1);
 }
 

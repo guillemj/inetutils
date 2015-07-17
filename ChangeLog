@@ -1,3 +1,12 @@
+2015-07-17  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	ifconfig: Sporadically appearing regression.
+	Device flags are sometimes calculated before their
+	query using SIOCGIFFLAGS.  First observed on GNU/Hurd.
+
+	* ifconfig/printif.c (fh_brdaddr_query, fh_dstaddr_query):
+	Execute ioctl(SIOCGIFFLAGS) before calculating UFLAGS.
+
 2015-05-27  Alfred M. Szmidt  <ams@gnu.org>
 
 	* Makefile.am (ACLOCAL_AMFLAGS): New variable.
