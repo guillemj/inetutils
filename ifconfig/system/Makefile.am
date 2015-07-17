@@ -26,8 +26,10 @@ noinst_HEADERS = \
 	linux.h \
 	solaris.h \
 	qnx.h \
+	hurd.h \
 	bsd.c \
 	generic.c \
 	linux.c \
 	solaris.c \
-	qnx.c
+	qnx.c \
+	hurd.c

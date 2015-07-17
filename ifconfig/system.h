@@ -97,6 +97,8 @@ extern struct if_nameindex* (*system_if_nameindex) (void);
        defined __FreeBSD_kernel__ || \
        defined __NetBSD__ || defined __OpenBSD__
 #  include "system/bsd.h"
+# elif defined __GNU__
+#  include "system/hurd.h"
 # else
 #  include "system/generic.h"
 # endif

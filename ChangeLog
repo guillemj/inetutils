@@ -1,3 +1,20 @@
+2015-07-18  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	ifconfig: Improve the support for GNU/Hurd.
+	Add system specific abilities, including parsing of command
+	line and hardware addresses.
+
+	* ifconfig/system.h [__GNU__]: Include "system/hurd.h".
+	* ifconfig/system.c [__GNU__]: Include "system/hurd.c".
+	* ifconfig/system/Makefile.am (noinst_HEADERS): Add the
+	files `hurd.h' and `hurd.c'.
+	* ifconfig/system/hurd.h, ifconfig/system/hurd.c: New files.
+
+	* ifconfig/system/generic.c: Include <unused-parameter.h>.
+	(system_parse_opt, system_parse_opt_rest, system_configure):
+	Apply _GL_UNUSED_PARAMETER to all arguments, as these functions
+	are placeholders and no-ops.
+
 2015-07-17  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	ifconfig: Sporadically appearing regression.

@@ -22,6 +22,8 @@
 #include <config.h>
 
 #include "../ifconfig.h"
+
+#include <unused-parameter.h>
 
 
 /* Output format stuff.  */
@@ -36,19 +38,25 @@ const char *system_help;
 struct argp_child system_argp_child;
 
 int
-system_parse_opt (struct ifconfig **ifp, char option, char *optarg)
+system_parse_opt (struct ifconfig **ifp _GL_UNUSED_PARAMETER,
+		  char option _GL_UNUSED_PARAMETER,
+		  char *optarg _GL_UNUSED_PARAMETER)
 {
   return 0;
 }
 
 int
-system_parse_opt_rest (struct ifconfig **ifp, int argc, char *argv[])
+system_parse_opt_rest (struct ifconfig **ifp _GL_UNUSED_PARAMETER,
+		       int argc _GL_UNUSED_PARAMETER,
+		       char *argv[] _GL_UNUSED_PARAMETER)
 {
   return 0;
 }
 
 int
-system_configure (int sfd, struct ifreq *ifr, struct system_ifconfig *ifs)
+system_configure (int sfd _GL_UNUSED_PARAMETER,
+		  struct ifreq *ifr _GL_UNUSED_PARAMETER,
+		  struct system_ifconfig *ifs _GL_UNUSED_PARAMETER)
 {
   return 0;
 }
