@@ -1,5 +1,15 @@
 2015-07-18  Mats Erik Andersson  <gnu@gisladisker.se>
 
+	rcp: Integer overflow.
+	During transmission of large files, size exceeding 2GB,
+	a long integer variable overflows.  Issue reported and
+	identified by Wenlin Kang in
+	http://lists.gnu.org/archive/html/bug-inetutils/2015-07/msg00004.html
+
+	* src/rcp.c (sink): Change SIZE to have type `off_t'.
+
+2015-07-18  Mats Erik Andersson  <gnu@gisladisker.se>
+
 	ifconfig: Improve the support for GNU/Hurd.
 	Add system specific abilities, including parsing of command
 	line and hardware addresses.

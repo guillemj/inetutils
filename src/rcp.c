@@ -876,9 +876,9 @@ sink (int argc, char *argv[])
   enum
   { YES, NO, DISPLAYED } wrerr;
   BUF *bp;
-  off_t i, j;
+  off_t i, j, size;
   int amt, count, exists, first, mask, mode, ofd, omode;
-  int setimes, size, targisdir, wrerrno;
+  int setimes, targisdir, wrerrno;
   char ch, *cp, *np, *targ, *vect[1], buf[BUFSIZ];
   const char *why;
 
