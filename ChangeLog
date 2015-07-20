@@ -1,3 +1,25 @@
+2015-07-20  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	ifconfig: More info on tunnel interfaces.
+
+	* ifconfig/options.c (formats) <net-tools format>: Add
+	destination address for point-to-point interfaces.  It is
+	present in some other formats.
+	<unix format>: Display tunnel addresses for p-t-p interfaces.
+	<osf format>: Add destination address for p-t-p interfaces
+	and hardware type and hardware address for any device.
+
+	* ifconfig/system/bsd.c (system_fh_brdaddr_query): Check
+	that IFF_BROADCAST is set and access the relevant member
+	`fp->ifa_broadaddr'.
+	(system_fh_brdaddr): Check for set IFF_BROADCAST.
+	(system_fh_tunnel_query, system_fh_tundst, system_fh_tunsrc):
+	New functions.
+	* ifconfig/system/bsd.h (SYSTEM_FORMAT_HANDLER): Add the
+	keys `tunnel?', `tundst', and `tunsrc'.
+	(system_fh_tunnel_query, system_fh_tundst, system_fh_tunsrc):
+	New prototypes.
+
 2015-07-18  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	rcp: Integer overflow.

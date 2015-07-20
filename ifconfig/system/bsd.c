@@ -217,7 +217,7 @@ system_fh_brdaddr_query (format_data_t form, int argc, char *argv[])
 	      strcmp (fp->ifa_name, form->ifr->ifr_name))
 	    continue;
 
-	  if (fp->ifa_netmask)
+	  if ((fp->ifa_flags & IFF_BROADCAST) && fp->ifa_broadaddr)
 	    missing = 0;
 	  break;
 	}
@@ -242,7 +242,7 @@ system_fh_brdaddr (format_data_t form, int argc, char *argv[])
 	      strcmp (fp->ifa_name, form->ifr->ifr_name))
 	    continue;
 
-	  if (fp->ifa_broadaddr)
+	  if ((fp->ifa_flags & IFF_BROADCAST) && fp->ifa_broadaddr)
 	    {
 	      missing = 0;
 	      put_addr (form, argc, argv, fp->ifa_broadaddr);
@@ -587,4 +587,37 @@ system_fh_status (format_data_t form, int argc, char *argv[])
   else
 #endif /* SIOCGIFMEDIA */
     put_string (form, "(not known)");
+}
+
+void
+system_fh_tunnel_query (format_data_t form, int argc, char *argv[])
+{
+#if defined SIOCGIFPSRCADDR && defined SIOCGIFPDSTADDR
+  if (ioctl (form->sfd, SIOCGIFPSRCADDR, form->ifr) >= 0)
+    select_arg (form, argc, argv, 0);
+  else
+#endif /* SIOCGIFPSRCADDR && SIOCGIFPDSTADDR */
+  select_arg (form, argc, argv, 1);
+}
+
+void
+system_fh_tundst (format_data_t form, int argc, char *argv[])
+{
+#ifdef SIOCGIFPDSTADDR
+  if (ioctl (form->sfd, SIOCGIFPDSTADDR, form->ifr) >= 0)
+    put_addr (form, argc, argv, &form->ifr->ifr_addr);
+  else
+    put_string (form, "(no phydst)");
+#endif /* SIOCGIFPDSTADDR */
+}
+
+void
+system_fh_tunsrc (format_data_t form, int argc, char *argv[])
+{
+#ifdef SIOCGIFPSRCADDR
+  if (ioctl (form->sfd, SIOCGIFPSRCADDR, form->ifr) >= 0)
+    put_addr (form, argc, argv, &form->ifr->ifr_addr);
+  else
+    put_string (form, "(no physrc)");
+#endif /* SIOCGIFPSRCADDR */
 }

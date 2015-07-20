@@ -71,7 +71,10 @@ struct system_ifconfig
   {"netmask?", system_fh_netmask_query}, \
   {"netmask", system_fh_netmask},	\
   {"status?", system_fh_status_query}, \
-  {"status", system_fh_status},
+  {"status", system_fh_status}, \
+  {"tunnel?", system_fh_tunnel_query}, \
+  {"tundst", system_fh_tundst}, \
+  {"tunsrc", system_fh_tunsrc},
 
 void system_fh_brdaddr_query (format_data_t form, int argc, char *argv[]);
 void system_fh_brdaddr (format_data_t form, int argc, char *argv[]);
@@ -85,5 +88,8 @@ void system_fh_netmask_query (format_data_t form, int argc, char *argv[]);
 void system_fh_netmask (format_data_t form, int argc, char *argv[]);
 void system_fh_status_query (format_data_t form, int argc, char *argv[]);
 void system_fh_status (format_data_t form, int argc, char *argv[]);
+void system_fh_tunnel_query (format_data_t form, int argc, char *argv[]);
+void system_fh_tundst (format_data_t form, int argc, char *argv[]);
+void system_fh_tunsrc (format_data_t form, int argc, char *argv[]);
 
 #endif /* IFCONFIG_SYSTEM_BSD_H */
