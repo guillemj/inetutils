@@ -1,3 +1,29 @@
+2015-07-21  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	ifconfig: Implement a hardware list for BSD systems.
+	Patterned on the hardware recognition already in use
+	by GNU/Linux, use a similar mechanism for all of BSD.
+
+	* ifconfig/system/bsd.c (print_hwaddr_ether): New function.
+	(ift_symbols): New variable.
+	(ift_findvalue): New function.
+	(system_fh_hwaddr_query, system_fh_hwaddr)
+	(system_fh_hwtype_query, system_fh_hwtype): Adjust mechanisms
+	to use the table `ift_symbols' via ift_findvalue().
+
+
+	ifconfig: Report tunnels in two more formats.
+
+	* ifconfig/options.c (formats) <gnu-one-entry format>:
+	Add two entries for the endpoints of tunnels.
+	<osf format>: Add a line to display tunnels.
+
+
+	ifconfig: Add a missing interface flag.
+
+	* ifconfig/flags.c [IFF_CANTCONFIG] (if_flags): Add the
+	extended interface flag `CANTCONFIG'.
+
 2015-07-20  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	ifconfig: More info on tunnel interfaces.

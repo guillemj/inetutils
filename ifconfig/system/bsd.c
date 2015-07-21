@@ -200,6 +200,73 @@ struct ifmediareq ifm;
 
 struct if_nameindex* (*system_if_nameindex) (void) = if_nameindex;
 
+static void
+print_hwaddr_ether (format_data_t form, unsigned char *data)
+{
+  put_string (form, ether_ntoa ((struct ether_addr *) data));
+  had_output = 1;
+}
+
+struct ift_symbol
+{
+  const char *name;
+  const char *title;
+  int value;
+  void (*print_hwaddr) (format_data_t form, unsigned char *data);
+} ift_symbols[] =
+  {
+#ifdef IFT_ETHER		/* Ethernet CSMA/CD */
+# ifdef ETHERNAME
+    { "ETHER", ETHERNAME, IFT_ETHER, print_hwaddr_ether},
+# else
+    { "ETHER", "ether", IFT_ETHER, print_hwaddr_ether},
+# endif /* !ETHERNAME */
+#endif /* IFT_ETHER */
+#ifdef IFT_GIF			/* Generic tunnel (gif) */
+    { "IPGIF", "IPIP tunnel", IFT_GIF, NULL},
+#endif
+#ifdef IFT_FAITH		/* IPv6-to-IPv4 TCP relay capture */
+    { "FAITH", "TCP relay capture", IFT_FAITH, NULL},
+#endif
+#ifdef IFT_LOOP			/* Local loopback */
+    { "LOOPBACK", "Local loopback", IFT_LOOP, NULL},
+#endif
+#ifdef IFT_PFLOG		/* Packet filter logging */
+    { "PFLOG", "Packet filter logger", IFT_PFLOG, NULL},
+#endif
+#ifdef IFT_PFSYNC		/* Packet filter state synching */
+    { "PFSYNC", "Packet filter state synching", IFT_PFSYNC, NULL},
+#endif
+#ifdef IFT_PPP			/* Point-to-Point serial protocol */
+    { "PPP", "Point-to-Point over serial", IFT_PPP, NULL},
+#endif
+#ifdef IFT_SLIP			/* IP over generic TTY */
+    { "SLIP", "Serial line IP", IFT_SLIP, NULL},
+#endif
+#ifdef IFT_TUNNEL		/* Encapsulation (gre) */
+    { "IPGRE", "GRE over IP", IFT_TUNNEL, NULL},
+#endif
+    { NULL, NULL, 0, NULL}
+  };
+
+static struct ift_symbol *
+ift_findvalue (int value)
+{
+  struct ift_symbol *ift = ift_symbols;
+
+  while (ift->name != NULL)
+    {
+      if (ift->value == value)
+	break;
+      ift++;
+    }
+
+  if (ift->name)
+    return ift;
+  else
+    return NULL;
+}
+
 void
 system_fh_brdaddr_query (format_data_t form, int argc, char *argv[])
 {
@@ -274,11 +341,16 @@ system_fh_hwaddr_query (format_data_t form, int argc, char *argv[])
 	    continue;
 
 	  dl = (struct sockaddr_dl *) fp->ifa_addr;
-	  if (dl && (dl->sdl_len > 0) &&
-	      dl->sdl_type == IFT_ETHER)	/* XXX: More cases?  */
-	    missing = 0;
+	  if (dl && (dl->sdl_len > 0))
+	    {
+	      struct ift_symbol *ift = ift_findvalue (dl->sdl_type);
+
+	      if (ift && ift->print_hwaddr)
+		missing = 0;
+	    }
 	  break;
 	}
+
       select_arg (form, argc, argv, missing);
     }
 }
@@ -304,11 +376,16 @@ system_fh_hwaddr (format_data_t form, int argc _GL_UNUSED_PARAMETER,
 	    continue;
 
 	  dl = (struct sockaddr_dl *) fp->ifa_addr;
-	  if (dl && (dl->sdl_len > 0) &&
-	      dl->sdl_type == IFT_ETHER)	/* XXX: More cases?  */
+	  if (dl && (dl->sdl_len > 0))
 	    {
-	      missing = 0;
-	      put_string (form, ether_ntoa ((struct ether_addr *) LLADDR (dl)));
+	      struct ift_symbol *ift = ift_findvalue (dl->sdl_type);
+
+	      if (ift && ift->print_hwaddr)
+		{
+		  missing = 0;
+		  ift->print_hwaddr (form,
+				     (unsigned char *) LLADDR (dl));
+		}
 	    }
 	  break;
 	}
@@ -320,19 +397,11 @@ system_fh_hwaddr (format_data_t form, int argc _GL_UNUSED_PARAMETER,
 void
 system_fh_hwtype_query (format_data_t form, int argc, char *argv[])
 {
-  system_fh_hwaddr_query (form, argc, argv);
-}
+  int missing = 1;
 
-void
-system_fh_hwtype (format_data_t form, int argc _GL_UNUSED_PARAMETER,
-		  char *argv[] _GL_UNUSED_PARAMETER)
-{
   ESTABLISH_IFADDRS
-  if (!ifp)
-    put_string (form, "(hwtype unknown)");
-  else
+  if (ifp)
     {
-      int found = 0;
       struct ifaddrs *fp;
       struct sockaddr_dl *dl = NULL;
 
@@ -343,17 +412,55 @@ system_fh_hwtype (format_data_t form, int argc _GL_UNUSED_PARAMETER,
 	    continue;
 
 	  dl = (struct sockaddr_dl *) fp->ifa_addr;
-	  if (dl && (dl->sdl_len > 0) &&
-	      dl->sdl_type == IFT_ETHER)	/* XXX: More cases?  */
+	  if (dl && (dl->sdl_len > 0))
 	    {
-	      found = 1;
-	      put_string (form, ETHERNAME);
+	      struct ift_symbol *ift = ift_findvalue (dl->sdl_type);
+
+	      if (ift && ift->title)
+		missing = 0;
 	    }
 	  break;
 	}
-      if (!found)
-	put_string (form, "(unknown hwtype)");
     }
+
+  select_arg (form, argc, argv, missing);
+}
+
+void
+system_fh_hwtype (format_data_t form, int argc _GL_UNUSED_PARAMETER,
+		  char *argv[] _GL_UNUSED_PARAMETER)
+{
+  int found = 0;
+
+  ESTABLISH_IFADDRS
+  if (ifp)
+    {
+      struct ifaddrs *fp;
+      struct sockaddr_dl *dl = NULL;
+
+      for (fp = ifp; fp; fp = fp->ifa_next)
+	{
+	  if (fp->ifa_addr->sa_family != AF_LINK ||
+	      strcmp (fp->ifa_name, form->ifr->ifr_name))
+	    continue;
+
+	  dl = (struct sockaddr_dl *) fp->ifa_addr;
+	  if (dl && (dl->sdl_len > 0))
+	    {
+	      struct ift_symbol *ift = ift_findvalue (dl->sdl_type);
+
+	      if (ift && ift->title)
+		{
+		  found = 1;
+		  put_string (form, ift->title);
+		}
+	    }
+	  break;
+	}
+    }
+
+  if (!found)
+    put_string (form, "(unknown hwtype)");
 }
 
 /* Lookup structures provided by the system, each decoding
