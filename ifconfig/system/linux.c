@@ -675,6 +675,7 @@ system_fh_txqlen (format_data_t form, int argc, char *argv[])
 const char *system_help = "\
  NAME [ADDR] [broadcast BRDADDR]\
  [pointopoint|dstaddr DSTADDR] [netmask MASK]\
+ [ether|hwaddr|lladdr MACADDR]\
  [metric N] [mtu N] [txqueuelen N] [up|down] [FLAGS]";
 
 void
@@ -768,6 +769,7 @@ system_parse_opt_rest (struct ifconfig **ifp, int argc, char *argv[])
     EXPECT_BROADCAST,
     EXPECT_DSTADDR,
     EXPECT_NETMASK,
+    EXPECT_HWADDR,
     EXPECT_MTU,
     EXPECT_METRIC,
     EXPECT_TXQLEN,
@@ -790,6 +792,10 @@ system_parse_opt_rest (struct ifconfig **ifp, int argc, char *argv[])
 
 	case EXPECT_NETMASK:
 	  parse_opt_set_netmask (*ifp, argv[i]);
+	  break;
+
+	case EXPECT_HWADDR:
+	  parse_opt_set_hwaddr (*ifp, argv[i]);
 	  break;
 
 	case EXPECT_MTU:
@@ -828,6 +834,10 @@ system_parse_opt_rest (struct ifconfig **ifp, int argc, char *argv[])
 	expect = EXPECT_DSTADDR;
       else if (!strcmp (argv[i], "netmask"))
 	expect = EXPECT_NETMASK;
+      else if (!strcmp (argv[i], "ether")
+	       || !strcmp(argv[i], "hwaddr")
+	       || !strcmp(argv[i], "lladdr"))
+	expect = EXPECT_HWADDR;
       else if (!strcmp (argv[i], "metric"))
 	expect = EXPECT_METRIC;
       else if (!strcmp (argv[i], "mtu"))
@@ -857,6 +867,10 @@ system_parse_opt_rest (struct ifconfig **ifp, int argc, char *argv[])
 
     case EXPECT_NETMASK:
       error (0, 0, "option `netmask' requires an argument");
+      break;
+
+    case EXPECT_HWADDR:
+      error (0, 0, "option `hwaddr' requires an argument");
       break;
 
     case EXPECT_METRIC:

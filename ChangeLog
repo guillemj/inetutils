@@ -1,3 +1,28 @@
+2015-07-25  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	ifconfig: Support changing of hardware address.
+	Implement the setting of link level addresses
+	for systems running GNU/Linux.
+
+	* ifconfig/changeif.c [HAVE_NETINET_ETHER_H]: Include
+	header <netinet/ether.h>.
+	(set_hwaddr): New function.
+	(configure_if): Call set_hwaddr() whenever `ifp->valid'
+	contains IF_VALID_HWADDR.
+	* ifconfig/options.c (ifconfig_initializer): Add a further
+	NULL at the end.
+	(parse_opt_set_hwaddr): New function built by the generic
+	macro PARSE_OPT_SET_ADDR.
+	* ifconfig/options.h (struct ifconfig): Define IF_VALID_HWADDR
+	and add a new member `hwaddr'.
+	(parse_opt_set_hwaddr): New prototype.
+
+	* ifconfig/system/linux.c (system_help): Add parsed option
+	`ether|hwaddr|lladdr MACADDR'.
+	(system_parse_opt_rest): New enum value EXPECT_HWADDR.  Insert
+	this into the parser, triggering on all the keywords `ether',
+	`hwaddr', and `lladdr' for best portability.
+
 2015-07-21  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	ifconfig: Implement a hardware list for BSD systems.

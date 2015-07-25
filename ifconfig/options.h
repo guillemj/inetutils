@@ -52,6 +52,8 @@ struct ifconfig
   int metric;
   int setflags;
   int clrflags;
+# define IF_VALID_HWADDR	0x200
+  char *hwaddr;
 };
 
 struct format
@@ -84,6 +86,7 @@ void parse_opt_set_address (struct ifconfig *ifp, char *addr);
 void parse_opt_set_brdaddr (struct ifconfig *ifp, char *addr);
 void parse_opt_set_dstaddr (struct ifconfig *ifp, char *addr);
 void parse_opt_set_netmask (struct ifconfig *ifp, char *addr);
+void parse_opt_set_hwaddr (struct ifconfig *ifp, char *addr);
 void parse_opt_set_mtu (struct ifconfig *ifp, char *addr);
 void parse_opt_set_metric (struct ifconfig *ifp, char *addr);
 void parse_opt_set_default_format (const char *format);

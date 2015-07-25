@@ -30,6 +30,9 @@
 #include <sys/ioctl.h>
 #include <net/if.h>
 #include <netinet/in.h>
+#ifdef HAVE_NETINET_ETHER_H
+# include <netinet/ether.h>
+#endif
 #include <arpa/inet.h>
 #include <netdb.h>
 #include "ifconfig.h"
@@ -186,6 +189,58 @@ set_brdaddr (int sfd, struct ifreq *ifr, char *brdaddr)
 }
 
 int
+set_hwaddr (int sfd, struct ifreq *ifr, char *hwaddr)
+{
+#ifndef SIOCSIFHWADDR
+  error (0, 0,
+         "don't know how to set a hardware address on this system");
+  return -1;
+#else
+# ifndef ifr_hwaddr
+#  ifdef ifr_enaddr
+#   define ifr_hwaddr ifr_enaddr
+#  endif /* ifr_en_addr */
+# endif /* ifr_hwaddr */
+  int err;
+  struct ether_addr *ether;
+  struct sockaddr *sa = (struct sockaddr *) &ifr->ifr_hwaddr;
+
+  ether = ether_aton (hwaddr);
+  if (!ether)
+    {
+      struct ether_addr addr;
+
+      err = ether_hostton (hwaddr, &addr);
+      if (err)
+	{
+	  error (0, 0, "`%s' is not a valid hardware address", hwaddr);
+	  return -1;
+	}
+
+	ether = &addr;
+    }
+
+  /* Reading the present hardware address is a simple
+   * way of initializing the structure!
+   */
+  (void) ioctl (sfd, SIOCGIFHWADDR, ifr);
+
+  memcpy (&sa->sa_data, ether, sizeof (*ether));
+  err = ioctl (sfd, SIOCSIFHWADDR, ifr);
+  if (err < 0)
+    {
+      error (0, errno, "%s failed", "SIOCSIFHWADDR");
+      return -1;
+    }
+
+  if (verbose)
+    printf ("Set interface hardware address of `%s' to %s.\n",
+	    ifr->ifr_name, ether_ntoa (ether));
+  return 0;
+#endif /* SIOCSIFHWADDR */
+}
+
+int
 set_mtu (int sfd, struct ifreq *ifr, int mtu)
 {
 #ifndef SIOCSIFMTU
@@ -282,6 +337,8 @@ configure_if (int sfd, struct ifconfig *ifp)
     err = set_dstaddr (sfd, &ifr, ifp->dstaddr);
   if (!err && ifp->valid & IF_VALID_BRDADDR)
     err = set_brdaddr (sfd, &ifr, ifp->brdaddr);
+  if (!err && ifp->valid & IF_VALID_HWADDR)
+    err = set_hwaddr (sfd, &ifr, ifp->hwaddr);
   if (!err && ifp->valid & IF_VALID_MTU)
     err = set_mtu (sfd, &ifr, ifp->mtu);
   if (!err && ifp->valid & IF_VALID_METRIC)

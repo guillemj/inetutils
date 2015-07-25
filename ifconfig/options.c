@@ -61,7 +61,7 @@ int nifs;
 static struct ifconfig ifconfig_initializer = {
   NULL,				/* name */
   0,				/* valid */
-  NULL, NULL, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0
+  NULL, NULL, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, NULL
 };
 
 struct format formats[] = {
@@ -338,6 +338,7 @@ PARSE_OPT_SET_ADDR (address, address, ADDR)
 PARSE_OPT_SET_ADDR (netmask, netmask, NETMASK)
 PARSE_OPT_SET_ADDR (dstaddr, destination / peer address, DSTADDR)
 PARSE_OPT_SET_ADDR (brdaddr, broadcast address, BRDADDR)
+PARSE_OPT_SET_ADDR (hwaddr, hardware address, HWADDR)
 
 #define PARSE_OPT_SET_INT(field, fname, fvalid) \
 void								\
