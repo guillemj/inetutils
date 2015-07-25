@@ -163,13 +163,65 @@ set_dstaddr (int sfd, struct ifreq *ifr, char *dstaddr)
   error (0, 0,
          "don't know how to set an interface peer address on this system");
   return -1;
-#else
-  SIOCSIF (DSTADDR, dstaddr)
+#else /* !SIOCSIFDSTADDR */
+# if HAVE_DECL_GETADDRINFO
+  int rc;
+  char addr[INET_ADDRSTRLEN];
+  struct addrinfo hints, *ai, *res;
+
+  memset (&hints, 0, sizeof (hints));
+  hints.ai_family = AF_INET;
+
+  rc = getaddrinfo (dstaddr, NULL, &hints, &res);
+  if (rc)
+    {
+      error (0, 0, "cannot resolve `%s': %s", dstaddr, gai_strerror (rc));
+      return -1;
+    }
+  for (ai = res; ai; ai = ai->ai_next)
+    if (ai->ai_family == AF_INET)
+      break;
+
+  if (ai == NULL)
+    {
+      error (0, 0, "`%s' refers to an unknown address type", dstaddr);
+      freeaddrinfo (res);
+      return -1;
+    }
+
+  rc = getnameinfo (ai->ai_addr, ai->ai_addrlen,
+		    addr, sizeof (addr), NULL, 0,
+		    NI_NUMERICHOST);
+  freeaddrinfo (res);
+  if (rc)
+    {
+      error (0, 0, "cannot resolve `%s': %s", dstaddr, gai_strerror (rc));
+      return -1;
+    }
+# else /* !HAVE_DECL_GETADDRINFO */
+  char *addr;
+  struct hostent *host = gethostbyname (dstaddr);
+
+  if (!host)
+    {
+      error (0, 0, "cannot resolve `%s': %s", dstaddr, hstrerror (h_errno));
+      return -1;
+    }
+  if (host->h_addrtype != AF_INET)
+    {
+      error (0, 0, "`%s' refers to an unknown address type", dstaddr);
+      return -1;
+    }
+
+  addr = inet_ntoa (*((struct in_addr *) host->h_addr));
+# endif /* !HAVE_DECL_GETADDRINFO */
+
+  SIOCSIF (DSTADDR, addr)
   if (verbose)
     printf ("Set interface peer address of `%s' to %s.\n",
 	    ifr->ifr_name, inet_ntoa (sin->sin_addr));
   return 0;
-#endif
+#endif /* SIOCSIFDSTADDR */
 }
 
 int

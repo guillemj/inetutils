@@ -1,5 +1,14 @@
 2015-07-25  Mats Erik Andersson  <gnu@gisladisker.se>
 
+	ifconfig: Symbolic name as peer address.
+
+	* ifconfig/changeif.c (set_dstaddr): Adapt code block used
+	by set_address(), thereby first using either getaddrinfo()
+	or gethostbyname() to resolve a possibly symbolic peer
+	destination, then setting the established address.
+
+2015-07-25  Mats Erik Andersson  <gnu@gisladisker.se>
+
 	ifconfig: Support changing of hardware address.
 	Implement the setting of link level addresses
 	for systems running GNU/Linux.
