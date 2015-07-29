@@ -1,3 +1,13 @@
+2015-07-30  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	ifconfig: A work-around specific to GNU/Hurd.
+	This system uses a mixture of BSD definitions
+	and GNU/Linux interfaces.  In particular, some
+	care is needed to check interface hardware type.
+
+	* ifconfig/system/hurd.c (_ARP_MASK): New macro.
+	(arphrd_symbols): Apply _ARP_MASK to each member `value'.
+
 2015-07-25  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	ifconfig: Symbolic name as peer address.

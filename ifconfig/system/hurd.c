@@ -175,6 +175,16 @@ print_hwaddr_ether (format_data_t form _GL_UNUSED_PARAMETER,
   had_output = 1;
 }
 
+/* GNU/Hurd and Mach are using a mixture of BSD definitions
+ * and GNU/Linux interface headers, which in this situation
+ * means that sa_family_t is an unsigned char, from BSD, while
+ * all ARPHRD_* come from GNU/Linux and are thus 16 bits wide.
+ * We must account for this.  The following bitmask will
+ * adapt to any future change!
+ */
+
+#define _ARP_MASK ((sizeof (sa_family_t) == 1) ? 0xff : 0xffff)
+
 struct arphrd_symbol
 {
   const char *name;
@@ -184,16 +194,11 @@ struct arphrd_symbol
 } arphrd_symbols[] =
   {
 #ifdef ARPHRD_ETHER		/* Ethernet 10/100Mbps.  */
-    { "ETHER", "Ethernet", ARPHRD_ETHER, print_hwaddr_ether},
+    { "ETHER", "Ethernet", ARPHRD_ETHER & _ARP_MASK, print_hwaddr_ether},
 #endif
 #ifdef ARPHRD_LOOPBACK		/* Loopback device.  */
-    { "LOOPBACK", "Local Loopback", ARPHRD_LOOPBACK, NULL},
+    { "LOOPBACK", "Local Loopback", ARPHRD_LOOPBACK & _ARP_MASK, NULL},
 #endif
-    /* XXX: The image debian-hurd-20150424 returns the value 4
-	    instead of expected ARPHRD_LOOPBACK.  This has been
-	    discussed in the list debian-hurd, where I was asked
-	    to resist the temptation of a work around!
-     */
     { NULL, NULL, 0, NULL}
   };
 
