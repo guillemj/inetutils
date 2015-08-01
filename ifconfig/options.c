@@ -49,8 +49,9 @@ int list_mode;
 int verbose;
 
 /* Flags asked for, possibly still pending application.  */
-int pending_setflags;
-int pending_clrflags;
+static int pending_setflags = 0;
+static int pending_clrflags = 0;
+static int pending_valid = 0;
 
 /* Array of all interfaces on the command line.  */
 struct ifconfig *ifs;
@@ -270,7 +271,7 @@ static struct argp_option argp_options[] = {
   { "format", FORMAT_OPTION, "FORMAT", 0,
     "select output format; set to `help' for info", GRP },
   { "up", UP_OPTION, NULL, 0,
-    "activate the interface (default if address is given)", GRP },
+    "activate the interface", GRP },
   { "down", DOWN_OPTION, NULL, 0,
     "shut the interface down", GRP },
   { "flags", 'F', "FLAG[,FLAG...]", 0,
@@ -381,6 +382,11 @@ void
 parse_opt_set_flag (struct ifconfig *ifp _GL_UNUSED_PARAMETER,
 		    int flag, int rev)
 {
+  if (ifp)
+    ifp->valid |= IF_VALID_FLAGS;
+  else
+    pending_valid |= IF_VALID_FLAGS;
+
   if (rev)
     {
       pending_clrflags |= flag;
@@ -496,12 +502,27 @@ parse_opt_set_default_format_from_file (const char *file)
 void
 parse_opt_finalize (struct ifconfig *ifp)
 {
+  /* The flags `--up' and `--down' are allowed early.  */
+  if (ifp && pending_valid)
+    {
+      ifp->valid |= pending_valid;
+      pending_valid = 0;
+    }
+
+  /* Only the empty set of actions, i.e., only the interface name
+   * is present on the command line, merits printout of status.
+   */
   if (ifp && !ifp->valid)
     {
       ifp->valid = IF_VALID_FORMAT;
       ifp->format = default_format;
+    }
+
+  if (ifp && (pending_setflags | pending_clrflags))
+    {
       ifp->setflags |= pending_setflags;
       ifp->clrflags |= pending_clrflags;
+      pending_setflags = pending_clrflags = 0;
     }
 }
 

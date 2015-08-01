@@ -1,3 +1,32 @@
+2015-08-01  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	ifconfig: Apply flags correctly.
+	When finalizing actions, some flags could be forgotten.
+	In particular, the flag 'up' was ignored whenever an
+	address was assigned at the same time.  This is related
+	to the fact that an invocation only effecting interface
+	flags, still resulted in a full printout if interface
+	status.  This latter behaviour differs from all other
+	implementations and is rather annoying.  The issue was
+	detected and reported by Hans-Peter Budek in
+	http://lists.gnu.org/archive/html/bug-inetutils/2015-07/msg00000.html
+
+	* ifconfig/options.c (pending_setflags, pending_clrflags):
+	Define as static variables.
+	(pending_valid): New variable.
+	(argp_options) <message 'up'>: Delete the claim that 'up' be
+	a default action together with address.
+	(parse_opt_set_flag): When `ifp' exists, update `ifp->valid'
+	with IF_VALID_FLAGS.  Otherwise, update `pending_valid'.
+	(parse_opt_finalize): If `ifp' exists and `pending_valid` is
+	set, then update `ifp->valid'.  The update of `ifp->setflags'
+	and `ifp->clrflags' is performed independently of assigning
+	an output format, as the latter would cause a printout also
+	when only some flag is being altered.
+	* ifconfig/options.h (IF_VALID_FLAGS): New macro.
+	(IF_VALID_HWADDR): Updated value.
+	(pending_setflags. pending_clrflags): Removed declaration.
+
 2015-07-30  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	ifconfig: A work-around specific to GNU/Hurd.

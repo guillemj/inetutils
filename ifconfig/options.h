@@ -50,9 +50,10 @@ struct ifconfig
   int mtu;
 # define IF_VALID_METRIC	0x100
   int metric;
+# define IF_VALID_FLAGS		0x200
   int setflags;
   int clrflags;
-# define IF_VALID_HWADDR	0x200
+# define IF_VALID_HWADDR	0x400
   char *hwaddr;
 };
 
@@ -66,9 +67,6 @@ struct format
 extern struct format formats[];
 extern int all_option;
 extern int ifs_cmdline;
-
-extern int pending_setflags;
-extern int pending_clrflags;
 
 /* Array of interfaces mentioned on the command line.  */
 extern struct ifconfig *ifs;
