@@ -367,6 +367,30 @@ set_flags (int sfd, struct ifreq *ifr, int setflags, int clrflags)
       error (0, errno, "SIOCSIFFLAGS failed");
       return -1;
     }
+
+  if (verbose)
+    {
+      printf ("Setting %sflags", setflags ? "" : "no ");
+
+      if (setflags)
+	{
+	  printf (" `");
+	  print_if_flags (setflags, NULL, ',');
+	  putchar ('\'');
+	}
+
+      printf (" of `%s'", ifr->ifr_name);
+
+      if (clrflags)
+	{
+	  printf (", clearing `");
+	  print_if_flags (clrflags, NULL, ',');
+	  putchar ('\'');
+	}
+
+      printf (".\n");
+    }
+
   return 0;
 #endif
 }

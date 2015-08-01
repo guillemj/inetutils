@@ -1,3 +1,11 @@
+2015-08-02  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	ifconfig: Verbose report on changed flags.
+
+	* ifconfig/changeif.c (set_flags): In verbose report mode,
+	compose a message to name those flags that were set, and
+	also those that were cleared.
+
 2015-08-01  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	ifconfig: Apply flags correctly.
