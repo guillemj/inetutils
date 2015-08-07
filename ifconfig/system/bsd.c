@@ -198,6 +198,19 @@ struct ifmediareq ifm;
   if (!ifp) \
     getifaddrs (&ifp);
 
+void
+system_fh_ifstat_query (format_data_t form, int argc, char *argv[])
+{
+  /* Flush an existing interface list, thus renewing statistics.  */
+  if (ifp)
+    {
+      freeifaddrs (ifp);
+      ifp = NULL;
+    }
+
+  select_arg (form, argc, argv, getifaddrs (&ifp) ? 1 : 0);
+}
+
 struct if_nameindex* (*system_if_nameindex) (void) = if_nameindex;
 
 static void
@@ -727,4 +740,73 @@ system_fh_tunsrc (format_data_t form, int argc, char *argv[])
   else
     put_string (form, "(no physrc)");
 #endif /* SIOCGIFPSRCADDR */
+}
+
+static struct if_data *
+get_if_data_by_name (format_data_t form)
+{
+  struct ifaddrs *fp;
+  struct if_data *data = NULL;
+
+  ESTABLISH_IFADDRS
+  if (!ifp)
+    return NULL;
+
+  for (fp = ifp; fp; fp = fp->ifa_next)
+    {
+      /* The choice of AF_LINK is the only portable alternative.
+       * Then IP, ARP etcera are included in all counters.
+       */
+      if (fp->ifa_addr->sa_family != AF_LINK ||
+	  strcmp (fp->ifa_name, form->ifr->ifr_name))
+	continue;
+
+      data = (struct if_data *) fp->ifa_data;
+      break;
+    }
+
+  return data;
+}
+
+void
+system_fh_missing_stat (format_data_t form, int argc, char *argv[])
+{
+  /* FIXME: Would a dash be a better answer?  */
+  put_ulong (form, argc, argv, 0);
+}
+
+#define _IU_DECLARE2(fld, udata)	\
+void					\
+_IU_CAT2 (system_fh_, fld) (format_data_t form, int argc, char *argv[])	\
+{				\
+  struct if_data *data = get_if_data_by_name (form);	\
+  if (data)			\
+    put_ulong (form, argc, argv, data->_IU_CAT2(ifi_, udata));	\
+  else				\
+    put_string (form, "(" #fld " unknown)");		\
+}
+
+_IU_DECLARE2 (rx_bytes, ibytes)
+_IU_DECLARE2 (rx_dropped, iqdrops)
+_IU_DECLARE2 (rx_errors, ierrors)
+_IU_DECLARE2 (rx_packets, ipackets)
+_IU_DECLARE2 (tx_bytes, obytes)
+_IU_DECLARE2 (tx_errors, oerrors)
+_IU_DECLARE2 (tx_packets, opackets)
+_IU_DECLARE2 (collisions, collisions)
+
+void
+system_fh_tx_dropped (format_data_t form, int argc, char *argv[])
+{
+#ifdef _IFI_OQDROPS
+  struct if_data *data = get_if_data_by_name (form);
+
+  if (data)
+    put_ulong (form, argc, argv, data->ifi_oqdrops);
+  else
+    put_string (form, "(txerrors unknown)");
+#else /* !_IFI_OQDROPS */
+  /* FIXME: Would a dash be a better answer?  */
+  put_ulong (form, argc, argv, 0);
+#endif
 }
