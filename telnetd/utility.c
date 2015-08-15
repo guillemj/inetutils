@@ -372,6 +372,14 @@ pty_input_putback (const char *str, size_t len)
   return 0;
 }
 
+/* pty_read()
+ *
+ * Read errors EWOULDBLOCK, EAGAIN, and EIO are
+ * tweeked into reporting zero bytes input.
+ * In particular, EIO is known to appear when
+ * reading off the master side, before having
+ * an active slave side.
+ */
 int
 pty_read (void)
 {

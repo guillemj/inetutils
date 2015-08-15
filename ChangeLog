@@ -1,3 +1,21 @@
+2015-08-15  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	telnetd: Premature connection closure.
+	When many connections are attempted in quick succession,
+	a substantial number of them are cancelled.  This does not
+	appear for manual use cases, but for contrived automated
+	set-ups.  The cause seems to be a change in the evaluation
+	of pty_read(), which was done to coincide with the condition
+	in use by the original BSD implementation.  Issue reported and
+	suggested by Chris Severance in
+	http://lists.gnu.org/archive/html/bug-inetutils/2015-07/msg00006.html
+
+	* telnetd/telnetd.c (telnetd_run): Break the loop only by the
+	stronger condition `pty_read() < 0', i.e., only on non-masked
+	read errors.  This reverts a change introduced in 2015-03-15.
+	* telnetd/utility.c (pty_read): Add a comment that the read
+	errors EWOULDBLOCK, EAGAIN, and EIO are treated specially.
+
 2015-08-07  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	ifconfig: Statistics for BSD systems.

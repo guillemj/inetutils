@@ -662,7 +662,13 @@ telnetd_run (void)
       if (FD_ISSET (pty, &ibits))
 	{
 	  /* Something to read from the pty... */
-	  if (pty_read () <= 0)
+
+	  /* Observe that pty_read() is masking a few select
+	   * read errors with the return value 0.  Let them
+	   * pass for further manipulation.  Issue reported in
+	   * http://lists.gnu.org/archive/html/bug-inetutils/2015-07/msg00006.html
+	   */
+	  if (pty_read () < 0)
 	    break;
 
 	  /* The first byte is now TIOCPKT data.  Peek at it.  */
