@@ -416,7 +416,7 @@ main (int argc, char *argv[])
 
 struct formats;
 int validate_access (char **, int);
-void send_file (struct formats *);
+void tftpd_sendfile (struct formats *);
 void recvfile (struct formats *);
 
 struct formats
@@ -428,8 +428,8 @@ struct formats
   int f_convert;
 } formats[] =
   {
-    {"netascii", validate_access, send_file, recvfile, 1},
-    {"octet", validate_access, send_file, recvfile, 0},
+    {"netascii", validate_access, tftpd_sendfile, recvfile, 1},
+    {"octet", validate_access, tftpd_sendfile, recvfile, 0},
     {0, NULL, NULL, NULL, 0}
   };
 
@@ -648,7 +648,7 @@ timer (int sig _GL_UNUSED_PARAMETER)
  * Send the requested file.
  */
 void
-send_file (struct formats *pf)
+tftpd_sendfile (struct formats *pf)
 {
   struct tftphdr *dp, *r_init (void);
   register struct tftphdr *ap;	/* ack packet */

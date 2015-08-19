@@ -236,7 +236,7 @@ set_port (struct sockaddr_storage *ss, in_port_t port)
 }
 
 void recvfile (int, char *, char *);
-void send_file (int, char *, char *);
+void tftp_sendfile (int, char *, char *);
 
 static error_t
 parse_opt (int key, char *arg, struct argp_state *state)
@@ -614,7 +614,7 @@ put (int argc, char *argv[])
       if (verbose)
 	printf ("putting %s to %s:%s [%s]\n", cp, hostname, targ, mode);
       set_port (&peeraddr, port);
-      send_file (fd, targ, mode);
+      tftp_sendfile (fd, targ, mode);
       return;
     }
   /* this assumes the target is a directory */
@@ -634,7 +634,7 @@ put (int argc, char *argv[])
       if (verbose)
 	printf ("putting %s to %s:%s [%s]\n", argv[n], hostname, targ, mode);
       set_port (&peeraddr, port);
-      send_file (fd, targ, mode);
+      tftp_sendfile (fd, targ, mode);
     }
 }
 
@@ -980,7 +980,7 @@ setverbose (int argc _GL_UNUSED_PARAMETER, char *argv[] _GL_UNUSED_PARAMETER)
  * Send the requested file.
  */
 void
-send_file (int fd, char *name, char *mode)
+tftp_sendfile (int fd, char *name, char *mode)
 {
   register struct tftphdr *ap;	/* data and ack packets */
   struct tftphdr *r_init (void), *dp;
