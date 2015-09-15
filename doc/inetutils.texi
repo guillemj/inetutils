@@ -31,6 +31,7 @@
 * ftp: (inetutils)ftp invocation.                 FTP client.
 * ftpd: (inetutils)ftpd invocation.               FTP Daemon.
 * hostname: (inetutils)hostname invocation.       Show or set system host name.
+* ifconfig: (inetutils)ifconfig invocation.       Configure network interfaces.
 * inetd: (inetutils)inetd invocation.             Internet super-server.
 * logger: (inetutils)logger invocation.           Send messages to the system log.
 * ping6: (inetutils)ping6 invocation.             Packets to IPv6 network hosts.
@@ -99,6 +100,7 @@ Diagnostic programs
 
 * dnsdomainname invocation::           Show DNS domain name.
 * hostname invocation::                Show or set system host name.
+* ifconfig invocation::                Configure network interfaces.
 * logger invocation::                  Send messages to system log.
 * ping invocation::                    Packets to network hosts.
 * ping6 invocation::                   Packets to IPv6 network hosts.
@@ -320,6 +322,202 @@ Get short host name.
 @opindex --nis
 Get NIS/YP domain name.
 @end table
+
+@node ifconfig invocation
+@chapter @command{ifconfig}: Configure network interfaces
+@pindex ifconfig
+
+@command{ifconfig} is a program to retrieve and to set selected
+properties of network interfaces.  It is best viewed as a tool to
+get information, rather than for changing the behaviour of adapters,
+since it is hard to support property setting in a portable manner.
+
+@noindent
+Synopsis:
+
+@example
+ifconfig @var{iface} [@var{arg}@dots{}]
+ifconfig -i @var{iface} [@var{option}@dots{}] [-i @var{iface2} [@var{option}@dots{}]]
+@end example
+
+@section Command line options
+@anchor{ifconfig options}
+
+@table @option
+@item -a
+@itemx --all
+@opindex -a
+@opindex --all
+Display all available interfaces, including those that not are
+marked as `up', i.e., also the inactive interfaces.
+
+@item -A @var{addr}
+@itemx --address=@var{addr}
+@opindex -A
+@opindex --address
+Set address of selected interface to @var{addr}.
+
+@item -b @var{addr}
+@itemx -B @var{addr}
+@itemx --brdaddr=@var{addr}
+@itemx --broadcast=@var{addr}
+@opindex -b
+@opindex -B
+@opindex --brdaddr
+@opindex --broadcast
+Set broadcast address of selected interface to @var{addr}.
+
+@item -d @var{addr}
+@itemx -p @var{addr}
+@itemx --dstaddr=@var{addr}
+@itemx --peer=@var{addr}
+@opindex -d
+@opindex -p
+@opindex --dstaddr
+@opindex --peer
+Set destination (peer) address of selected interface.
+
+@item --down
+@opindex --down
+Deactivate the selected interface.
+
+@item -F @var{list}
+@itemx --flags=@var{list}
+@opindex -F
+@opindex --flags
+Change those interface flags mentioned in @var{list}.
+The argument is a comma separated list of one ore more
+flag names to be set, or in case the name is prepended
+with @samp{no}, the corresponding flag is cleared.
+The output of @command{ifconfig} with the option @option{--help}
+contains a list of available flag names.
+
+@item --format=@var{format}
+@opindex --format
+Select output format; the value @samp{help} prints a list
+of all available formats.
+
+@item -i @var{name}
+@itemx --interface=@var{name}
+@opindex -i
+@opindex --interface
+Select the named interface for any following action.
+
+@item -l
+@itemx --list
+@opindex -l
+@opindex --list
+List, with name only, all available interfaces, or only those
+selected should at least one option @option{-i} have specified.
+
+@item -m @var{mask}
+@itemx --netmask=@var{mask}
+@opindex -m
+@opindex --netmask
+Set netmask of selected interface to @var{mask}.
+
+@item --metric=@var{n}
+@opindex --metric
+Set the metric of selected interface to the number @var{n}.
+
+@item -M @var{n}
+@itemx --mtu=@var{n}
+@opindex -M
+@opindex --mtu
+Set MTU of selected interface to the number @var{n}.
+
+@item -s
+@itemx --short
+@opindex -s
+@opindex --short
+Use short output format.  This is identical to specifying
+@samp{--format=netstat}.
+
+@item --up
+@opindex --up
+Activate the selected interface.
+
+@item -v
+@itemx --verbose
+@opindex -v
+@opindex --verbose
+Print informational messages when configuring an interface.
+@end table
+
+Observe that the use of program options is the only manner
+in which @command{ifconfig} is able to handle multiple
+interfaces in one invocation.  Once a particular interface
+has been selected using @option{-i}, it is affected by any
+following option until replaced by another interface selector.
+This is also the main cause, that @command{ifconfig} is
+unable to treat options independently of their order, as is
+mostly the case in other GNU software.
+
+@section Formatted status output
+@anchor{ifconfig formats}
+
+The status of one or more interfaces can be presented in a number
+of different formats.  A list of them is printed by the option
+@option{--format=help}.  In the following table the valid formats
+are given, each is used in the form @option{--format=@var{name}}.
+
+@table @asis
+@item check
+@itemx check-existence
+@itemx ?
+Place holders for the ability to check whether the interfaces
+selected by one or more options @option{-i} are determining
+existing interfaces in the running system.  No output in case
+of success, an error message in case of a failure.
+
+@item gnu
+@itemx default
+Standard GNU output format.
+
+@item gnu-one-entry
+Like the previous format, but with intermediary newlines removed.
+
+@item help
+Display a list of valid formats, together with a short description
+for each choice.
+
+@item net-tools
+Imitation of presentation used by the implementation in @samp{net-tools}.
+Default format for GNU/Linux.
+
+@item netstat
+Terse output with statistics, similar to that of @code{netstat -i}.
+
+@item osf
+Format variant of @samp{unix} preferred by OSF's implementation.
+
+@item unix
+Traditional UNIX type format.  Default for BSD, HPUX and Solaris.
+@end table
+
+@section Legacy syntax
+@anchor{ifconfig legacy syntax}
+
+The traditional mode of invoking @command{ifconfig} is via
+a parsed command line, without all use of program switches
+and options, relying fully on argument parsing.  This mode
+of use is supported also in the present implementation,
+but keep in mind that only one interface can be manipulated
+using this legacy syntax.
+
+@example
+ifconfig NAME [ADDR [DSTADDR]] [broadcast BRDADDR] [netmask MASK]
+         [metric N] [mtu N] [up|down]
+@end example
+
+As is conventional, only the primary address and possibly the
+peer destination address are stated as bare arguments, without
+a specifying keyword.
+Some slight variation on this syntax will depend on the target
+system for which the program is being built, as not all platforms
+support identical abilities.
+The best information is found via the usage massage
+@samp{ifconfig --usage}.
 
 @node logger invocation
 @chapter @command{logger}: Send messages to system log

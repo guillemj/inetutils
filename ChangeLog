@@ -1,3 +1,7 @@
+2015-09-15  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	* doc/inetutils.texi (ifconfig invocation): New chapter.
+
 2015-08-19  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	AIX systems have a system call send_file().  Rename our calls.
