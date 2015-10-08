@@ -1,3 +1,18 @@
+2015-10-08  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	syslogd: Redefine faulty macro LOG_MAKEPRI whenever needed.
+	Systems with Glibc header file <syslog.h> prior to 2.17,
+	are not correctly defining the helper macro LOG_MAKEPRI.
+	This effects our syslog service whenever it receives kernel
+	messages from a remote host.  The issue was mentioned in
+	Debian's BTS as report #729666.
+
+	* src/logprio.h [LOG_MAKEPRI]: Check that the macro does
+	not shift the first argument.  If it does, undefine it and
+	apply our corrected definition.
+	* src/syslogd.c [LOG_MAKEPRI]: Likewise.  Display a precompiler
+	warning to the effect that we have diagnosed an issue.
+
 2015-09-15  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	* doc/inetutils.texi (ifconfig invocation): New chapter.
