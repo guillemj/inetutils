@@ -517,7 +517,7 @@ fi # TEST_IPV6
 # Availability of IPv4-mapped IPv6 addresses.
 #
 # These are impossible on OpenBSD, so a flexible test
-# is implemented using sysctl(1) as tool.
+# is implemented using sysctl(8) as tool.
 
 # Helpers tp catch relevant execution path.
 have_sysctl=false
@@ -531,8 +531,12 @@ test `uname -s` = 'SunOS' && have_address_mapping=true
 if $have_address_mapping; then
     :
 else
-    # Do we have sysctl(1) available?
-    if sysctl -a >/dev/null 2>&1; then
+    # Do we have sysctl(8) available?
+    # It need not be present with the default search path,
+    # so locally augment PATH!
+    SYSCTL=`PATH="$PATH":/usr/sbin:/sbin command -v sysctl`
+
+    if test -n "$SYSCTL"; then
 	have_sysctl=true
     else
 	echo "Warning: Not testing IPv4-mapped addresses." >&2
@@ -548,7 +552,7 @@ elif $have_sysctl; then
     # or
     #    net.inet6.ip6.v6only (BSD).
     #
-    value_v6only=`sysctl -a 2>/dev/null | $GREP v6only`
+    value_v6only=`$SYSCTL -a 2>/dev/null | $GREP v6only || true`
     if test -n "$value_v6only"; then
 	value_v6only=`echo $value_v6only | $SED 's/^.*[=:] *//'`
 	if test "$value_v6only" -eq 0; then
