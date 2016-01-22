@@ -1,3 +1,7 @@
+2016-01-22  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	* bootstrap: Updated from gnulib.
+
 2015-12-29  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	tests/ftp-localhost.sh: Incomplete error handling.
