@@ -1,5 +1,5 @@
 /* hurd.c -- Code for ifconfig specific to GNU/Hurd.
-  Copyright (C) 2015 Free Software Foundation, Inc.
+  Copyright (C) 2015, 2016 Free Software Foundation, Inc.
 
   This file is part of GNU Inetutils.
 

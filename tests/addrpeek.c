@@ -1,5 +1,5 @@
 /* addrpeek - testing service for Inetd: remote address, environment vars
-  Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015 Free Software
+  Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015, 2016 Free Software
   Foundation, Inc.
 
   This file is part of GNU Inetutils.
