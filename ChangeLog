@@ -1,3 +1,15 @@
+2016-01-23  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	ftp: Allow remote user in command.
+
+	* ftp/ftp.c (hookup): Check for an embedded at-sign in the input
+	variable `host', keeping the rightmost part.  New variable P.
+	(login): Likewise, but also using the string part to the left of
+	the last at-sign as remote user name.
+
+	* doc/inetutils.texi (ftp invocation): Document this ability.
+	* NEWS: Likewise.
+
 2016-01-22  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	* bootstrap: Updated from gnulib.

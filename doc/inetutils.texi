@@ -1527,6 +1527,9 @@ Synopsis:
 @example
 ftp [@var{option}@dots{}] [@var{host} [@var{port}]]
 pftp [@var{option}@dots{}] [@var{host} [@var{port}]]
+
+ftp [@var{option}@dots{}] @var{user@@host} [@var{port}]
+pftp [@var{option}@dots{}] @var{user@@host} [@var{port}]
 @end example
 
 @noindent
@@ -1537,6 +1540,7 @@ The client host with which @command{ftp} is to communicate may be
 specified on the command line.
 If this is done, @command{ftp} will immediately attempt to establish
 a connection to the FTP server running on that host.
+Optionally, a remote user name can be specified at will.
 Otherwise, the program will start a command interpreter and will await
 further instructions from the user.
 Commands can either be entered interactively,
@@ -2004,12 +2008,17 @@ character's position in @var{inchars} is longer than the length of
 @var{outchars}, the character is deleted from the file name.
 
 @item open @var{host} [@var{port}]
+@itemx open @var{user@@host} [@var{port}]
 Establish a connection to the specified FTP server
 at @var{host}.  An optional port number may be supplied,
 in which case, @command{ftp} will attempt to contact the server
 at that specific TCP port.  If the @code{autologin} option
 is on (is so by default), @command{ftp} will also attempt to
 automatically log the user in to the FTP server.
+
+The second form of invocation sets the remote user name to @var{user},
+which otherwise is taken as identical to the user identity owning the
+local session.
 
 @item passive
 Toggle passive mode.  If passive mode is turned on (default is off),

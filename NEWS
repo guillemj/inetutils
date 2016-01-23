@@ -5,6 +5,11 @@ Free Software Foundation, Inc.
 See the end of this file for license conditions.
 
 Please send inetutils bug reports to <bug-inetutils@gnu.org>.
+
+* ftp
+
+Allow invocation, as well as command `open', to accept an explicit
+remote user name as extended host argument: `user@host'.
 
 June 9, 2015
 Version 1.9.4:

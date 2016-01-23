@@ -133,7 +133,11 @@ hookup (char *host, int port)
   int s, tos;
   socklen_t len;
   static char hostnamebuf[80];
-  char *rhost;
+  char *rhost, *p;
+
+  p = strrchr (host, '@');
+  if (p && p != host && isprint (p[1]))
+    host = ++p;
 
 #ifdef HAVE_IDN
   status = idna_to_ascii_lz (host, &rhost, 0);
@@ -293,7 +297,7 @@ int
 login (char *host)
 {
   char tmp[80];
-  char *user, *pass, *acct;
+  char *user, *pass, *acct, *p;
   int n, aflag = 0;
 
   user = pass = acct = 0;
@@ -302,6 +306,15 @@ login (char *host)
       code = -1;
       return (0);
     }
+
+  p = strrchr (host, '@');
+  if (user == NULL && p && p != host && isprint (p[1]))
+    {
+      *p = 0;
+      user = host;
+      host = ++p;
+    }
+
   while (user == NULL)
     {
       char *myname = getlogin ();
