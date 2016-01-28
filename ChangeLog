@@ -1,6 +1,8 @@
 2016-01-23  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	ftp: Allow remote user in command.
+	Ability implemented after a query by Andreas Adamcik, on the
+	legacy use of getlogin() versus the more admitting getuid().
 
 	* ftp/ftp.c (hookup): Check for an embedded at-sign in the input
 	variable `host', keeping the rightmost part.  New variable P.
