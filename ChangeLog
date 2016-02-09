@@ -1,3 +1,8 @@
+2016-02-09  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	* configure.ac (missing ipv6 or icmp6): Disable `ping6' using
+	the macro IU_DISABLE_TARGET.
+
 2016-01-23  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	ftp: Allow remote user in command.

@@ -463,7 +463,7 @@ else
 fi
 
 if test "$ipv6" = "no" || test "$working_ipv6" = "no";then
-  ping6_BUILD=''
+  IU_DISABLE_TARGET([ping6])
 else
   working_icmp6=yes
   AC_CHECK_HEADER(netinet/icmp6.h, , working_icmp6=no,
@@ -552,7 +552,7 @@ else
 
   if test "$working_icmp6" = "no"; then
     AC_MSG_WARN([ICMPv6 support not available, disabling ping6])
-    ping6_BUILD=''
+    IU_DISABLE_TARGET([ping6])
   fi
 fi
 
