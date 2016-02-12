@@ -39,6 +39,8 @@
 
 #include "ping.h"
 
+static int useless_ident = 0;	/* Relevant at least for Linux.  */
+
 static size_t _ping_packetsize (PING * p);
 
 size_t
@@ -72,8 +74,28 @@ ping_init (int type, int ident)
   if (fd < 0)
     {
       if (errno == EPERM || errno == EACCES)
-	fprintf (stderr, "ping: Lacking privilege for raw socket.\n");
-      return NULL;
+	{
+	  errno = 0;
+
+	  /* At least Linux can allow subprivileged users to send ICMP
+	   * packets formally encapsulated and built as a datagram socket,
+	   * but then the identity number is set by the kernel itself.
+	   */
+	  fd = socket (AF_INET, SOCK_DGRAM, proto->p_proto);
+	  if (fd < 0)
+	    {
+	      if (errno == EPERM || errno == EACCES || errno == EPROTONOSUPPORT)
+		fprintf (stderr, "ping: Lacking privilege for icmp socket.\n");
+	      else
+		fprintf (stderr, "ping: %s\n", strerror (errno));
+
+	      return NULL;
+	    }
+
+	  useless_ident++;	/* SOCK_DGRAM overrides our set identity.  */
+	}
+      else
+	return NULL;
     }
 
   /* Allocate PING structure and initialize it to default values */
@@ -172,7 +194,7 @@ my_echo_reply (PING * p, icmphdr_t * icmp)
   return (orig_ip->ip_dst.s_addr == p->ping_dest.ping_sockaddr.sin_addr.s_addr
 	  && orig_ip->ip_p == IPPROTO_ICMP
 	  && orig_icmp->icmp_type == ICMP_ECHO
-	  && ntohs (orig_icmp->icmp_id) == p->ping_ident);
+	  && (ntohs (orig_icmp->icmp_id) == p->ping_ident || useless_ident));
 }
 
 int
@@ -206,7 +228,7 @@ ping_recv (PING * p)
     case ICMP_ADDRESSREPLY:
       /*    case ICMP_ROUTERADV: */
 
-      if (ntohs (icmp->icmp_id) != p->ping_ident)
+      if (ntohs (icmp->icmp_id) != p->ping_ident && useless_ident == 0)
 	return -1;
 
       if (rc)

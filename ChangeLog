@@ -1,3 +1,17 @@
+2016-02-12  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	ping: Implement subprivileged echo method.
+	Add fallback code usable by GNU/Linux to create a datagram
+	socket for sending ICMP ECHOREQUEST.  The change is related
+	to issue #37252.
+
+	* ping/libping.c (useless_ident): New variable.
+	(ping_init): When a raw socket fails, fall back to a datagram
+	socket.  In case of success, increase `useless_ident' since
+	the kernel choses a packet identity, overwriting our choice.
+	(my_echo_reply, ping_recv): Short circuit the tests for packet
+	identity with the value of `useless_identity'.
+
 2016-02-09  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	* configure.ac (missing ipv6 or icmp6): Disable `ping6' using
