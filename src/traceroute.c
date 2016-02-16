@@ -75,6 +75,7 @@ typedef struct trace
 {
   int icmpfd, udpfd;
   enum trace_type type;
+  int no_ident;
   struct sockaddr_in to, from;
   int ttl;
   struct timeval tsent;
@@ -476,6 +477,7 @@ trace_init (trace_t * t, const struct sockaddr_in to,
   t->type = type;
   t->to = to;
   t->ttl = opt_ttl;
+  t->no_ident = 0;
 
   if (t->type == TRACE_UDP)
     {
@@ -494,6 +496,21 @@ trace_init (trace_t * t, const struct sockaddr_in to,
       if (protocol)
 	{
 	  t->icmpfd = socket (PF_INET, SOCK_RAW, protocol->p_proto);
+	  if (t->icmpfd < 0 && (errno == EPERM || errno == EACCES))
+	    {
+	      /* A subprivileged user on GNU/Linux might be allowed
+	       * to create ICMP packets from a datagram socket.
+	       * Such packets are always severely crippled.
+	       */
+	      errno = 0;
+	      t->icmpfd = socket (PF_INET, SOCK_DGRAM, protocol->p_proto);
+	      t->no_ident++;
+
+	      /* Recover error message for non-Linux systems.  */
+	      if (errno == EPROTONOSUPPORT)
+		errno = EPERM;
+	    }
+
 	  if (t->icmpfd < 0)
 	    error (EXIT_FAILURE, errno, "socket");
 
@@ -609,7 +626,7 @@ trace_read (trace_t * t, int * type, int * code)
 
       if (ic->icmp_type == ICMP_ECHOREPLY
 	  && (ntohs (ic->icmp_seq) != seqno
-	      || ntohs (ic->icmp_id) != pid))
+	      || (ntohs (ic->icmp_id) != pid && t->no_ident == 0)))
 	return -1;
 
       if (ic->icmp_type == ICMP_TIME_EXCEEDED
@@ -685,6 +702,17 @@ trace_write (trace_t * t)
     case TRACE_ICMP:
       {
 	icmphdr_t hdr;
+	int i;
+
+	/* Deposit deterministic values throughout the header!  */
+	for (i = 0; i < sizeof (hdr); ++i)
+	  *((char *) &hdr + i) = i;
+
+	/* The subprivileged use case of ICMP sent over datagram
+	 * sockets needs extra help with identification of target.
+	 */
+	if (t->no_ident)
+	  *((int *) &hdr + 12 / sizeof(int)) = dest.sin_addr.s_addr;
 
 	/* The sequence number is updated to a valid value!  */
 	if (icmp_echo_encode ((unsigned char *) &hdr, sizeof (hdr),

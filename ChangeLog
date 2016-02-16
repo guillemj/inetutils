@@ -1,3 +1,21 @@
+2016-02-16  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	traceroute: Subprivileged use case.
+	A fallback for ICMP tracing relevant to GNU/Linux is implemented,
+	allowing a rudimentary but suid-less use case.  The ability to
+	identify intermediary hosts is missing, due to the crippled
+	capability of receiving ICMP packets other than ICMP_ECHOREPLY.
+
+	* src/traceroute.c (struct trace): New member `no_ident'.
+	(trace_init): Initiate `t->no_ident'.
+	<type TRACE_ICMP or TRACE_UDP>: In case a raw socket for an ICMP
+	protocol fails, fall back to a datagram socket.
+	(trace_read) <type TRACE_ICMP>: Short circuit `ic->icmp_id != pid'
+	with the conditional `t->no_ident == 0'.
+	(trace_write) <type TRACE_ICMP>: New variable I.  Initialize HDR
+	to its full extent.  If `t->no_ident' is non-zero, insert our
+	intended target as payload of HDR for trace identification.
+
 2016-02-12  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	ping: Implement subprivileged echo method.
