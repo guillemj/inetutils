@@ -337,7 +337,10 @@ get_ip_addresses (const char *const host_name)
             }
 
           strcat (addresses, address);
-          strcat (addresses, " ");
+
+	  /* Insert a separating space character.  */
+	  if (ht->h_addr_list[i+1] != NULL)
+	    strcat (addresses, " ");
         }
     }
 

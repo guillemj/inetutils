@@ -1,3 +1,13 @@
+2016-05-23  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	hostname: Avoid a trailing space.
+	Suppress the space character after the last presented IP number.
+	Problem reported by Terje Strand in
+	http://lists.gnu.org/archive/html/bug-inetutils/2016-04/msg00001.html
+
+	* src/hostname.c (get_ip_addresses): Emit a space character
+	only in case a further IP address will be printed.
+
 2016-02-16  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	traceroute: Subprivileged use case.
