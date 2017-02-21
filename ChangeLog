@@ -1,5 +1,9 @@
 2017-02-21  Mats Erik Andersson  <gnu@gisladisker.se>
 
+	* bootstrap: Updated from gnulib.
+
+2017-02-21  Mats Erik Andersson  <gnu@gisladisker.se>
+
 	telnetd: Debugging of mainly line mode options.
 
 	* telnetd/telnetd.c (telnetd_run): Assemble flow control data
