@@ -1,3 +1,17 @@
+2017-02-21  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	telnetd: Debugging of mainly line mode options.
+
+	* telnetd/telnetd.c (telnetd_run): Assemble flow control data
+	in new string variable DATA, then send it and include for debug
+	reporting in category 'options'.
+	* telnetd/termstat.c (localstat, flowstat, clientstat): Likewise,
+	also for line mode data.
+
+	* telnetd/utility.c (printsub) <LM_MODE>: Test TBUF[0]
+	to calculate replacement string, since TBUF[1] is not
+	guaranteed to be initialized by the preceding snprintf().
+
 2016-05-23  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	hostname: Avoid a trailing space.

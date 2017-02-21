@@ -698,9 +698,15 @@ telnetd_run (void)
 	      int newflow = (c & TIOCPKT_DOSTOP) ? 1 : 0;
 	      if (newflow != flowmode)
 		{
-		  net_output_data ("%c%c%c%c%c%c",
-				   IAC, SB, TELOPT_LFLOW,
-				   flowmode ? LFLOW_ON : LFLOW_OFF, IAC, SE);
+		  char data[6];
+
+		  sprintf (data, "%c%c%c%c%c%c",
+			   IAC, SB, TELOPT_LFLOW,
+			   flowmode ? LFLOW_ON : LFLOW_OFF,
+			   IAC, SE);
+		  net_output_datalen (data, sizeof (data));
+		  DEBUG (debug_options, 1,
+			 printsub ('>', data + 2, sizeof (data) - 2));
 		}
 	    }
 

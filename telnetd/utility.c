@@ -1220,7 +1220,7 @@ printsub (int direction, unsigned char *pointer, int length)
 		      pointer[2] & MODE_SOFT_TAB ? "|SOFT_TAB" : "",
 		      pointer[2] & MODE_LIT_ECHO ? "|LIT_ECHO" : "",
 		      pointer[2] & MODE_ACK ? "|ACK" : "");
-	    debug_output_data ("%s", tbuf[1] ? &tbuf[1] : "0");
+	    debug_output_data ("%s", tbuf[0] ? &tbuf[1] : "0");
 	  }
 
 	  if (pointer[2] & ~(MODE_EDIT | MODE_TRAPSIG | MODE_ACK))
