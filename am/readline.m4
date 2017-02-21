@@ -1,6 +1,6 @@
 # readline.m4 serial 9
 dnl Copyright (C) 2005, 2006, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
-dnl 2016 Free Software Foundation, Inc.
+dnl 2016, 2017 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
 dnl with or without modifications, as long as this notice is preserved.
