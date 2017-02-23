@@ -504,6 +504,14 @@ telnetd_setup (int fd)
 
   io_setup ();
 
+  /* Before doing anything related to the identity of the client,
+   * scrub the environment variable USER, since it may be set with
+   * an irrelevant user name at this point.  OpenBSD has been known
+   * to offend at this point with their own inetd.  Any demand for
+   * autologin will get attention in getterminaltype().
+   */
+  unsetenv ("USER");
+
   /* get terminal type. */
   uname[0] = 0;
   level = getterminaltype (uname, sizeof (uname));

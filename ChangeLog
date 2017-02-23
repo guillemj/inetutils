@@ -1,3 +1,14 @@
+2017-02-23  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	telnetd: Scrub USER from environment.
+	Discard the environment variable USER.  It will later be set
+	properly for autologin, but at least one BSD system passes
+	a preset value when telnetd starts, a value which will cause
+	rejected login when autologin is not in effect.
+
+	* telnetd/telnetd.c (telnetd_setup): Unset environment
+	variable USER before calling getterminaltype().
+
 2017-02-21  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	* bootstrap: Updated from gnulib.
