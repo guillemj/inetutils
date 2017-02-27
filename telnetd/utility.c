@@ -1196,9 +1196,21 @@ printsub (int direction, unsigned char *pointer, int length)
 		debug_output_data ("(0x%x)", pointer[i + SLC_FLAGS]);
 	      debug_output_data (" %d;", pointer[i + SLC_VALUE]);
 
+	      /* Protocol enforced duplication of IAC depends on pre
+	       * and post modification of data, hence differs between
+	       * in, out, and no direction, i.e., recursive mode.
+	       * Some systems assign _POSIX_VDISABLE and IAC the same
+	       * value!  Heuristic experiments led to the following.
+	       * Recursive mode needs both steps as written here.
+	       */
 	      if ((pointer[i + SLC_VALUE] == IAC) &&
-		  (pointer[i + SLC_VALUE + 1] == IAC))
+		  (pointer[i + SLC_VALUE + 1] == IAC) &&
+		  (direction != '<'))
 		i++;
+	      if ((pointer[i + SLC_VALUE] == IAC) &&
+		  (pointer[i + SLC_VALUE + 1] == IAC) &&
+		  !direction)
+		i += 2;
 	    }
 
 	  for (; i < length; i++)
@@ -1572,7 +1584,12 @@ printsub (int direction, unsigned char *pointer, int length)
 	debug_output_data (" %d", pointer[i]);
       break;
     }
-  debug_output_data ("\r\n");
+
+  /* Without direction, we are doing a recursive suboption printing.
+   * Suppress NL, which would otherwise misplace the SE marker.
+   */
+  if (direction)
+    debug_output_data ("\r\n");
 }
 
 /*

@@ -1,3 +1,22 @@
+2017-02-27  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	telnetd: Portable option debugging.
+	BSD systems assign IAC and _POSIX_VDISABLE the common decimal
+	value 255. Hence the NVT enforces value duplication more often
+	during their transmission, than GNU and Solaris systems do.
+
+	* telnetd/utility.c (printsub) <LM_SLC>: Increase suboption
+	pointer I sufficiently to counteract duplication.  This has
+	to distinguish between in/out/none.  In recursive mode,
+	suppress newline at the end of suboption printing.
+
+	* telnetd/slc.c (send_slc) <SLC_EC, SLC_EL, SLC_EW, SLC_RP>
+	<SLC_LNEXT>: Editing characters are reported using SLC_DEFAULT
+	rather than ignored due to SLC_NOSUPPORT, when they are not
+	supported locally.  This conforms with RFC 1184, section 2.4.
+	The test for support checks the set 'current', not 'defset',
+	which fits the wording found in RFC 1184.
+
 2017-02-23  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	telnetd: Scrub USER from environment.

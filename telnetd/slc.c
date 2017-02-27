@@ -73,14 +73,37 @@ send_slc (void)
   /*
    * Send out list of triplets of special characters
    * to client.  We only send info on the characters
-   * that are currently supported.
+   * that are currently supported, except that editing
+   * characters without current support are conveyed
+   * using SLC_DEFAULT, thus urging the client to make
+   * a choice of his own.  This conforms to RFC 1184,
+   * section 2.4, page 6.
    */
   for (i = 1; i <= NSLC; i++)
     {
-      if ((slctab[i].defset.flag & SLC_LEVELBITS) == SLC_NOSUPPORT)
-	continue;
-      add_slc ((unsigned char) i, slctab[i].current.flag,
-	       slctab[i].current.val);
+      if ((slctab[i].current.flag & SLC_LEVELBITS) != SLC_NOSUPPORT)
+	add_slc ((unsigned char) i, slctab[i].current.flag,
+		 slctab[i].current.val);
+      else
+	{
+	  /* Urge the client to choose sensible editing characters.  */
+	  switch (i)
+	    {
+	    case SLC_EC:
+	    case SLC_EL:
+	    case SLC_EW:
+	    case SLC_RP:
+	    case SLC_LNEXT:
+	      add_slc ((unsigned char) i,
+		       (slctab[i].current.flag & ~SLC_LEVELBITS) | SLC_DEFAULT,
+			0);
+	      break;
+
+	    default:
+	      /* Be silent on other, unsupported characters.  */
+	      break;
+	    }
+	}
     }
 
 }				/* end of send_slc */
