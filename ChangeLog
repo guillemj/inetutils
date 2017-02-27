@@ -1,5 +1,15 @@
 2017-02-27  Mats Erik Andersson  <gnu@gisladisker.se>
 
+	telnetd: Portability of TTY termcap to Solaris systems.
+
+	* telnetd/term.c: Include header <fcntl.h>.
+	[SOLARIS10 || SOLARIS] (init_termbuf): If applicable, open
+	the slave TTY and extract terminal capabilities, since these
+	systems do not assign a line discipline to the master PTY.
+	New variables NAME and TTY.
+
+2017-02-27  Mats Erik Andersson  <gnu@gisladisker.se>
+
 	telnetd: Portable option debugging.
 	BSD systems assign IAC and _POSIX_VDISABLE the common decimal
 	value 255. Hence the NVT enforces value duplication more often

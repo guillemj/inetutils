@@ -21,6 +21,8 @@
 
 #include <telnetd.h>
 
+#include <fcntl.h>
+
 typedef struct termios TERMDESC;
 #define _term_getattr tcgetattr
 #define _term_setattr(fd, tp) tcsetattr (fd, TCSANOW, tp)
@@ -213,7 +215,7 @@ tty_iscrnl ()
   return termbuf.sg.sg_flags & CRMOD;
 }
 
-#else
+#else /* !IOCTL_INTERFACE */
 
 # define termdesc_eofc    c_cc[VEOF]
 # define termdesc_erase   c_cc[VERASE]
@@ -496,12 +498,36 @@ tty_iscrnl (void)
   return termbuf.c_iflag & ICRNL;
 }
 
-#endif
+#endif /* !IOCTL_INTERFACE */
 
 void
 init_termbuf (void)
 {
+#if defined SOLARIS10 || defined SOLARIS
+  /* On Solaris the master PTY is not able to report terminal
+   * settings about the slave TTY, since it is only the slave
+   * that is working with an designated line discipline.
+   * Therefore we must determine the slave descriptor, which
+   * exists only if ptsname() returns a non-empty string.
+   * This happens for the parent process.  The child process
+   * sees an empty name, so undergoes minimal processing.
+   */
+  char *name = ptsname(pty);
+
+  if (!name)
+    _term_getattr (pty, &termbuf);
+  else
+    {
+      /* Minimal access means read only!  */
+      int tty = open(name, O_RDONLY | O_NONBLOCK);
+
+      _term_getattr (tty, &termbuf);
+      close(tty);
+    }
+#else /* !SOLARIS && !SOLARIS10 */
   _term_getattr (pty, &termbuf);
+#endif
+
   termbuf2 = termbuf;
 }
 
