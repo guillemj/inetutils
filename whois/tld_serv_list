@@ -81,7 +81,7 @@
 #.bw			# NIC? www.botsnet.bw
 #.by	NONE		# NIC? http://unibel.by www.open.by
 .bz	NONE		# http://www.psg.com/dns/bz/
-.ca	whois.cdnnet.ca
+.ca	whois.cira.ca
 .cc	whois.nic.cc
 .cd	WEB http://www.nic.cd/database/cd/
 #.cf	NONE		# NIC? http://www.socatel.intnet.cf
