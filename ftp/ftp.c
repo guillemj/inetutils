@@ -296,6 +296,9 @@ bad:
 int
 login (char *host)
 {
+#if !HAVE_DECL_GETPASS
+  extern char *getpass ();
+#endif
   char tmp[80];
   char *user, *pass, *acct, *p;
   int n, aflag = 0;

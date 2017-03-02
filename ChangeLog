@@ -1,3 +1,16 @@
+2017-03-02  Fredrik Fornwall  <fredrik@fornwall.net>  (tiny change)
+
+	ftp: Portability to Android.
+	Without a check for HAVE_DECL_GETPASS and without making a
+	local function declaration, the implicit declaration causes
+	crashes on 64-bit systems lacking declared getpass(), such
+	as Android.  Reported in:
+	http://lists.gnu.org/archive/html/bug-inetutils/2016-10/msg00000.html
+
+	* ftp/cmds.c [!HAVE_DECL_GETPASS] (user, account): Declare getpass()
+	as external function.
+	* ftp/ftp.c (login): Likewise.
+
 2017-03-02  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	whois: Update Canadian TLD server.
