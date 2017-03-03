@@ -22,7 +22,7 @@ AM_CPPFLAGS = $(iu_INCLUDES)
 LDADD = $(iu_LIBRARIES)
 
 noinst_PROGRAMS = identify
-identify_LDADD =
+identify_LDADD = $(top_builddir)/lib/libgnu.a $(LIBUTIL)
 
 check_PROGRAMS = localhost readutmp waitdaemon
 

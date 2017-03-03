@@ -1,3 +1,16 @@
+2017-03-03  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Test utility displays some termcaps.
+
+	* tests/Makefile.am (identify_LDADD): Set to contain
+	`$(top_builddir)/lib/libgnu.a' and `$(LIBUTIL)'.
+	* tests/identify.c: Include <string.h>.
+	[HAVE_TERMIOS_H]: Include <errno.h>, <termios.h>, <pty.h>.
+	[HAVE_TERMIOS_H && HAVE_FCNTL_H]: Include <fcntl.h>.
+	[HAVE_TCGETATTR] (test_flag): New macro.
+	[HAVE_TCGETATTR] (do_termcap): New function.
+	[HAVE_TCGETATTR] (main): Call do_termcap().
+
 2017-03-02  Fredrik Fornwall  <fredrik@fornwall.net>  (tiny change)
 
 	ftp: Portability to Android.
