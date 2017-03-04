@@ -503,7 +503,9 @@ tty_iscrnl (void)
 void
 init_termbuf (void)
 {
-#if defined SOLARIS10 || defined SOLARIS
+#if !defined SOLARIS10 && !defined SOLARIS
+  _term_getattr (pty, &termbuf);
+#else /* SOLARIS || SOLARIS10 */
   /* On Solaris the master PTY is not able to report terminal
    * settings about the slave TTY, since it is only the slave
    * that is working with an designated line discipline.
@@ -512,21 +514,18 @@ init_termbuf (void)
    * This happens for the parent process.  The child process
    * sees an empty name, so undergoes minimal processing.
    */
-  char *name = ptsname(pty);
+  int tty = pty;
+  char *name = ptsname (pty);
 
-  if (!name)
-    _term_getattr (pty, &termbuf);
-  else
-    {
-      /* Minimal access means read only!  */
-      int tty = open(name, O_RDONLY | O_NONBLOCK);
+  if (name)
+    /* Minimal access means read only!  */
+    tty = open (name, O_RDONLY | O_NONBLOCK);
 
-      _term_getattr (tty, &termbuf);
-      close(tty);
-    }
-#else /* !SOLARIS && !SOLARIS10 */
-  _term_getattr (pty, &termbuf);
-#endif
+  _term_getattr (tty, &termbuf);
+
+  if (name)
+    close (tty);
+#endif /* SOLARIS || SOLARIS10 */
 
   termbuf2 = termbuf;
 }
@@ -555,7 +554,23 @@ void
 set_termbuf (void)
 {
   if (memcmp (&termbuf, &termbuf2, sizeof (termbuf)))
+#if !defined SOLARIS10 && !defined SOLARIS
     _term_setattr (pty, &termbuf);
+#else /* SOLARIS || SOLARIS10 */
+    {
+      /* Same reason as with _term_getattr.  */
+      int tty = pty;
+      char *name = ptsname (pty);
+
+      if (name)
+	tty = open (name, O_RDWR | O_NONBLOCK | O_NOCTTY);
+
+      _term_setattr (tty, &termbuf);
+
+      if (name)
+	close (tty);
+    }
+#endif /* SOLARIS || SOLARIS10 */
 }
 
 /* spcset(func, valp, valpp)

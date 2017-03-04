@@ -51,6 +51,8 @@
 
 #include "telnetd.h"
 
+#include <fcntl.h>	/* Solaris */
+
 /*
  * local variables
  */
@@ -591,7 +593,23 @@ clientstat (register int code, register int parm1, register int parm2)
 
 	ws.ws_col = parm1;
 	ws.ws_row = parm2;
+
+# if !defined SOLARIS && !defined SOLARIS10
 	ioctl (pty, TIOCSWINSZ, (char *) &ws);
+# else /* SOLARIS || SOLARIS10 */
+	{
+	  int tty = pty;
+	  char *name = ptsname (pty);
+
+	  if (name)
+	    tty = open (name, O_RDWR | O_NONBLOCK | O_NOCTTY);
+
+	  ioctl (tty, TIOCSWINSZ, (char *) &ws);
+
+	  if (name)
+	    close (tty);
+	}
+# endif /* SOLARIS || SOLARIS10 */
       }
 #endif /* TIOCSWINSZ */
 
@@ -682,9 +700,25 @@ defer_terminit (void)
       memset ((char *) &ws, 0, sizeof (ws));
       ws.ws_col = def_col;
       ws.ws_row = def_row;
+
+# if !defined SOLARIS && !defined SOLARIS10
       ioctl (pty, TIOCSWINSZ, (char *) &ws);
+# else /* SOLARIS || SOLARIS10 */
+      {
+	int tty = pty;
+	char *name = ptsname (pty);
+
+	if (name)
+	  tty = open (name, O_RDWR | O_NONBLOCK | O_NOCTTY);
+
+	ioctl (tty, TIOCSWINSZ, (char *) &ws);
+
+	if (name)
+	  close (tty);
+      }
+# endif /* SOLARIS || SOLARIS10 */
     }
-#endif
+#endif /* TIOCSWINSZ */
 
   /*
    * The only other module that currently defers anything.

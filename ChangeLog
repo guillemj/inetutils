@@ -1,3 +1,21 @@
+2017-03-04  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	telnetd: Use tty, not pty on Solaris.
+	Setting of terminal attributes as well setting of window size
+	must be done via the slave descriptor, not the master descriptor.
+
+	* telnetd/term.c [SOLARIS || SOLARIS10] (set_termbuf):
+	New variables NAME, TTY.  A call to ptsname() reveals whether
+	`pty' is a master.  Then open that file, update TTY, and call
+	_term_setattr().
+	[SOLARIS || SOLARIS10] (init_termbuf): Simplify to use a single
+	call to _term_getattr(), similar to set_termbuf().
+	* telnetd/termstat.c: Include <fcntl.h>.
+	[TIOCSWINSZ && (SOLARIS || SOLARIS10)] (clientstat) <TELOPT_NAWS>:
+	New variables NAME, TTY.  Similar mechanism as above, but call
+	ioctl with window size.
+	[TIOCSWINSZ && (SOLARIS || SOLARIS10)] (defer_terminit): Likewise.
+
 2017-03-03  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	Test utility displays some termcaps.
