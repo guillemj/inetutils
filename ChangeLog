@@ -1,3 +1,8 @@
+2017-06-22  Omer Anson <oaanson@gmail.com>  (tiny change)
+
+	* ftp/main.c (main): Don't assume that uninitialized argv[argv] is
+	NULL.
+
 2017-03-04  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	telnetd: Use tty, not pty on Solaris.

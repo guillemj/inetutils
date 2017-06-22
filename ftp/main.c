@@ -286,16 +286,15 @@ main (int argc, char *argv[])
   if (argc > 0)
     {
       char *xargv[5];
+      int i;
 
       if (setjmp (toplevel))
 	exit (EXIT_SUCCESS);
       signal (SIGINT, intr);
       signal (SIGPIPE, lostpeer);
       xargv[0] = program_invocation_name;
-      xargv[1] = argv[0];
-      xargv[2] = argv[1];
-      xargv[3] = argv[2];
-      xargv[4] = NULL;
+      for (i = 0; i < argc && i < 3; i++)
+	xargv[i + 1] = argv[i];
       setpeer (argc + 1, xargv);
     }
   top = setjmp (toplevel) == 0;
