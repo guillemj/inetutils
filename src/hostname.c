@@ -232,7 +232,7 @@ set_name (const hostname_arguments *const args)
   else
     hostname_new = args->hostname_new;
 
-  size = strlen (hostname_new);
+  size = hostname_new ? strlen (hostname_new) : 0;
   if (!size)
     error (EXIT_FAILURE, 0, "Empty hostname");
 

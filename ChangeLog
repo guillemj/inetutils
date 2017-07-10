@@ -1,5 +1,10 @@
 2017-07-10  Omer Anson <oaanson@gmail.com>  (tiny change)
 
+	* src/hostname.c (set_name): Handle case when hostname_new is
+	NULL.
+
+2017-07-10  Omer Anson <oaanson@gmail.com>  (tiny change)
+
 	* ftpd/ftpd.c (options) <max-timeout>: Mention mandatory argument.
 
 2017-06-22  Omer Anson <oaanson@gmail.com>  (tiny change)
