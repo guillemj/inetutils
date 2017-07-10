@@ -410,9 +410,11 @@ parse_file (const char *const file_name)
 
       if (buffer[0] != '#')
         {
-	  name = (char *) xmalloc (sizeof (char) * nread);
-	  if (sscanf (buffer, "%s", name)  == 1)
+	  name = (char *) xmalloc (sizeof (char) * (nread + 1));
+	  if (sscanf (buffer, "%s", name) == 1)
 	    break;
+	  free (name);
+	  name = NULL;
         }
     }
   while (feof (file) == 0);
