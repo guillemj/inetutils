@@ -1,5 +1,7 @@
 2018-09-06  Simon Josefsson  <simon@josefsson.org>
 
+	* README-alpha (Development): Remove broken links.
+
 	* bootstrap: Updated from gnulib.
 
 2017-07-10  Omer Anson <oaanson@gmail.com>  (tiny change)
