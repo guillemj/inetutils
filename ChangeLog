@@ -1,3 +1,10 @@
+2018-11-09  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	* bootstrap: Updated from gnulib.
+
+	* configure.ac (AC_PREREQ): Require autoconf 2.63.  Gnulib needs
+	a more recent version due to demands put forward by libtool.
+
 2018-09-06  Simon Josefsson  <simon@josefsson.org>
 
 	* README-alpha (Development): Remove broken links.
