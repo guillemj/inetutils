@@ -221,7 +221,7 @@ main (int argc, char *argv[])
   iu_argp_init ("tftpd", default_program_authors);
   argp_parse (&argp, argc, argv, 0, &index, NULL);
 
-  openlog ("tftpd", LOG_PID, LOG_FTP);
+  openlog ("tftpd", LOG_NDELAY | LOG_PID, LOG_FTP);
 
   if (index < argc)
     {

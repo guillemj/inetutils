@@ -1,3 +1,8 @@
+2018-11-12  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	* src/tftpd.c (main): Add LOG_NDELAY to openlog().  The file
+	descriptor for logging must be active before chrooting happens.
+
 2018-11-09  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	* bootstrap: Updated from gnulib.
