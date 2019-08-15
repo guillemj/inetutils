@@ -390,7 +390,7 @@ struct icmp_diag icmp_diag[] = {
   {ICMP_SOURCE_QUENCH, "Source Quench", print_ip_data, NULL},
   {ICMP_REDIRECT, NULL, print_icmp, "Redirect"},
   {ICMP_ECHO, "Echo Request", NULL, NULL},
-  {ICMP_ROUTERADV, "Router Advertisment", NULL, NULL},
+  {ICMP_ROUTERADV, "Router Advertisement", NULL, NULL},
   {ICMP_ROUTERDISCOVERY, "Router Discovery", NULL, NULL},
   {ICMP_TIME_EXCEEDED, NULL, print_icmp, "Time exceeded"},
   {ICMP_PARAMETERPROB, NULL, print_parameterprob, NULL},
