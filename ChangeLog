@@ -1,5 +1,9 @@
 2020-01-01  Simon Josefsson  <simon@josefsson.org>
 
+	* THANKS: Credit Mats.
+
+2020-01-01  Simon Josefsson  <simon@josefsson.org>
+
 	* cfg.mk: Silence 'make syntax-check'.
 
 2020-01-01  Simon Josefsson  <simon@josefsson.org>
