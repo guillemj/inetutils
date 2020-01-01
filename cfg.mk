@@ -47,10 +47,14 @@ local-checks-to-skip = \
 	sc_prohibit_strcmp \
 	sc_unmarked_diagnostics \
 	sc_bindtextdomain \
-	sc_assignment_in_if
+	sc_assignment_in_if \
+	sc_prohibit_gnu_make_extensions
 
 exclude_file_name_regexp--sc_prohibit_have_config_h = \
 	^libinetutils/libinetutils.h$$
+
+exclude_file_name_regexp--sc_obsolete_symbols = \
+	^tests/identify.c$$
 
 htmldir = ../www-$(PACKAGE)
 
