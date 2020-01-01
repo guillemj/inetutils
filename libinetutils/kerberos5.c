@@ -1,5 +1,5 @@
 /* kerberos5.c -- functions to use Heimdal's and MIT's Kerberos V
-  Copyright (C) 2014, 2015, 2016, 2017 Free Software Foundation, Inc.
+  Copyright (C) 2014-2020 Free Software Foundation, Inc.
 
   This file is part of GNU Inetutils.
 

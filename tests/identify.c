@@ -1,5 +1,5 @@
 /* identify -- Probe system and report characteristica.
-  Copyright (C) 2013, 2014, 2015, 2016, 2017 Free Software Foundation, Inc.
+  Copyright (C) 2013-2020 Free Software Foundation, Inc.
 
   This file is part of GNU Inetutils.
 
