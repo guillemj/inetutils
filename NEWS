@@ -4,10 +4,168 @@ See the end of this file for license conditions.
 
 Please send inetutils bug reports to <bug-inetutils@gnu.org>.
 
+Version 1.9.5:
+
+* ping
+
+** Implement subprivileged echo method.
+
+Add fallback code usable by GNU/Linux to create a datagram socket for
+sending ICMP ECHOREQUEST.  The change is related to issue #37252.
+
+* ifconfig
+
+**  Support changing of hardware address.
+
+Implement the setting of link level addresses for systems running
+GNU/Linux.
+
+** Statistics for BSD systems.
+
+** A work-around specific to GNU/Hurd.
+
+This system uses a mixture of BSD definitions and GNU/Linux
+interfaces.  In particular, some care is needed to check interface
+hardware type.
+
+**  Improve the support for GNU/Hurd.
+
+Add system specific abilities, including parsing of command line and
+hardware addresses.
+
+** More info on tunnel interfaces.
+
+** Implement a hardware list for BSD systems.
+
+Patterned on the hardware recognition already in use by GNU/Linux, use
+a similar mechanism for all of BSD.
+
+** Sporadically appearing regression.
+
+Device flags are sometimes calculated before their query using
+SIOCGIFFLAGS.  First observed on GNU/Hurd.
+
+** Apply flags correctly.
+
+When finalizing actions, some flags could be forgotten.  In
+particular, the flag 'up' was ignored whenever an address was assigned
+at the same time.  This is related to the fact that an invocation only
+effecting interface flags, still resulted in a full printout if
+interface status.  This latter behaviour differs from all other
+implementations and is rather annoying.  The issue was detected and
+reported by Hans-Peter Budek in
+http://lists.gnu.org/archive/html/bug-inetutils/2015-07/msg00000.html
+
+** Verbose report on changed flags.
+
+** Symbolic name as peer address.
+
 * ftp
 
-Allow invocation, as well as command `open', to accept an explicit
-remote user name as extended host argument: `user@host'.
+** Allow invocation, as well as command `open', to accept an explicit
+** remote user name as extended host argument: `user@host'.
+
+** Portability to Android.
+
+Without a check for HAVE_DECL_GETPASS and without making a local
+function declaration, the implicit declaration causes crashes on
+64-bit systems lacking declared getpass(), such as Android.  See
+http://lists.gnu.org/archive/html/bug-inetutils/2016-10/msg00000.html
+
+* ftpd
+
+** Mention mandatory argument for <max-timeout>.
+
+* rcp
+
+** Integer overflow.
+
+During transmission of large files, size exceeding 2GB, a long integer
+variable overflows.  Issue reported and identified by Wenlin Kang in
+http://lists.gnu.org/archive/html/bug-inetutils/2015-07/msg00004.html
+
+* hostname
+
+** Avoid a trailing space.
+
+Suppress the space character after the last presented IP number.
+Problem reported by Terje Strand in
+http://lists.gnu.org/archive/html/bug-inetutils/2016-04/msg00001.html
+
+** Make -F handle comment-only input files without trailing newline.
+Problem reported by Omer Anson <oaanson@gmail.com> in
+https://lists.gnu.org/archive/html/bug-inetutils/2017-06/msg00010.html
+
+* syslogd
+
+** Redefine faulty macro LOG_MAKEPRI whenever needed.
+
+Systems with Glibc header file <syslog.h> prior to 2.17, are not
+correctly defining the helper macro LOG_MAKEPRI.  This effects our
+syslog service whenever it receives kernel messages from a remote
+host.  The issue was mentioned in Debian's BTS as report #729666.
+
+* tftpd
+
+** AIX portability
+
+** Add LOG_NDELAY to openlog().  The file descriptor for logging must
+** be active before chrooting happens.
+
+* traceroute
+
+** Subprivileged use case.
+
+A fallback for ICMP tracing relevant to GNU/Linux is implemented,
+allowing a rudimentary but suid-less use case.  The ability to
+identify intermediary hosts is missing, due to the crippled capability
+of receiving ICMP packets other than ICMP_ECHOREPLY.
+
+* telnet
+
+Telnet -E(no escape) is treating _POSIX_VDISABLE char as escape.
+Causes problems when sending binary data through telnet connections.
+
+* telnetd
+
+** Use tty, not pty on Solaris.
+
+Setting of terminal attributes as well setting of window size must be
+done via the slave descriptor, not the master descriptor.
+
+** Scrub USER from environment.
+
+Discard the environment variable USER.  It will later be set properly
+for autologin, but at least one BSD system passes a preset value when
+telnetd starts, a value which will cause rejected login when autologin
+is not in effect.
+
+** Portability of TTY termcap to Solaris systems.
+
+** Portable option debugging.
+
+BSD systems assign IAC and _POSIX_VDISABLE the common decimal value
+255. Hence the NVT enforces value duplication more often during their
+transmission, than GNU and Solaris systems do.
+
+** Premature connection closure.
+
+When many connections are attempted in quick succession, a substantial
+number of them are cancelled.  This does not appear for manual use
+cases, but for contrived automated set-ups.  The cause seems to be a
+change in the evaluation of pty_read(), which was done to coincide
+with the condition in use by the original BSD implementation.  Issue
+reported and suggested by Chris Severance in
+http://lists.gnu.org/archive/html/bug-inetutils/2015-07/msg00006.html
+
+* whois
+
+** Update Canadian TLD server.
+
+Old host name no longer exists.  Reported by Neil Mayhem:
+http://lists.gnu.org/archive/html/bug-inetutils/2017-01/msg00000.html
+
+* Improved documentation, self-tests and build environment.
 
 June 9, 2015
 Version 1.9.4:
