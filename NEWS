@@ -127,6 +127,8 @@ of receiving ICMP packets other than ICMP_ECHOREPLY.
 
 Causes problems when sending binary data through telnet connections.
 
+** Validate supplied environment variables. CVE-2019-0053
+
 * telnetd
 
 ** Use tty, not pty on Solaris.

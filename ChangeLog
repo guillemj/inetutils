@@ -1,3 +1,9 @@
+2020-01-01  Simon Josefsson  <simon@josefsson.org>
+
+	telnet: Validate supplied environment variables. CVE-2019-0053
+	* telnet/telnet.c (suboption): Use snprintf instead of sprintf.
+	* telnet/utilities.c (printsub): Likewise.
+
 2020-01-01  Guillem Jover  <guillem@hadrons.org>  (tiny change)
 
 	* ping/ping_echo.c (struct icmp_diag): Fix typo.
