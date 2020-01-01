@@ -123,7 +123,8 @@ of receiving ICMP packets other than ICMP_ECHOREPLY.
 
 * telnet
 
-Telnet -E(no escape) is treating _POSIX_VDISABLE char as escape.
+** Telnet -E(no escape) is treating _POSIX_VDISABLE char as escape.
+
 Causes problems when sending binary data through telnet connections.
 
 * telnetd
