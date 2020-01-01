@@ -1,5 +1,9 @@
 2020-01-01  Simon Josefsson  <simon@josefsson.org>
 
+	* bootstrap: Updated from gnulib.
+
+2020-01-01  Simon Josefsson  <simon@josefsson.org>
+
 	* telnet/telnet.c (telsnd): Telnet -E(no escape) is treating
 	_POSIX_VDISABLE char as escape.
 	Reported by Mikhail Bychek <mikhail.bychek@sputnix.ru>.
