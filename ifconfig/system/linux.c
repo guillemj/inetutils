@@ -41,7 +41,9 @@
 #include <sys/ioctl.h>
 #include <net/if.h>
 #include <net/if_arp.h>
-#include <linux/if_ether.h>
+#ifdef HAVE_NETINET_ETHER_H
+# include <netinet/ether.h>
+#endif
 
 #include <read-file.h>
 #include <unused-parameter.h>

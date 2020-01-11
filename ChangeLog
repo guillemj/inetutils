@@ -1,5 +1,15 @@
 2020-01-11  Mats Erik Andersson  <gnu@gisladisker.se>
 
+	The glibc manual page for ether address specifies <netinet/ether.h>.
+	Use this for GNU/Linux in the hope of resolving also musl libc, as
+	used with Alpine Linux.  Reported by Bruno Haible.
+
+	* ifconfig/system/linux.c [HAVE_NETINET_ETHER_H]: Include the
+	library header <netinet/ether.h> instead of the system specific
+	header <linux/if_ether.h>.
+
+2020-01-11  Mats Erik Andersson  <gnu@gisladisker.se>
+
 	Consistent use of `grep' tools in scripts.
 
 	* configure.ac (EGREP, FGREP): New and precious variables.
