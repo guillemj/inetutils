@@ -85,7 +85,7 @@ errno=0
 diff=`{ echo "$REPLY_a1"; echo "$REPLY_A1"; } | sort | uniq -u`
 
 test `echo "$diff" | wc -l` -eq 2 &&
-test `echo "$diff" | grep -c -v -e '^\.\{1,2\}$'` -eq 0 ||
+test `echo "$diff" | $GREP -c -v '^[.]\{1,2\}$'` -eq 0 ||
   { errno=1; echo >&2 'Failed to tell switch -a apart from -A.'
     # Attempt a diagnosis.
     if test -z "$diff"; then

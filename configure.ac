@@ -135,6 +135,8 @@ AC_PATH_PROG(MKTEMP, mktemp, mktemp)
 AC_PATH_PROG(NETSTAT, netstat, netstat)
 AC_PATH_PROG(RM, rm, rm)
 AC_PROG_CPP
+AC_PROG_EGREP
+AC_PROG_FGREP
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
 AC_PROG_RANLIB
@@ -143,6 +145,8 @@ AC_PROG_LN_S
 AC_PROG_SED
 AM_MISSING_PROG(HELP2MAN, help2man, $missing_dir)
 AC_ARG_VAR(GREP, [Location of preferred 'grep' utility.])
+AC_ARG_VAR(EGREP, [Location of preferred 'egrep' utility.])
+AC_ARG_VAR(FGREP, [Location of preferred 'fgrep' utility.])
 AC_ARG_VAR(SED, [Location of preferred 'sed' utility.])
 AC_ARG_VAR(DD, [Location of 'dd'.])
 AC_ARG_VAR(MKTEMP, [Location of 'mktemp'.])

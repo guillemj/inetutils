@@ -77,7 +77,7 @@ test $reply -eq 0 || { errno=1
 #
 tell='hash 7M
 hash 12k'
-reply=`echo "$tell" | $FTP -v | $GREP -c -e 12288 -e 7340032`
+reply=`echo "$tell" | $FTP -v | $EGREP -c '12288|7340032'`
 
 test $reply -eq 2 || { errno=1
   echo >&2 'Failed to parse step sizes for hash printing.'; }

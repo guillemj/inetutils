@@ -591,7 +591,7 @@ COUNT=`$GREP -c "$TAG" "$OUT"`
 # All notices in $OUT_NOTICE should be present also in $OUT.
 # Assign value 1 to full outcome.
 COUNT_NOTICE=`$SED -n '$=' "$OUT_NOTICE"`
-wrapped=`$GREP -c -f "$OUT_NOTICE" "$OUT"`
+wrapped=`$FGREP -c -f "$OUT_NOTICE" "$OUT"`
 
 COUNT_WRAP=0
 if $do_unix_socket || $do_inet_socket; then
@@ -601,9 +601,7 @@ fi
 # Second set-up after SIGHUP.
 COUNT2=`$GREP -c "$TAG2" "$OUT_USER"`
 COUNT3=`$GREP -c "$TAG2" "$OUT_DEBUG"`
-COUNT4=`$GREP -c -e "$TAG2.*Default facility" \
-		 -e "$TAG2.*Fake kern facility" \
-		 -e "$TAG2.*Illegal facility" \
+COUNT4=`$EGREP -c "$TAG2.*(Default|Fake kern|Illegal) facility" \
 	"$OUT_UNOTICE"`
 COUNT5=`$GREP -c "$TAG2" "$OUT_LOCAL0"`
 
@@ -614,7 +612,7 @@ COUNT2_debug=`$GREP -c "$TAG2.*user.debug" "$OUT_USER"`
 COUNT3_info=`$GREP -c "$TAG2.*user.info" "$OUT_DEBUG"`
 
 # No info or debug message should enter with selector 'user.=notice'.
-COUNT4_notice=`$GREP -c -e "$TAG2.*user.info" -e "$TAG2.*user.debug" \
+COUNT4_notice=`$EGREP -c "$TAG2.*user.(info|debug)" \
 		"$OUT_UNOTICE"`
 # Undefined facility should overwrite also the priority.
 COUNT4_illegal=`$GREP -c "$TAG2.*Illegal facility" "$OUT_USER"`
@@ -670,12 +668,12 @@ else
 
     # local socket transport
     if $do_unix_socket; then
-	if grep "$TAG2.*info.*BSD" "$OUT_USER" >/dev/null 2>&1; then
+	if $GREP "$TAG2.*info.*BSD" "$OUT_USER" >/dev/null 2>&1; then
 	    :
 	else
 	    echo >&2 '** UDP socket did not convey info msg after HUP.'
 	fi
-	if grep "$TAG2.*debug.*BSD" "$OUT_DEBUG" >/dev/null 2>&1; then
+	if $GREP "$TAG2.*debug.*BSD" "$OUT_DEBUG" >/dev/null 2>&1; then
 	    :
 	else
 	    echo >&2 '** UDP socket did not convey debug msg after HUP.'
@@ -684,12 +682,12 @@ else
 
     # UDP transport
     if $do_inet_socket; then
-	if grep "$TAG2.*info.*IPv" "$OUT_USER" >/dev/null 2>&1; then
+	if $GREP "$TAG2.*info.*IPv" "$OUT_USER" >/dev/null 2>&1; then
 	    :
 	else
 	    echo >&2 '** IP socket did not convey info msg after HUP.'
 	fi
-	if grep "$TAG2.*debug.*IPv" "$OUT_DEBUG" >/dev/null 2>&1; then
+	if $GREP "$TAG2.*debug.*IPv" "$OUT_DEBUG" >/dev/null 2>&1; then
 	    :
 	else
 	    echo >&2 '** IP socket did not convey debug msg after HUP.'

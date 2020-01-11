@@ -18,6 +18,8 @@
 # Helpers and supporting functionality for test scripts.
 
 GREP=${GREP:-@GREP@}
+EGREP=${EGREP:-@EGREP@}
+FGREP=${FGREP:-@FGREP@}
 SED=${SED:-@SED@}
 DD=${DD:-@DD@}
 MKTEMP=${MKTEMP:-@MKTEMP@}

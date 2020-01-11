@@ -170,7 +170,7 @@ else
     for nn in 1 2 3 4 5; do
 	# Check for response at chosen port.
 	$TCPGET $TARGET $PORT 2>/dev/null |
-	    grep "Your address is $TARGET." >/dev/null 2>&1 || errno=1
+	    $GREP "Your address is $TARGET." >/dev/null 2>&1 || errno=1
 
 	test $errno -eq 0 ||
 	    { cat >&2 <<-EOT
