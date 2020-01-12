@@ -1,3 +1,14 @@
+2020-01-12  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Suppress building of remote execution commands on systems that
+	offer no rcmd functionality.  This happens with embedded systems
+	like Alpine Linux and musl libc, as reported by Assaf Gordon and
+	Bruno Haible.
+
+	* configure.ac: Check for function rcmd().  Disable building
+	of `rcp', `rlogin', and `rsh' when no rcmd variant is present.
+	(WITH_RCMD): New precompiler macro.
+
 2020-01-11  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	The glibc manual page for ether address specifies <netinet/ether.h>.

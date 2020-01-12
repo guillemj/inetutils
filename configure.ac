@@ -255,6 +255,15 @@ else
   IU_DISABLE_TARGET(talk)
 fi
 
+# The function rcmd() is crucial for remote shells, but is not
+# always implemented in libraries intended for embedded systems.
+# Check for its availability in order to later disable our rcp,
+# rlogin, and rsh when no alternative is present.
+AC_CHECK_FUNC(rcmd, , , [#include <netdb.h>])
+if test "$ac_cv_func_rcmd" = yes; then
+  AC_DEFINE([WITH_RCMD], 1, [Define to one if you can use rcmd.])
+fi
+
 # NetBSD offers orcmd() and orcmd_af() for getting
 # exactly the functionality that rcmd() and rcmd_af()
 # offer on all other targetted systems.
@@ -310,6 +319,16 @@ else
   fi
 fi
 
+# Disable targets rcp, rlogin, and rsh when no rcmd variant is available.
+if test "$ac_cv_func_rcmd" != yes \
+   && test "$ac_cv_func_orcmd" != yes \
+   && test "$ac_cv_func_rcmd_af" != yes \
+   && "$ac_cv_func_orcmd_af" != yes
+then
+  IU_DISABLE_TARGET(rcp)
+  IU_DISABLE_TARGET(rlogin)
+  IU_DISABLE_TARGET(rsh)
+fi
 
 # FIXME: Make this test case a bit more robust.  Remove KRB4
 LIBAUTH=
