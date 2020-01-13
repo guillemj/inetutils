@@ -1,5 +1,13 @@
 2020-01-13  Mats Erik Andersson  <gnu@gisladisker.se>
 
+	The Gnulib module `regex' requires linking that was not made
+	explicit in our source.  Discovered by Bruno Haible with AIX 7.2.
+	https://lists.gnu.org/archive/html/bug-inetutils/2020-01/msg00012.html
+
+	* talkd/Makefile.am (LD_ADD): Add $(LIBTHREAD) and $(LIB_MBRTOWC).
+
+2020-01-13  Mats Erik Andersson  <gnu@gisladisker.se>
+
 	Attempt to build correctly on Cygwin, new and old. Reported
 	and suggested by Bruno Haible in
 	https://lists.gnu.org/archive/html/bug-inetutils/2020-01/msg00013.html

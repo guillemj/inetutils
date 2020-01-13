@@ -23,7 +23,7 @@ AM_CPPFLAGS = \
 	$(PATHDEF_DEV) \
 	$(PATHDEF_TTY_PFX) $(PATHDEF_UTMP) $(PATHDEF_UTMPX)
 
-LDADD = $(iu_LIBRARIES)
+LDADD = $(iu_LIBRARIES) $(LIBTHREAD) $(LIB_MBRTOWC)
 
 inetdaemondir = @inetdaemondir@
 
