@@ -22,7 +22,7 @@ AC_DEFUN([IU_ENABLE_FOO],
  [AC_ARG_ENABLE($1, AS_HELP_STRING([--disable-$1], [don't compile $1]), ,
                 [enable_]$1[=$enable_]$2)
 [if test "$enable_$1" = yes; then
-   $1_BUILD=$1
+   $1_BUILD=$1$EXEEXT
    $1_INSTALL_HOOK="install-$1-hook"
 else
    $1_BUILD=''

@@ -615,7 +615,7 @@ AC_HEADER_STDC
 AC_HEADER_TIME
 AC_HEADER_DIRENT
 
-AC_CHECK_HEADERS([arpa/nameser.h errno.h fcntl.h features.h \
+AC_CHECK_HEADERS([arpa/nameser.h arpa/tftp.h errno.h fcntl.h features.h \
 		  glob.h memory.h netinet/ether.h netinet/in_systm.h \
 		  netinet/ip.h netinet/ip_icmp.h netinet/ip_var.h \
 		  security/pam_appl.h shadow.h \
@@ -639,8 +639,15 @@ AC_CHECK_HEADERS([arpa/nameser.h errno.h fcntl.h features.h \
 # include <sys/param.h>
 #endif
 ]
-
 )
+
+# Recent Cygwin 2.9 has dropped <arpa/tftp.h>.  Other systems
+# might take similar steps.
+if test "$ac_cv_header_arpa_tftp_h" = no; then
+  AC_MSG_WARN([arpa/tftp.h is not available: not building tftp, nor tftpd])
+  IU_DISABLE_TARGET(tftp)
+  IU_DISABLE_TARGET(tftpd)
+fi
 
 ### Checks for types.
 

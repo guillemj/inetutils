@@ -1,3 +1,13 @@
+2020-01-13  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Attempt to build correctly on Cygwin, new and old. Reported
+	and suggested by Bruno Haible in
+	https://lists.gnu.org/archive/html/bug-inetutils/2020-01/msg00013.html
+
+	* configure.ac: Check for header <arpa/tftp.h>.  When it is
+	missing disable the targets `tftp', and `tftpd'.
+	* am/enable.m4 (IU_ENABLE_FOO): Append $EXEEXT to `target_BUILD'.
+
 2020-01-12  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	Suppress building of remote execution commands on systems that
