@@ -97,7 +97,15 @@ reply=`echo "$tell" | $FTP`
 
 test `echo "$reply" | $SED -n '$='` \
      -eq `echo "$tell" | $SED -n '$='` \
-&& test `echo "$reply" | $GREP -c 'Local directory is /tmp'` -eq 1 \
+|| { errno=1; echo >&2 'Some command in mixed list produced no response.'; }
+
+# At least Darwin has been known to prepend a directory stem.
+DIR_STEM=`echo "$reply" | $SED -n 's,Local directory now \([^ ]*\)/tmp$,\1,p'`
+
+test -z "$DIR_STEM" \
+|| $silence echo "This system prepends a directory stem: $DIR_STEM"
+
+test `echo "$reply" | $GREP -c "Local directory is $DIR_STEM/tmp"` -eq 1 \
 || { errno=1; echo >&2 'Failed to set local directory.'; }
 
 # Summary of work.

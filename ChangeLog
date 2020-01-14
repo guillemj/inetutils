@@ -1,3 +1,13 @@
+2020-01-14  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Make test of ftp-parser slightly more forgiving.  Darwin systems
+	might prepend a path stem to local directory.  Assaf Gordon reported
+	https://lists.gnu.org/archive/html/bug-inetutils/2020-01/msg00005.html
+
+	* tests/ftp-parser.sh: Check number of responses to mixed command
+	list, and extract any prepended path resulting from `lcd'.
+	(DIR_STEM): New variable.  This modifies matching test after `lpwd'.
+
 2020-01-13  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	The Gnulib module `regex' requires linking that was not made
