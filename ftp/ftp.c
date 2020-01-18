@@ -98,8 +98,6 @@ extern int fclose (FILE *);
 extern int pclose (FILE *);
 #endif
 
-extern int h_errno;
-
 int data = -1;
 int abrtflag = 0;
 jmp_buf ptabort;

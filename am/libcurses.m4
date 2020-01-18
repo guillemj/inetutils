@@ -81,8 +81,11 @@ dnl including ncurses (unless --disable ncurses is specified), curses (which
 dnl does so on some systems), termcap, and termlib.  If termcap is found, then
 dnl LIBTERMCAP is defined with the appropriate linker specification.
 dnl
-dnl Solaris is known to use libtermcap for tgetent, but to declare tgetent
-dnl in <term.h>!
+dnl Solaris is known to offer tgetent encapsulated in libtermcap, but to
+dnl declare tgetent also in <term.h>!  When X/Open Curses is present as
+dnl primary implementation, the header file <term.h> is included already
+dnl in <curses.h>, and the first available <term.h> may in fact cause
+dnl contradictions.
 dnl
 AC_DEFUN([IU_LIB_TERMCAP], [
   AC_REQUIRE([IU_LIB_NCURSES])
@@ -106,7 +109,9 @@ AC_DEFUN([IU_LIB_TERMCAP], [
        location_tgetent=termcap.h],
       [AC_LINK_IFELSE(
 	[AC_LANG_PROGRAM([[#include <curses.h>
-#include <term.h>]],
+#ifndef _XOPEN_CURSES
+# include <term.h>
+#endif]],
 	  [[(void) tgetent((char *) 0, (char *) 0);]])],
 	[AC_DEFINE([HAVE_CURSES_TGETENT], 1,
 	  [Define to 1 if tgetent() exists in <term.h>.])
@@ -122,7 +127,9 @@ AC_DEFUN([IU_LIB_TERMCAP], [
     else
       AC_CHECK_LIB(curses, tgetent, LIBTERMCAP=-lcurses)
       AC_CHECK_DECLS([tgetent], , , [[#include <curses.h>
-#include <term.h>]])
+#ifndef _XOPEN_CURSES
+# include <term.h>
+#endif]])
       if test "$ac_cv_lib_curses_tgetent" = yes \
 	  && test "$ac_cv_have_decl_tgetent" = yes; then
 	AC_DEFINE([HAVE_CURSES_TGETENT], 1)

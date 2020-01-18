@@ -1,3 +1,15 @@
+2020-01-18  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Minor portability glitches in Solaris and in AIX.
+
+	* am/libcurses.m4 (IU_LIB_TERMCAP) [!_XOPEN_CURSES]: Conditionally
+	include the header <term.h>.
+	* telnet/telnet.c [HAVE_CURSES_TGETENT & !_XOPEN_CURSES]: Likewise.
+	* telnetd/utility.c [HAVE_CURSES_TGETENT & !_XOPEN_CURSES]: Likewise.
+
+	* ftp/ftp.c (h_errno): Delete declaration, not in use.
+	* ftpd/ftpd.c (FTP_NAMES): Assign a value to this macro.
+
 2020-01-14  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	Make test of ftp-parser slightly more forgiving.  Darwin systems

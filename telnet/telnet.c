@@ -75,7 +75,9 @@
 # include <termcap.h>
 #elif defined HAVE_CURSES_TGETENT
 # include <curses.h>
-# include <term.h>
+# ifndef _XOPEN_CURSES
+#  include <term.h>
+# endif
 #endif
 
 #ifdef AUTHENTICATION

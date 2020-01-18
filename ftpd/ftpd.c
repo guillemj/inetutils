@@ -66,7 +66,7 @@
 # include <netinet/ip.h>
 #endif
 
-#define FTP_NAMES
+#define FTP_NAMES 1
 #include <arpa/ftp.h>
 #include <arpa/inet.h>
 #include <arpa/telnet.h>
