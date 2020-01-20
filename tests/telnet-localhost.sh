@@ -53,6 +53,8 @@ fi
 
 $need_mktemp || exit_no_mktemp
 
+RUNTIME_IPV6="${RUNTIME_IPV6:-./runtime-ipv6$EXEEXT}"
+
 # The executables under test.
 #
 INETD=${INETD:-../src/inetd$EXEEXT}
@@ -131,6 +133,12 @@ posttesting () {
 trap posttesting EXIT HUP INT QUIT TERM
 
 PORT=`expr 4973 + ${RANDOM:-$$} % 973`
+
+# Avoid IPv6 when not functional.
+if test "$TEST_IPV6" = "auto"; then
+    $RUNTIME_IPV6 || { TEST_IPV6="no"
+	echo "Suppressing non-supported IPv6."; }
+fi
 
 cat > "$INETD_CONF" <<-EOF ||
 	$TARGET:$PORT stream tcp4 nowait $USER $ADDRPEEK addrpeek addr

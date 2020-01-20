@@ -123,8 +123,6 @@ IU_ENABLE_CLIENT(traceroute)
 
 AM_SILENT_RULES([yes])
 
-AC_ISC_POSIX
-
 ### Checks for programs.
 AC_PROG_CC
 gl_EARLY

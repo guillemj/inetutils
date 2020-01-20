@@ -51,6 +51,8 @@ set -e
 
 . ./tools.sh
 
+RUNTIME_IPV6="${RUNTIME_IPV6:-./runtime-ipv6$EXEEXT}"
+
 FTP=${FTP:-../ftp/ftp$EXEEXT}
 FTPD=${FTPD:-../ftpd/ftpd$EXEEXT}
 INETD=${INETD:-../src/inetd$EXEEXT}
@@ -221,6 +223,12 @@ locate_port () {
 	$GREP "^$2[46]\{0,2\}.*[^0-9]$1[^0-9]" >/dev/null 2>&1
     fi
 }
+
+# Avoid IPv6 when not functional.
+if test "$TEST_IPV6" = "auto"; then
+    $RUNTIME_IPV6 || { TEST_IPV6="no"
+	echo "Suppressing non-supported IPv6."; }
+fi
 
 # Files used in transmission tests.
 GETME=`$MKTEMP $TMPDIR/file.XXXXXXXX` || do_transfer=false

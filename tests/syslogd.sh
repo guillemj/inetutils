@@ -96,6 +96,8 @@ if test "$IU_OS" = "Linux" || test "$IU_OS" = "SunOS"; then
     iu_socklen_max=108
 fi
 
+RUNTIME_IPV6="${RUNTIME_IPV6:-./runtime-ipv6$EXEEXT}"
+
 # The executables under test.
 #
 SYSLOGD=${SYSLOGD:-../src/syslogd$EXEEXT}
@@ -187,6 +189,12 @@ clean_testdir () {
 # Clean artifacts as execution stops.
 #
 trap clean_testdir EXIT HUP INT QUIT TERM
+
+# Avoid IPv6 when not functional.
+if test "$TEST_IPV6" = "auto"; then
+    $RUNTIME_IPV6 || { TEST_IPV6="no"
+	$silence echo "Suppressing non-supported IPv6."; }
+fi
 
 # Test at this port.
 # Standard is syslog at 514/udp.

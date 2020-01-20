@@ -23,7 +23,7 @@ LDADD = $(iu_LIBRARIES)
 noinst_PROGRAMS = identify
 identify_LDADD = $(top_builddir)/lib/libgnu.a $(LIBUTIL)
 
-check_PROGRAMS = localhost readutmp waitdaemon
+check_PROGRAMS = localhost readutmp runtime-ipv6 waitdaemon
 
 dist_check_SCRIPTS = utmp.sh
 

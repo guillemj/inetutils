@@ -68,6 +68,8 @@ fi
 # Portability fix for SVR4
 PWD="${PWD:-`pwd`}"
 
+RUNTIME_IPV6="${RUNTIME_IPV6:-./runtime-ipv6$EXEEXT}"
+
 TFTP="${TFTP:-../src/tftp$EXEEXT}"
 TFTPD="${TFTPD:-$PWD/../src/tftpd$EXEEXT}"
 INETD="${INETD:-../src/inetd$EXEEXT}"
@@ -154,6 +156,12 @@ trap posttesting EXIT HUP INT QUIT TERM
 if test "$ADDRESSES" = "sense"; then
     ADDRESSES=`$IFCONFIG -a | $SED -e "/$AF /!d" \
 	-e "s/^.*$AF \([:.0-9]\{1,\}\) .*$/\1/g"`
+fi
+
+# Avoid IPv6 when not functional.
+if test "$TEST_IPV6" = "auto"; then
+    $RUNTIME_IPV6 || { TEST_IPV6="no"
+	$silence echo "Suppressing non-supported IPv6."; }
 fi
 
 if test -z "$ADDRESSES"; then

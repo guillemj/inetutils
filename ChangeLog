@@ -1,3 +1,25 @@
+2020-01-20  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Test robustly in absence of IPv6.
+	For systems without functional IPv6 addressing at runtime,
+	suppress this address family in our tests, whenever IPv6 was
+	configured as autodetected.  Helpful answer by Bruno Haible
+	originating from effects in a Raspbian system:
+	https://lists.gnu.org/archive/html/bug-inetutils/2020-01/msg00021.html
+
+	* tests/Makefile.am (check_PROGRAMS): Add `runtime-ipv6'.
+	* tests/ftp-localhost.sh (RUNTIME_IPV6): New variable.
+	[TEST_IPV6 == auto]: Set TEST_IPV6 to `no' when runtime presence
+	of IPv6 is in the negative.  Thus effectively inhibiting all use
+	within this script of IPv6 addresses.
+	* tests/ping-localhost.sh: Likewise.
+	* tests/syslogd.sh: Likewise.
+	* tests/telnet-localhost.sh: Likewise.
+	* tests/tftp.sh: Likewise.
+	* tests/runtime-ipv6.c: New file.
+
+	* configure.ac (AC_ISC_POSIX): Delete obsolete test.
+
 2020-01-18  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	Minor portability glitches in Solaris and in AIX.

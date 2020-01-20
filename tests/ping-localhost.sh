@@ -25,6 +25,8 @@
 
 . ./tools.sh
 
+RUNTIME_IPV6="${RUNTIME_IPV6:-./runtime-ipv6$EXEEXT}"
+
 PING=${PING:-../ping/ping$EXEEXT}
 TARGET=${TARGET:-127.0.0.1}
 
@@ -44,6 +46,12 @@ fi
 if [ `func_id_uid` != 0 ]; then
     echo "ping needs to run as root"
     exit 77
+fi
+
+# Avoid IPv6 when not functional.
+if test "$TEST_IPV6" = "auto"; then
+    $RUNTIME_IPV6 || { TEST_IPV6="no"
+	echo "Suppressing non-supported IPv6."; }
 fi
 
 errno=0
