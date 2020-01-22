@@ -1,3 +1,10 @@
+2020-01-22  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Correctly detect presence of IPv6.
+
+	* tests/runtime-ipv6.c [AI_ADDRCONFIG] (hints.ai_flags):
+	Add AI_ADDRCONFIG for better selectivity.
+
 2020-01-20  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	Test robustly in absence of IPv6.

@@ -55,9 +55,12 @@ main (int argc, char *argv[])
   set_program_name (argv[0]);
 
   memset (&hints, 0, sizeof (hints));
-  hints.ai_family = PF_INET6;
+  hints.ai_family = AF_INET6;
   hints.ai_socktype = SOCK_DGRAM;
   hints.ai_flags = AI_NUMERICHOST;
+#ifdef AI_ADDRCONFIG
+  hints.ai_flags |= AI_ADDRCONFIG;
+#endif
 
   err = getaddrinfo ("::1", "tftp", &hints, &aiptr);
   if (!err)
