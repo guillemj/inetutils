@@ -96,8 +96,6 @@ if test "$IU_OS" = "Linux" || test "$IU_OS" = "SunOS"; then
     iu_socklen_max=108
 fi
 
-RUNTIME_IPV6="${RUNTIME_IPV6:-./runtime-ipv6$EXEEXT}"
-
 # The executables under test.
 #
 SYSLOGD=${SYSLOGD:-../src/syslogd$EXEEXT}
@@ -189,12 +187,6 @@ clean_testdir () {
 # Clean artifacts as execution stops.
 #
 trap clean_testdir EXIT HUP INT QUIT TERM
-
-# Avoid IPv6 when not functional.
-if test "$TEST_IPV6" = "auto"; then
-    $RUNTIME_IPV6 || { TEST_IPV6="no"
-	$silence echo "Suppressing non-supported IPv6."; }
-fi
 
 # Test at this port.
 # Standard is syslog at 514/udp.
@@ -441,15 +433,18 @@ if $do_socket_length; then
 fi
 
 if $do_inet_socket; then
-    TESTCASES=`expr $TESTCASES + 1`
-    $LOGGER -4 -h "$TARGET:$PORT" -p user.info -t "$TAG" \
-	"Sending IPv4 message. (pid $$)"
-    if test "$TEST_IPV6" != "no"; then
+    if test "$TEST_IPV4" != "no" && test -n "$TARGET"; then
+	TESTCASES=`expr $TESTCASES + 1`
+	$LOGGER -4 -h "$TARGET:$PORT" -p user.info -t "$TAG" \
+	    "Sending IPv4 message. (pid $$)"
+    fi # TEST_IPV4 && TARGET
+
+    if test "$TEST_IPV6" != "no" && test -n "$TARGET6"; then
 	TESTCASES=`expr $TESTCASES + 1`
 	$LOGGER -6 -h "[$TARGET6]:$PORT" -p user.info -t "$TAG" \
 	    "Sending IPv6 message. (pid $$)"
-    fi
-fi
+    fi # TEST_IPV6 && TARGET
+fi # do_inet_socket
 
 # Send message of priority notice, either via local socket or IPv4,
 # but not both.  The presence is checked in $OUT and in $OUT_NOTICE,
@@ -459,10 +454,12 @@ if $do_unix_socket; then
     $LOGGER -h "$SOCKET" -p daemon.notice -t "$TAG" \
 	"Attemping to locate wrapped configuration. (pid $$)"
 elif $do_inet_socket; then
-    TESTCASES=`expr $TESTCASES + 2`
-    $LOGGER -4 -h "$TARGET:$PORT" -p daemon.notice -t "$TAG" \
-	"Attemping to locate wrapped configuration. (pid $$)"
-fi
+    if test "$TEST_IPV4" != "no" && test -n "$TARGET"; then
+	TESTCASES=`expr $TESTCASES + 2`
+	$LOGGER -4 -h "$TARGET:$PORT" -p daemon.notice -t "$TAG" \
+	    "Attemping to locate wrapped configuration. (pid $$)"
+    fi # TEST_IPV4 && TARGET
+fi # do_inet_socket
 
 # Generate a more elaborate message routing, aimed at confirming
 # discrimination of severity and facility.  This is made active
@@ -541,17 +538,19 @@ if $do_unix_socket; then
     TESTCASES=`expr $TESTCASES + 2`
     $LOGGER -h "$SOCKET" -p 512.info -t "$TAG2" \
 	"Illegal facility in BSD message. (pid $$)"
-fi
+fi # do_unix_socket
 
 if $do_inet_socket; then
     # Two messages of weight 2, ensuring that missing
     # and misplaced messages are not yielding negatives.
-    TESTCASES=`expr $TESTCASES + 4`
-    $LOGGER -4 -h "$TARGET:$PORT" -p user.info -t "$TAG2" \
-	"user.info as IPv4 message. (pid $$)"
-    $LOGGER -4 -h "$TARGET:$PORT" -p user.debug -t "$TAG2" \
-	"user.debug as IPv4 message. (pid $$)"
-fi
+    if test "$TEST_IPV4" != "no" && test -n "$TARGET"; then
+	TESTCASES=`expr $TESTCASES + 4`
+	$LOGGER -4 -h "$TARGET:$PORT" -p user.info -t "$TAG2" \
+	    "user.info as IPv4 message. (pid $$)"
+	$LOGGER -4 -h "$TARGET:$PORT" -p user.debug -t "$TAG2" \
+	    "user.debug as IPv4 message. (pid $$)"
+    fi # TEST_IPV4 && TARGET
+fi # do_inet_socket
 
 # Remove previous SYSLOG daemon.
 test -r "$PID" && kill -0 "`cat "$PID"`" >/dev/null 2>&1 &&
@@ -577,16 +576,18 @@ if $do_standard_port; then
 	--inet --ipany $OPTIONS
     sleep 1
 
-    TESTCASES=`expr $TESTCASES + 1`
-    $LOGGER -4 -h "$TARGET" -p user.info -t "$TAG" \
-	"IPv4 to standard port. (pid $$)"
+    if test "$TEST_IPV4" != "no" && test -n "$TARGET"; then
+	TESTCASES=`expr $TESTCASES + 1`
+	$LOGGER -4 -h "$TARGET" -p user.info -t "$TAG" \
+	    "IPv4 to standard port. (pid $$)"
+    fi # TEST_IPV4 && TARGET
 
-    if test "$TEST_IPV6" != "no"; then
+    if test "$TEST_IPV6" != "no" && test -n "$TARGET6"; then
 	TESTCASES=`expr $TESTCASES + 1`
 	$LOGGER -6 -h "[$TARGET6]" -p user.info -t "$TAG" \
 	    "IPv6 to standard port. (pid $$)"
-    fi
-fi
+    fi # TEST_IPV6 && TARGET6
+fi # do_standard_port
 
 # Delay detection due to observed race condition.
 sleep 3

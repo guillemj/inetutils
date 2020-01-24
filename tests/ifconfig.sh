@@ -60,6 +60,11 @@ if test ! -x "$IFCONFIG"; then
     exit 77
 fi
 
+if test "$TEST_IPV4" = "no"; then
+    echo >&2 "Disabled IPv4 testing.  Skipping test."
+    exit 77
+fi
+
 if test -z "${VERBOSE+set}"; then
     silence=:
     bucket='>/dev/null'

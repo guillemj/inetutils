@@ -25,8 +25,6 @@
 
 . ./tools.sh
 
-RUNTIME_IPV6="${RUNTIME_IPV6:-./runtime-ipv6$EXEEXT}"
-
 PING=${PING:-../ping/ping$EXEEXT}
 TARGET=${TARGET:-127.0.0.1}
 
@@ -43,21 +41,22 @@ if [ $VERBOSE ]; then
     $PING --version
 fi
 
-if [ `func_id_uid` != 0 ]; then
-    echo "ping needs to run as root"
+if test "$TEST_IPV4" = "no" && test "$TEST_IPV6" = "no"; then
+    echo >&2 "Inet socket testing is disabled.  Skipping test."
     exit 77
 fi
 
-# Avoid IPv6 when not functional.
-if test "$TEST_IPV6" = "auto"; then
-    $RUNTIME_IPV6 || { TEST_IPV6="no"
-	echo "Suppressing non-supported IPv6."; }
+if test $(func_id_uid) != 0; then
+    echo "ping needs to run as root"
+    exit 77
 fi
 
 errno=0
 errno2=0
 
-$PING -n -c 1 $TARGET || errno=$?
+test "$TEST_IPV4" != "no" && test -x $PING &&
+    { $PING -n -c 1 $TARGET || errno=$?; }
+
 test $errno -eq 0 || echo "Failed at pinging $TARGET." >&2
 
 # Host might not have been built with IPv6 support.

@@ -51,8 +51,6 @@ set -e
 
 . ./tools.sh
 
-RUNTIME_IPV6="${RUNTIME_IPV6:-./runtime-ipv6$EXEEXT}"
-
 FTP=${FTP:-../ftp/ftp$EXEEXT}
 FTPD=${FTPD:-../ftpd/ftpd$EXEEXT}
 INETD=${INETD:-../src/inetd$EXEEXT}
@@ -116,7 +114,12 @@ if [ $VERBOSE ]; then
     $INETD --version | $SED '1q'
 fi
 
-if [ `func_id_uid` != 0 ]; then
+if test "$TEST_IPV4" = "no" && test "$TEST_IPV6" = "no"; then
+    echo >&2 "Inet socket testing is disabled.  Skipping test."
+    exit 77
+fi
+
+if test $(func_id_uid) != 0; then
     echo "ftpd needs to run as root" >&2
     exit 77
 fi
@@ -224,12 +227,6 @@ locate_port () {
     fi
 }
 
-# Avoid IPv6 when not functional.
-if test "$TEST_IPV6" = "auto"; then
-    $RUNTIME_IPV6 || { TEST_IPV6="no"
-	echo "Suppressing non-supported IPv6."; }
-fi
-
 # Files used in transmission tests.
 GETME=`$MKTEMP $TMPDIR/file.XXXXXXXX` || do_transfer=false
 
@@ -256,7 +253,15 @@ if test -z "$PORT"; then
     fi
 fi
 
-cat <<EOT > "$TMPDIR/inetd.conf"
+# Create an empty configuration file for inetd.
+: > "$TMPDIR/inetd.conf" 2>/dev/null ||
+    {
+	echo 'Failed at writing configuration for Inetd.  Skipping test.' >&2
+	exit 77
+    }
+
+test "$TEST_IPV4" = "no" ||
+    cat <<EOT > "$TMPDIR/inetd.conf"
 $PORT stream tcp4 nowait $USER $PWD/$FTPD ftpd -A -l
 EOT
 
@@ -265,26 +270,30 @@ test "$TEST_IPV6" = "no" ||
 $PORT stream tcp6 nowait $USER $PWD/$FTPD ftpd -A -l
 EOT
 
-if test $? -ne 0; then
-    echo 'Failed at writing configuration for Inetd.  Skipping test.' >&2
-    exit 77
-fi
+: > "$TMPDIR/.netrc" 2>/dev/null ||
+    {
+	echo 'Failed at writing access file ".netrc".  Skipping test.' >&2
+	exit 77
+    }
 
-cat <<EOT > "$TMPDIR/.netrc"
-machine $TARGET login $FTPUSER password foobar
-EOT
+if test "$TEST_IPV4" != "no" && test -n "$TARGET"; then
+    cat <<-EOT >> "$TMPDIR/.netrc"
+	machine $TARGET login $FTPUSER password foobar
+	EOT
+fi # TEST_IPV4 && TARGET
 
-if test $? -ne 0; then
-    echo 'Failed at writing access file ".netrc".  Skipping test.' >&2
-    exit 77
-fi
-
-if test "$TEST_IPV6" != "no"; then
+if test "$TEST_IPV6" != "no" && test -n "$TARGET6"; then
     cat <<-EOT >> "$TMPDIR/.netrc"
 	machine $TARGET6 login $FTPUSER password foobar
+	EOT
+fi # TEST_IPV6 && TARGET6
+
+if test "$TEST_IPV4" != "no" && test "$TEST_IPV6" != "no" &&
+   test -n "$TARGET46"; then
+    cat <<-EOT >> "$TMPDIR/.netrc"
 	machine $TARGET46 login $FTPUSER password foobar
 	EOT
-fi
+fi # TEST_IPV4 && TEST_IPV6 && TARGET46
 
 chmod 600 "$TMPDIR/.netrc"
 
@@ -345,6 +354,9 @@ test_report () {
 	exit 1
     fi
 }
+
+if test "$TEST_IPV4" != "no" && test -n "$TARGET"; then
+### TODO: Fix indentation within this conditional.
 
 # Test a passive connection: PASV and IPv4.
 #
@@ -483,6 +495,8 @@ $FTP "$TARGET" $PORT -N"$TMPDIR/.netrc" -4 -v -t >$TMPDIR/ftp.stdout 2>&1
 
 test_report $? "$TMPDIR/ftp.stdout" "EPRT/$TARGET"
 
+fi # TEST_IPV4 && TARGET
+
 if test "$TEST_IPV6" != "no" && test -n "$TARGET6"; then
     # Test a passive connection: EPSV and IPv6.
     #
@@ -520,7 +534,7 @@ put $GETME $PUTME"`
 	echo >&2 'Binary transfer failed.'
 	exit 1
     fi
-fi # TEST_IPV6
+fi # TEST_IPV6 && TARGET6
 
 # Availability of IPv4-mapped IPv6 addresses.
 #
@@ -579,8 +593,8 @@ fi
 
 # Test functionality of IPv4-mapped IPv6 addresses.
 #
-if $have_address_mapping && test -n "$TARGET46" &&
-   test "$TEST_IPV6" != "no"; then
+if test "$TEST_IPV4" != "no" &&test "$TEST_IPV6" != "no" &&
+   test -n "$TARGET46" && $have_address_mapping ; then
     # Test a passive connection: EPSV and IPv4-mapped-IPv6.
     #
     echo "EPSV to $TARGET46 (IPv4-as-IPv6) using inetd."
@@ -631,15 +645,15 @@ put $GETME $PUTME"`
 	    echo >&2 'Binary transfer failed.'
 	    exit 1
 	fi
-else
+elif test "$TEST_IPV4" != "no" || test "$TEST_IPV6" != "no"; then
     # The IPv4-as-IPv6 tests were not performed.
     echo 'Skipping two tests of IPv4 mapped as IPv6.'
-fi # have_address_mapping && TEST_IPV6
+fi # TEST_IPV4 && TEST_IPV6 && TARGET46 && have_address_mapping
 
 # Test name mapping with PASV and IPv4.
 # Needs a writable destination!
 #
-if $do_transfer; then
+if test "$TEST_IPV4" != "no" && test -n "$TARGET" && $do_transfer; then
     echo "Name mapping test at $TARGET (IPv4) using inetd."
 
     cat <<-STOP |
@@ -674,6 +688,6 @@ if $do_transfer; then
 	rm -f $FTPHOME$DLDIR/$2.$1 $FTPHOME$DLDIR/copy.$GETME
 	exit 1
     fi
-fi
+fi # TEST_IPV4 && TARGET && do_transfer
 
 exit 0

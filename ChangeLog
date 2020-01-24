@@ -1,3 +1,38 @@
+2020-01-24  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Separation of test cases according to IPv4, and to IPv6.
+	The two precious macros TEST_IPV4 and TEST_IPV6 are controlling
+	whether the indicated address family is checked in our tests.
+	Test coverage is left unequal.
+
+	* configure.ac (TEST_IPV4): New macro.  The new switch
+	`--disable-ipv4' suppresses IPv4 during target `check'.
+	* tests/Makefile.am (tools_subst): Replace @TEST_IPV4@.
+	* tests/tools.sh.in (TEST_IPV4, RUNTIME_IPV4, RUNTIME_IPV6):
+	New variables.
+	(TEST_IPV4, TEST_IPV6): If either is `auto', make a runtime check
+	for availability, and set to `no' in case of failure.
+
+	* tests/runtime-ipv6.c: Implement switches `-4' and `-6', making
+	it possible to test for either address family at runtime.
+	[EAI_NODATA]: Return this error in a corner case, or else EAI_FAIL.
+
+	* tests/ftp-localhost.sh: Remove code now existing in tools.sh.in.
+	Separate existing test cases according to IPv4 and IPv6, by means
+	of conditionals with TEST_IPV4 and TARGET, or TEST_IPV6 and TARGET6.
+	[TEST_IPV4 = TEST_IPV6 = no]: Skip test.
+	* tests/ping-localhost.sh: Likewise.
+	* tests/syslogd.sh: Likewise.
+	* tests/telnet-localhost.sh: Likewise.
+	* tests/tftp.sh: Likewise.
+
+	* tests/ifconfig.sh [TEST_IPV4 = no]: Skip test.
+	* tests/inetd.sh (TARGET6): New variable.
+	[TEST_IPV4 = TEST_IPV6 = no]: Skip test.
+	Implement subcases for IPv6, and condition old cases on TEST_IPV4.
+	* tests/traceroute-localhost.sh [TEST_IPV4 = no]: Skip test.
+	[TEST_IPV4 && TARGET]: Condition each case completely.
+
 2020-01-22  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	Correctly detect presence of IPv6.

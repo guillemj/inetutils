@@ -426,6 +426,23 @@ if test ".$LIBAUTH" != .; then
                    [Define to one if you want encryption.])
 fi
 
+# Make IPv4 tests configurable in testing stage.
+
+AC_ARG_ENABLE([ipv4],
+  AS_HELP_STRING([--disable-ipv4], [disable IPv4 testing]),
+  [case "${enable_ipv4}" in
+  no)
+    AC_MSG_NOTICE([Disabling IPv4 tests at user request])
+    ipv4=no
+    ;;
+  *)
+    ipv4=yes
+    ;;
+  esac],
+  [ipv4=auto]
+)
+AC_SUBST(TEST_IPV4, [$ipv4])
+
 # Checks for IPv6 support.
 
 AC_ARG_ENABLE([ipv6],

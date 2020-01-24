@@ -68,8 +68,6 @@ fi
 # Portability fix for SVR4
 PWD="${PWD:-`pwd`}"
 
-RUNTIME_IPV6="${RUNTIME_IPV6:-./runtime-ipv6$EXEEXT}"
-
 TFTP="${TFTP:-../src/tftp$EXEEXT}"
 TFTPD="${TFTPD:-$PWD/../src/tftpd$EXEEXT}"
 INETD="${INETD:-../src/inetd$EXEEXT}"
@@ -158,15 +156,10 @@ if test "$ADDRESSES" = "sense"; then
 	-e "s/^.*$AF \([:.0-9]\{1,\}\) .*$/\1/g"`
 fi
 
-# Avoid IPv6 when not functional.
-if test "$TEST_IPV6" = "auto"; then
-    $RUNTIME_IPV6 || { TEST_IPV6="no"
-	$silence echo "Suppressing non-supported IPv6."; }
-fi
-
 if test -z "$ADDRESSES"; then
-    ADDRESSES="${TARGET:-127.0.0.1}"
-    test "$TEST_IPV6" = "no" || ADDRESSES="$ADDRESSES ${TARGET6:-::1}"
+    test "$TEST_IPV4" = "no" || ADDRESSES="${TARGET:-127.0.0.1}"
+    test "$TEST_IPV6" = "no" ||
+	ADDRESSES="${ADDRESSES:+$ADDRESSES }${TARGET6:-::1}"
 fi
 
 # Work around the peculiar output of netstat(1m,solaris).
@@ -214,7 +207,10 @@ fi
 # $INETD_CONF.  Thus the dependency on file locations will be
 # identical in daemon-mode and in debug-mode.
 write_conf () {
-    cat > "$INETD_CONF" <<-EOF
+    : > "$INETD_CONF" 2>/dev/null
+
+    test "$TEST_IPV4" = "no" ||
+	cat >> "$INETD_CONF" <<-EOF
 	$PORT dgram ${PROTO}4 wait $USER $TFTPD   tftpd -l $TMPDIR/tftp-test
 	EOF
 
@@ -223,6 +219,12 @@ write_conf () {
 	$PORT dgram ${PROTO}6 wait $USER $TFTPD   tftpd -l $TMPDIR/tftp-test
 	EOF
 }
+
+if test "$TEST_IPV4" = "no" && test "$TEST_IPV6" = "no"
+then
+    echo >&2 "Inet socket test is switched off.  Skipping test."
+    exit 77
+fi
 
 write_conf ||
     {
@@ -429,7 +431,10 @@ if $do_secure_setting; then
     # Allow an underprivileged process owner to read files.
     chmod g=rx,o=rx $TMPDIR
 
-    cat > "$INETD_CONF" <<-EOF
+    : > "$INETD_CONF"
+
+    test "$TEST_IPV4" = "no" ||
+	cat >> "$INETD_CONF" <<-EOF
 	$PORT dgram ${PROTO}4 wait $USER $TFTPD   tftpd -l -s $TMPDIR /tftp-test
 	EOF
 
@@ -443,7 +448,7 @@ if $do_secure_setting; then
 
     # Test two files: file-small and asciifile.txt
     #
-    addr=`echo "$ADDRESSES" | $SED 's/ .*//'`
+    addr=`echo $ADDRESSES | $SED 's/ .*//'`
     name=`echo "$FILELIST" | $SED 's/ .*//'`
     rm -f "$name" "$ASCIIFILE"
     EFFORTS=`expr $EFFORTS + 2`

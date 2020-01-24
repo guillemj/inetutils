@@ -38,7 +38,12 @@ if [ $VERBOSE ]; then
     $TRACEROUTE --version
 fi
 
-if [ `func_id_uid` != 0 ]; then
+if test "$TEST_IPV4" = "no"; then
+    echo >&2 "Disabled IPv4 testing.  Skipping test."
+    exit 77
+fi
+
+if test $(func_id_uid) != 0; then
     echo "traceroute needs to run as root"
     exit 77
 fi
@@ -46,11 +51,13 @@ fi
 errno=0
 errno2=0
 
-$TRACEROUTE --type=udp $TARGET || errno=$?
-test $errno -eq 0 || echo "Failed at UDP tracing." >&2
+if test "$TEST_IPV4" != "no" && test -n "$TARGET"; then
+    $TRACEROUTE --type=udp $TARGET || errno=$?
+    test $errno -eq 0 || echo "Failed at UDP tracing." >&2
 
-$TRACEROUTE --type=icmp $TARGET || errno2=$?
-test $errno2 -eq 0 || echo "Failed at ICMP tracing." >&2
+    $TRACEROUTE --type=icmp $TARGET || errno2=$?
+    test $errno2 -eq 0 || echo "Failed at ICMP tracing." >&2
+fi
 
 test $errno -eq 0 || exit $errno
 
