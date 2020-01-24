@@ -18,14 +18,16 @@
 
 /* Written by Mats Erik Andersson.  */
 
-/* Runtime-ipv6 determines whether IPv6 address ::1 can be selected.
+/* Runtime-ipv6 determines by default whether IPv6 address ::1 can
+ * be selected.  The switch `-6' is identical, whereas `-4' probes
+ * for 127.0.0.1.
  *
  * Invocation:
  *
- *   runtime-ipv6
+ *   runtime-ipv6 [-4] [-6]
  *
  * Return value is 0 (zero) when successful, otherwise -1.
- * On failure a message is printed to stderr: `IPv6 disabled in system'.
+ * On failure a message is printed to stderr: `IPv# disabled in system'.
  */
 
 #include <config.h>
@@ -111,7 +113,7 @@ main (int argc, char *argv[])
   hints.ai_flags |= AI_ADDRCONFIG;
 #endif
 
-  err = getaddrinfo (tested_localhost, "tftp", &hints, &aiptr);
+  err = getaddrinfo (tested_localhost, "1237", &hints, &aiptr);
   if (!err)
     {
       /* Should not really happen.  */
