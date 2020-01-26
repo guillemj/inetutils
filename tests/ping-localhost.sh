@@ -46,7 +46,7 @@ if test "$TEST_IPV4" = "no" && test "$TEST_IPV6" = "no"; then
     exit 77
 fi
 
-if test $(func_id_uid) != 0; then
+if test `func_id_uid` != 0; then
     echo "ping needs to run as root"
     exit 77
 fi

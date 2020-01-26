@@ -1,3 +1,16 @@
+2020-01-26  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Examination of testing scripts.
+
+	* tests/ftp-localhost.sh [TEST_IPV4 && TARGET]: Implement one
+	additional level of indentation in this large text block.
+	Some additional fixes of indentation and improved readability.
+
+	* tests/inetd.sh: Improve regex when refusing test directories.
+	* tests/syslogd.sh: Likewise.
+	* tests/ping-localhost.sh: Use back quotes for portability.
+	* tests/traceroute-localhost.sh: Likewise.
+
 2020-01-24  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	runtime-ipv6: Implicit dependency on services file.

@@ -132,8 +132,8 @@ if [ ! -d "$IU_TESTDIR" ]; then
 	    echo 'Failed at creating test directory.  Aborting.' >&2
 	    exit 77
 	}
-elif expr X"$IU_TESTDIR" : X'\.\{1,2\}/\{0,1\}$' >/dev/null; then
-    # Eliminating directories: . ./ .. ../
+elif expr X"$IU_TESTDIR" : X'[./]\{1,\}$' >/dev/null; then
+    # Eliminating directories: all mixtures of . and / only.
     echo 'Dangerous input for test directory.  Aborting.' >&2
     exit 77
 fi
