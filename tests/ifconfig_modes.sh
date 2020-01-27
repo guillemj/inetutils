@@ -49,6 +49,8 @@ set -u
 
 : ${EXEEXT:=}
 
+. ./tools.sh
+
 silence=
 if test -z "${VERBOSE+set}"; then
   silence=:

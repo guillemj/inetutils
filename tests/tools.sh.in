@@ -18,8 +18,8 @@
 # Helpers and supporting functionality for test scripts.
 
 GREP=${GREP:-@GREP@}
-EGREP=${EGREP:-@EGREP@}
-FGREP=${FGREP:-@FGREP@}
+EGREP=${EGREP:-"@EGREP@"}
+FGREP=${FGREP:-"@FGREP@"}
 SED=${SED:-@SED@}
 DD=${DD:-@DD@}
 MKTEMP=${MKTEMP:-@MKTEMP@}
@@ -29,8 +29,8 @@ TARGET6=${TARGET6:-@TARGET6@}
 TEST_IPV4=${TEST_IPV4:-@TEST_IPV4@}
 TEST_IPV6=${TEST_IPV6:-@TEST_IPV6@}
 
-RUNTIME_IPV4="${RUNTIME_IPV4:-./runtime-ipv6$EXEEXT -4}"
-RUNTIME_IPV6="${RUNTIME_IPV6:-./runtime-ipv6$EXEEXT}"
+RUNTIME_IPV4=${RUNTIME_IPV4:-"./runtime-ipv6$EXEEXT -4"}
+RUNTIME_IPV6=${RUNTIME_IPV6:-"./runtime-ipv6$EXEEXT -6"}
 
 # Avoid IPv4 when not functional.
 if test "$TEST_IPV4" = "auto"; then

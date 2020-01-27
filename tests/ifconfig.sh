@@ -104,7 +104,7 @@ errno=0
 # Check for loopback address in all formats displaying the
 # standard address $TARGET, commonly 127.0.0.1.
 #
-for fmt in ${FORMAT:-gnu gnu-one-entry net-tools osf unix}; do
+for fmt in ${FORMAT:-"gnu gnu-one-entry net-tools osf unix"}; do
     $silence echo "Checking format $fmt."
     find_lo_addr $fmt || { errno=1; echo >&2 "Failed with format '$fmt'."; }
 done

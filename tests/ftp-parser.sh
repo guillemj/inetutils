@@ -23,9 +23,10 @@
 
 set -u
 
+: ${EXEEXT:=}
+
 . ./tools.sh
 
-: ${EXEEXT:=}
 silence=
 bucket=
 

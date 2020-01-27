@@ -1,3 +1,18 @@
+2020-01-27  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Portability to an old Solaris shell.
+
+	* tests/tools.sh.in (EGREP, FGREP, RUNTIME_IPV4, RUNTIME_IPV6):
+	Inside parameter substitution, put value between quotes, since
+	some old shells stumble on non-quoted space characters.
+	* tests/ifconfig.sh (evaluation of FORMAT): Likewise.
+
+	Make sure that scripts are individually executable.
+
+	* tests/ftp-parser.sh (EXEEXT): Test empty before reading tools.sh.
+	* tests/libls.sh (EXEEXT): Likewise.
+	* tests/ifconfig_modes.sh: Read tools.sh.
+
 2020-01-26  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	Examination of testing scripts.
