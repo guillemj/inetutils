@@ -446,37 +446,46 @@ if $do_secure_setting; then
     # Let inetd reload configuration.
     kill -HUP $inetd_pid
 
-    # Test two files: file-small and asciifile.txt
+    # Test two files for each address: file-small and asciifile.txt
     #
-    addr=`echo $ADDRESSES | $SED 's/ .*//'`
-    name=`echo "$FILELIST" | $SED 's/ .*//'`
-    rm -f "$name" "$ASCIIFILE"
-    EFFORTS=`expr $EFFORTS + 2`
+    name=`echo $FILELIST | $SED 's/ .*//'`
 
-    echo "binary
-get $name
-ascii
-get /tftp-test/$ASCIIFILE" | \
-    eval "$TFTP" ${VERBOSE:+-v} "$addr" $PORT $bucket
+    for addr in $ADDRESSES; do
+	rm -f "$name" "$ASCIIFILE"
+	EFFORTS=`expr $EFFORTS + 2`
 
-    cmp "$TMPDIR/tftp-test/$name" "$name" 2>/dev/null
-    result=$?
-    if test $? -ne 0; then
-	$silence echo >&2 "Failed chrooted access to $name."
-	RESULT=$result
-    else
-	$silence echo >&2 "Success with chrooted access to $name."
-	SUCCESSES=`expr $SUCCESSES + 1`
-    fi
-    cmp "$TMPDIR/tftp-test/$ASCIIFILE" "$ASCIIFILE" 2>/dev/null
-    result=$?
-    if test $? -ne 0; then
-	$silence echo >&2 "Failed chrooted access to /tftp-test/$ASCIIFILE."
-	RESULT=$result
-    else
-	$silence echo >&2 "Success with chrooted /tftp-test/$ASCIIFILE."
-	SUCCESSES=`expr $SUCCESSES + 1`
-    fi
+	cat <<-EOT |
+		binary
+		get $name
+		ascii
+		get /tftp-test/$ASCIIFILE
+	EOT
+	eval "$TFTP" ${VERBOSE:+-v} "$addr" $PORT $bucket
+
+	cmp "$TMPDIR/tftp-test/$name" "$name" 2>/dev/null
+	result=$?
+
+	if test $? -ne 0; then
+	    $silence echo >&2 "Failed chrooted access to $addr:$name."
+	    RESULT=$result
+	else
+	    $silence echo >&2 "Success with chrooted access to $addr:$name."
+	    SUCCESSES=`expr $SUCCESSES + 1`
+	fi
+
+	cmp "$TMPDIR/tftp-test/$ASCIIFILE" "$ASCIIFILE" 2>/dev/null
+	result=$?
+
+	if test $? -ne 0; then
+	    $silence echo >&2 \
+		"Failed chrooted access to $addr:/tftp-test/$ASCIIFILE."
+	    RESULT=$result
+	else
+	    $silence echo >&2 \
+	    "Success with chrooted $addr:/tftp-test/$ASCIIFILE."
+	    SUCCESSES=`expr $SUCCESSES + 1`
+	fi
+    done # addr in ADDRESSES
 else
     $silence echo >&2 'Informational: Inhibiting chroot test.'
 fi

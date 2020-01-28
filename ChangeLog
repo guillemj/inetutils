@@ -1,3 +1,21 @@
+2020-01-28  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Better test coverage, mostly IPv6.
+
+	* tests/ftp-localhost.sh [TEST_IPV6 && TARGET6]: Add the possible
+	test cases that existed for IPv4, but did not for IPv6.
+	[do_transfer]: Explicitly remove copied $PUTME for reliability.
+	[TEST_IPV6 && TARGET6 && do_transfer]: New test for name mapping.
+	* tests/syslogd.sh [do_unix_socket || do_inet_socket]: Do priority
+	`notice' for each of local socket, IPv4 socket, and IPv6 socket,
+	as is applicable.
+	(COUNT_WRAP): Reworked calculation on grounds as above.
+	[do_inet_socket && TEST_IPV6 && TARGET6]: Test facilities `user.info'
+	and `user.debug' with IPv6.
+	* tests/tftp.sh (do_secure_setting): Test all of $ADDRESSES.
+
+	* tests/.gitignore: Add runtime-ipv6 to list.
+
 2020-01-27  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	Portability to an old Solaris shell.

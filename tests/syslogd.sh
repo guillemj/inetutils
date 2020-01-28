@@ -443,22 +443,35 @@ if $do_inet_socket; then
 	TESTCASES=`expr $TESTCASES + 1`
 	$LOGGER -6 -h "[$TARGET6]:$PORT" -p user.info -t "$TAG" \
 	    "Sending IPv6 message. (pid $$)"
-    fi # TEST_IPV6 && TARGET
+    fi # TEST_IPV6 && TARGET6
 fi # do_inet_socket
 
-# Send message of priority notice, either via local socket or IPv4,
-# but not both.  The presence is checked in $OUT and in $OUT_NOTICE,
-# so merit value is 2.
+# Send message of priority notice, via local socket, IPv4, or IPv6,
+# whatever is there.  The presence is checked in $OUT and in $OUT_NOTICE,
+# so merit value is 2 for each placed message.
+COUNT_WRAP=0
+
 if $do_unix_socket; then
     TESTCASES=`expr $TESTCASES + 2`
+    COUNT_WRAP=`expr $COUNT_WRAP + 1`
     $LOGGER -h "$SOCKET" -p daemon.notice -t "$TAG" \
-	"Attemping to locate wrapped configuration. (pid $$)"
-elif $do_inet_socket; then
+	"Attempting to locate wrapped unix configuration. (pid $$)"
+fi # do_unix_socket
+
+if $do_inet_socket; then
     if test "$TEST_IPV4" != "no" && test -n "$TARGET"; then
 	TESTCASES=`expr $TESTCASES + 2`
+	COUNT_WRAP=`expr $COUNT_WRAP + 1`
 	$LOGGER -4 -h "$TARGET:$PORT" -p daemon.notice -t "$TAG" \
-	    "Attemping to locate wrapped configuration. (pid $$)"
+	    "Attempting to locate wrapped IPv4 configuration. (pid $$)"
     fi # TEST_IPV4 && TARGET
+
+    if test "$TEST_IPV6" != "no" && test -n "$TARGET6"; then
+	TESTCASES=`expr $TESTCASES + 2`
+	COUNT_WRAP=`expr $COUNT_WRAP + 1`
+	$LOGGER -6 -h "[$TARGET6]:$PORT" -p daemon.notice -t "$TAG" \
+	    "Attempting to locate wrapped IPv6 configuration. (pid $$)"
+    fi # TEST_IPV6 && TARGET6
 fi # do_inet_socket
 
 # Generate a more elaborate message routing, aimed at confirming
@@ -550,6 +563,14 @@ if $do_inet_socket; then
 	$LOGGER -4 -h "$TARGET:$PORT" -p user.debug -t "$TAG2" \
 	    "user.debug as IPv4 message. (pid $$)"
     fi # TEST_IPV4 && TARGET
+
+    if test "$TEST_IPV6" != "no" && test -n "$TARGET6"; then
+	TESTCASES=`expr $TESTCASES + 4`
+	$LOGGER -6 -h "[$TARGET6]:$PORT" -p user.info -t "$TAG2" \
+	    "user.info as IPv6 message. (pid $$)"
+	$LOGGER -6 -h "[$TARGET6]:$PORT" -p user.debug -t "$TAG2" \
+	    "user.debug as IPv6 message. (pid $$)"
+    fi # TEST_IPV6 && TARGET6
 fi # do_inet_socket
 
 # Remove previous SYSLOG daemon.
@@ -602,9 +623,10 @@ COUNT=`$GREP -c "$TAG" "$OUT"`
 COUNT_NOTICE=`$SED -n '$=' "$OUT_NOTICE"`
 wrapped=`$FGREP -c -f "$OUT_NOTICE" "$OUT"`
 
-COUNT_WRAP=0
+# Provoke a later total miscount, if message counts do not match now.
 if $do_unix_socket || $do_inet_socket; then
-    test $COUNT_NOTICE -ne $wrapped || COUNT_WRAP=1
+    test $COUNT_NOTICE -eq $wrapped ||
+	COUNT_WRAP=`expr $COUNT_WRAP - $COUNT_NOTICE + $wrapped`
 fi
 
 # Second set-up after SIGHUP.

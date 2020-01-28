@@ -3,6 +3,7 @@ identify
 localhost
 ls
 readutmp
+runtime-ipv6
 tcpget
 tools.sh
 waitdaemon
