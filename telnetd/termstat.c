@@ -304,7 +304,7 @@ localstat (void)
 	}
       else if (lmodetype == REAL_LINEMODE)
 	{
-	  char data[7];
+	  char data[8];
 
 	  send_do (TELOPT_LINEMODE, 1);
 	  /* send along edit modes */
@@ -339,7 +339,7 @@ localstat (void)
 	  /*
 	   * Send along appropriate edit mode mask.
 	   */
-	  char data[7];
+	  char data[8];
 
 	  sprintf (data, "%c%c%c%c%c%c%c",
 		   IAC, SB, TELOPT_LINEMODE,
@@ -391,7 +391,7 @@ flowstat (void)
 {
   if (his_state_is_will (TELOPT_LFLOW))
     {
-      char data[6];
+      char data[7];
 
       if (tty_flowmode () != flowmode)
 	{
@@ -476,7 +476,7 @@ clientstat (register int code, register int parm1, register int parm2)
 	  if (lmodetype == REAL_LINEMODE && uselinemode)
 	    if (uselinemode)
 	      {
-		char data[7];
+		char data[8];
 
 		useeditmode = 0;
 		if (tty_isediting ())
@@ -553,7 +553,7 @@ clientstat (register int code, register int parm1, register int parm2)
 
 	    if (!ack)
 	      {
-		char data[7];
+		char data[8];
 
 		sprintf (data, "%c%c%c%c%c%c%c",
 			 IAC, SB, TELOPT_LINEMODE,

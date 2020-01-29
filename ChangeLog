@@ -1,3 +1,22 @@
+2020-01-29  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	More work on CVE-2019-0053.
+	Telnet protocol messages must not be corrupted when buffer
+	overflows are detected, but should be reported as errors.
+
+	* telnet/telnet.c (suboption): Check that prepared protocol
+	message in fact fits in intermediary buffer without truncation.
+	Tweak indentation for visibility of protocol elements in snprintf.
+
+	Allocate space also for final NUL-character.
+
+	* telnetd/telnetd.c (telnetdrun): Increase DATA string size by one.
+	* telnetd/termstat.c (localstat, flowstat, clientstat): Likewise.
+
+	Insufficiently declared length of string variable.
+
+	* telnetd/utility.c (printsub): Declare TBUF with maximal extent.
+
 2020-01-28  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	Better test coverage, mostly IPv6.

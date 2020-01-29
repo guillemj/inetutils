@@ -859,10 +859,13 @@ suboption (void)
 #endif /* defined(TN3270) */
 	  name = gettermname ();
 	  len = strlen (name) + 4 + 2;
-	  if (len < NETROOM ())
+
+	  if ((len < NETROOM ()) && (len <= sizeof (temp)))
 	    {
-	      snprintf ((char *) temp, sizeof (temp), "%c%c%c%c%s%c%c", IAC, SB, TELOPT_TTYPE,
-		       TELQUAL_IS, name, IAC, SE);
+	      snprintf ((char *) temp, sizeof (temp), "%c%c%c%c%s%c%c",
+			IAC, SB, TELOPT_TTYPE, TELQUAL_IS,
+			name,
+			IAC, SE);
 	      ring_supply_data (&netoring, temp, len);
 	      printsub ('>', &temp[2], len - 2);
 	    }
@@ -880,13 +883,15 @@ suboption (void)
       if (SB_GET () == TELQUAL_SEND)
 	{
 	  long ospeed, ispeed;
-	  unsigned char temp[50];
+	  unsigned char temp[50];	/* Two six-digit integers plus 7.  */
 	  int len;
 
 	  TerminalSpeeds (&ispeed, &ospeed);
 
-	  snprintf ((char *) temp, sizeof (temp), "%c%c%c%c%d,%d%c%c", IAC, SB, TELOPT_TSPEED,
-		   TELQUAL_IS, (int) ospeed, (int) ispeed, IAC, SE);
+	  snprintf ((char *) temp, sizeof (temp), "%c%c%c%c%d,%d%c%c",
+		    IAC, SB, TELOPT_TSPEED, TELQUAL_IS,
+		    (int) ospeed, (int) ispeed,
+		    IAC, SE);
 	  len = strlen ((char *) temp + 4) + 4;	/* temp[3] is 0 ... */
 
 	  if (len < NETROOM ())
@@ -999,8 +1004,23 @@ suboption (void)
 	      send_wont (TELOPT_XDISPLOC, 1);
 	      break;
 	    }
-	  snprintf ((char *) temp, sizeof (temp), "%c%c%c%c%s%c%c", IAC, SB, TELOPT_XDISPLOC,
-		   TELQUAL_IS, dp, IAC, SE);
+
+	  /* Remote host, and display server must not be corrupted
+	   * by truncation.  In addition, every character of telnet
+	   * protocol must remain unsevered.  Check that DP fits in
+	   * full within TEMP.  Otherwise report buffer error.
+	   */
+	  if (strlen (dp) > sizeof (temp) - 4 - 2)
+	    {
+	      printf ("lm_will: not enough room in buffer\n");
+	      break;
+	    }
+
+	  /* Go ahead safely.  */
+	  snprintf ((char *) temp, sizeof (temp), "%c%c%c%c%s%c%c",
+		    IAC, SB, TELOPT_XDISPLOC, TELQUAL_IS,
+		    dp,
+		    IAC, SE);
 	  len = strlen ((char *) temp + 4) + 4;	/* temp[3] is 0 ... */
 
 	  if (len < NETROOM ())

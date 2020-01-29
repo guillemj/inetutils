@@ -1225,7 +1225,8 @@ printsub (int direction, unsigned char *pointer, int length)
 	      break;
 	    }
 	  {
-	    char tbuf[32];
+	    char tbuf[sizeof ("|EDIT|TRAPSIG|SOFT_TAB|LIT_ECHO|ACK")];
+
 	    snprintf (tbuf, sizeof (tbuf), "%s%s%s%s%s",
 		      pointer[2] & MODE_EDIT ? "|EDIT" : "",
 		      pointer[2] & MODE_TRAPSIG ? "|TRAPSIG" : "",
