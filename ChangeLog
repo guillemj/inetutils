@@ -1,5 +1,12 @@
 2020-01-31  Mats Erik Andersson  <gnu@gisladisker.se>
 
+	whois: IP delegation update.
+
+	* whois/ip_del_list: Update with entries as stated by IANA
+	with publication date 2019-12-27.
+
+2020-01-31  Mats Erik Andersson  <gnu@gisladisker.se>
+
 	whois: Failure of service name.
 	The IANA has made badly founded changes to the list of port names,
 	promoting `nicname' and introducing the aliases list `Who Is',

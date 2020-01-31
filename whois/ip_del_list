@@ -15,13 +15,55 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see `http://www.gnu.org/licenses/'.
 
+#
+# Collected from
+#
+# IANA IPv4 Address Space Registry: 2019-12-27
+#
+
+1.0.0.0/8	apnic
+2.0.0.0/8	ripe
+5.0.0.0/8	ripe
+14.0.0.0/8	apnic
 24.192.0.0/14	apnic
 24.132.0.0/14	ripe
-61.0.0.0/8	apnic
+25.0.0.0/8	ripe	# administered
+27.0.0.0/8	apnic
+31.0.0.0/8	ripe
+36.0.0.0/8	apnic
+37.0.0.0/8	ripe
+39.0.0.0/8	apnic
+41.0.0.0/8	afrinic
+42.0.0.0/7	apnic
+46.0.0.0/8	ripe
+49.0.0.0/8	apnic
+51.0.0.0/8	ripe	# administered
+53.0.0.0/8	ripe	# Daimler AG
+57.0.0.0/8	ripe	# administered
+58.0.0.0/7	apnic
+60.0.0.0/7	apnic
 62.0.0.0/8	ripe
 63.208.0.0/13	rr.level3.net
+77.0.0.0/8	ripe
+78.0.0.0/7	ripe
+80.0.0.0/4	ripe
+101.0.0.0/8	apnic
+102.0.0.0/8	afrinic
+103.0.0.0/8	apnic
+105.0.0.0/8	afrinic
+106.0.0.0/8	apnic
+109.0.0.0/8	ripe
+110.0.0.0/7	apnic
+112.0.0.0/6	apnic
+116.0.0.0/6	apnic
+120.0.0.0/6	apnic
+124.0.0.0/6	apnic
 0.0.0.0/2	arin	# all other A classes are managed by ARIN
+
 ## The B class space is a mess :-( - something could still be missing
+# Ranges administered by ARIN are caught by default.
+#
+133.0.0.0/8	apnic	# administered
 139.20.0.0/14	ripe
 139.24.0.0/14	ripe
 139.28.0.0/15	ripe
@@ -29,11 +71,13 @@
 141.64.0.0/12	ripe
 141.80.0.0/14	ripe
 141.84.0.0/15	ripe
+141.0.0.0/8	ripe	# administered
 145.224.0.0/12	ripe
 145.240.0.0/13	ripe
 145.248.0.0/14	ripe
 145.252.0.0/15	ripe
 145.254.0.0/16	ripe
+145.0.0.0/8	ripe	# administered
 149.202.0.0/15	ripe
 149.204.0.0/16	ripe
 149.206.0.0/15	ripe
@@ -42,6 +86,7 @@
 149.240.0.0/13	ripe
 149.248.0.0/14	ripe
 150.254.0.0/16	ripe
+150.0.0.0/8	apnic	# administered
 151.13.0.0/16	ripe
 151.14.0.0/15	ripe
 151.16.0.0/12	ripe
@@ -55,12 +100,16 @@
 151.92.0.0/15	ripe
 151.95.0.0/16	ripe
 151.99.0.0/16	ripe	# interbusiness
+151.0.0.0/8	ripe	# administered
+153.0.0.0/8	apnic	# administered
+154.0.0.0/8	afrinic	# administered
 160.216.0.0/14	ripe
 160.220.0.0/16	ripe
 160.44.0.0/14	ripe
 160.48.0.0/12	ripe
 163.156.0.0/14	ripe
 163.160.0.0/12	ripe
+163.0.0.0/8	apnic	# administered
 164.0.0.0/11	ripe
 164.32.0.0/13	ripe
 164.40.0.0/16	ripe
@@ -68,6 +117,25 @@
 169.208.0.0/12	apnic
 171.16.0.0/12	ripe
 171.32.0.0/15	ripe
+171.0.0.0/8	apnic	# administered
+173.0.0.0/8	arin
+174.0.0.0/8	arin
+175.0.0.0/8	apnic
+176.0.0.0/8	ripe
+177.0.0.0/8	lacnic
+178.0.0.0/8	ripe
+179.0.0.0/8	lacnic
+180.0.0.0/8	apnic
+181.0.0.0/8	lacnic
+182.0.0.0/7	apnic
+184.0.0.0/8	arin
+185.0.0.0/8	ripe
+186.0.0.0/7	lacnic
+188.0.0.0/8	ripe	# administered
+189.0.0.0/8	lacnic
+190.0.0.0/8	lacnic
+191.0.0.0/8	lacnic	# administered
+
 ## The C class space is cleanly delegated and the data here should be complete
 192.71.0.0/16	ripe
 192.72.0.0/16	whois.seed.net.tw	# NETBLK-SEED-NETS
@@ -78,10 +146,9 @@
 192.0.0.0/8	arin	# the swamp
 193.0.0.0/8	ripe
 194.0.0.0/7	ripe
-198.17.117.0/24	ripe
-196.0.0.0/6	arin
-200.0.0.0/7	arin
-203.0.0.0/10	aunic
+196.0.0.0/7	afrinic	# administered
+198.0.0.0/7	arin	# administered
+200.0.0.0/7	lacnic
 202.0.0.0/7	apnic
 204.0.0.0/6	arin
 208.0.0.0/7	arin
@@ -89,3 +156,6 @@
 212.0.0.0/7	ripe
 214.0.0.0/7	arin	# DoD
 216.0.0.0/8	arin
+217.0.0.0/8	ripe
+218.0.0.0/7	apnic
+220.0.0.0/6	apnic
