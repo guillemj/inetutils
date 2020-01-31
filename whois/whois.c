@@ -574,8 +574,13 @@ openconn (const char *server, const char *port)
   hints.ai_family = AF_UNSPEC;
   hints.ai_socktype = SOCK_STREAM;
 
+  /* The well-known service name is no longer universally acknowledged,
+   * because IANA has tampered with aliasing, making `Who' and `Is'
+   * into legal and functional aliases.
+   */
   if ((i = getaddrinfo (server, port ? port : "whois", &hints, &res)) != 0)
-    err_quit ("getaddrinfo: %s", gai_strerror (i));
+    if ((i = getaddrinfo (server, port ? port : "nicname", &hints, &res)) != 0)
+      err_quit ("getaddrinfo: %s", gai_strerror (i));
 
   for (ressave = res; res; res = res->ai_next)
     {
