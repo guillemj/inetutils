@@ -33,6 +33,14 @@
 #
 #    OpenBSD uses /etc/services directly, not via /etc/nsswitch.conf.
 
+# Influential shell variables:
+#
+#   TARGET	IPv4 address for tests.  Defaults to 127.0.0.1.
+#   TARGET6	IPv6 address for tests.  Defaults to ::1.
+#   TARGET46	IPv4-mapped-IPv6 address.  Defaults to ::ffff:127.0.0.1.
+#   VERBOSE	Whenever defined, test runs in verbose mode.
+#   LOGGING	When defined, let `ftpd' do system logging.
+#
 # FIXME: Better test coverage!
 #
 # Implemented: anonymous-only in inetd-mode.
@@ -261,14 +269,14 @@ fi
     }
 
 test "$TEST_IPV4" = "no" ||
-    cat <<EOT > "$TMPDIR/inetd.conf"
-$PORT stream tcp4 nowait $USER $PWD/$FTPD ftpd -A -l
-EOT
+    cat <<-EOT > "$TMPDIR/inetd.conf"
+	$PORT stream tcp4 nowait $USER $PWD/$FTPD ftpd -A ${LOGGING+"-l"}
+	EOT
 
 test "$TEST_IPV6" = "no" ||
-    cat <<EOT >> "$TMPDIR/inetd.conf"
-$PORT stream tcp6 nowait $USER $PWD/$FTPD ftpd -A -l
-EOT
+    cat <<-EOT >> "$TMPDIR/inetd.conf"
+	$PORT stream tcp6 nowait $USER $PWD/$FTPD ftpd -A ${LOGGING+"-l"}
+	EOT
 
 : > "$TMPDIR/.netrc" 2>/dev/null ||
     {

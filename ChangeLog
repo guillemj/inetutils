@@ -1,3 +1,15 @@
+2020-02-01  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	tests: Less system logging.
+
+	* tests/ftp-localhost.sh (LOGGING): New variable.  Let the server
+	program do system logging only if LOGGING has been defined.
+	* tests/tftp.sh (LOGGING): Likewise.  Add a test case where a
+	non-existing file is requested.  Check that the number of tries
+	and of successes agree in order to suppress the final text.
+
+	* README: Add some remarks on our testing abilities.
+
 2020-01-31  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	whois: IP delegation update.

@@ -22,6 +22,31 @@ if you explicitly specify whether to build a program, that will
 override the values specified by --disable-clients or
 --disable-servers.
 
+Some words on testing are in order.  The three tests `ftp-localhost',
+`ping', and `traceroute', all need to be run by root.  Several tests
+will depend on infrastructure files in `/etc/', but most tests will
+complain about their obvious needs.  Anyway, these dependencies are
+important whenever chrooted builds are conducted.
+
+At the time of running a test, the shell variables TEST_IPV4 and
+TEST_IPV6 are influential.  Regard them as taking one of three values:
+`yes', `no', or `auto'.  When assigned the value `auto', a small check
+at runtime will determine if the corresponding address family is available,
+and accordingly include it during test.  The values `yes', and `no',
+include or exclude the corresponding address family unconditionally.
+
+During configuration time, TEST_IPV# is essentially set to `auto',
+except that `-enable-ipv#' assigns `yes', and `--disable-ipv#' assigns
+`no' unconditionally.  Note however, that `--disable-ipv6' retains
+its property of removing all support for IPv6 in every executable,
+while `--disable-ipv4' only affects the testing target `check' and scripts.
+
+During chrooted tests, the runtime check for either family can be
+fooled, so setting `TEST_IPV6=yes' might be necessary.  On the other
+hand, chrooting similar to a FreeBSD jail, normally changes the address
+of `localhost', so similar environments will need counteractions like
+`TARGET=10.0.6.1'.
+
 The GNU whois client reads a whois-servers file to figure out which
 whois server to use.  It won't always pick the best server;
 whois.internic.net seems to know something about nic.ddn.mil, but the

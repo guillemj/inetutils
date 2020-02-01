@@ -46,9 +46,12 @@
 #
 # The values of TARGET and TARGET6 replace the loopback addresses
 # 127.0.0.1 and ::1, whenever the variables are set.  However,
-# Setting the variable ADDRESSES to a list of addresses takes
+# setting the variable ADDRESSES to a list of addresses takes
 # precedence over all other choices.  The particular value "sense"
 # tries to find all local addresses, then go ahead with these.
+#
+# Whenever set, VERBOSE and LOGGING, this test is performed in verbose
+# mode, and lets `tftpd' do system logging, respectively.
 
 . ./tools.sh
 
@@ -211,12 +214,12 @@ write_conf () {
 
     test "$TEST_IPV4" = "no" ||
 	cat >> "$INETD_CONF" <<-EOF
-	$PORT dgram ${PROTO}4 wait $USER $TFTPD   tftpd -l $TMPDIR/tftp-test
+	$PORT dgram ${PROTO}4 wait $USER $TFTPD   tftpd ${LOGGING+"-l"} $TMPDIR/tftp-test
 	EOF
 
     test "$TEST_IPV6" = "no" ||
 	cat >> "$INETD_CONF" <<-EOF
-	$PORT dgram ${PROTO}6 wait $USER $TFTPD   tftpd -l $TMPDIR/tftp-test
+	$PORT dgram ${PROTO}6 wait $USER $TFTPD   tftpd ${LOGGING+"-l"} $TMPDIR/tftp-test
 	EOF
 }
 
@@ -356,7 +359,7 @@ $silence echo "Looking into '`echo $ADDRESSES | tr "\n" ' '`'."
 for addr in $ADDRESSES; do
     $silence echo "trying address '$addr'..." >&2
 
-    for name in $FILELIST; do
+    for name in $FILELIST missing-file; do
 	test -n "$name" || continue
 	EFFORTS=`expr $EFFORTS + 1`
 	rm -f "$name"
@@ -365,8 +368,15 @@ for addr in $ADDRESSES; do
 get $name" | \
 	eval "$TFTP" ${VERBOSE:+-v} "$addr" $PORT $bucket
 
-	cmp "$TMPDIR/tftp-test/$name" "$name" 2>/dev/null
-	result=$?
+	if test "$name" != "missing-file"; then
+	   cmp "$TMPDIR/tftp-test/$name" "$name" 2>/dev/null
+	   result=$?
+	else
+	   # No data should have arrived, but traditionally an empty
+	   # file was created.
+	   result=0
+	   test ! -s "$name" || result=1
+	fi
 
 	if [ "$result" -ne 0 ]; then
 	    # Failure.
@@ -435,12 +445,12 @@ if $do_secure_setting; then
 
     test "$TEST_IPV4" = "no" ||
 	cat >> "$INETD_CONF" <<-EOF
-	$PORT dgram ${PROTO}4 wait $USER $TFTPD   tftpd -l -s $TMPDIR /tftp-test
+	$PORT dgram ${PROTO}4 wait $USER $TFTPD   tftpd ${LOGGING+"-l"} -s $TMPDIR /tftp-test
 	EOF
 
     test "$TEST_IPV6" = "no" ||
 	cat >> "$INETD_CONF" <<-EOF
-	$PORT dgram ${PROTO}6 wait $USER $TFTPD   tftpd -l -s $TMPDIR /tftp-test
+	$PORT dgram ${PROTO}6 wait $USER $TFTPD   tftpd ${LOGGING+"-l"} -s $TMPDIR /tftp-test
 	EOF
 
     # Let inetd reload configuration.
@@ -492,7 +502,7 @@ fi
 
 # Minimal clean up. Main work in posttesting().
 $silence echo
-test $RESULT -eq 0 && $silence false \
+test $RESULT -eq 0 && test $SUCCESSES -eq $EFFORTS && $silence false \
     || echo Test had $SUCCESSES successes out of $EFFORTS cases.
 
 exit $RESULT
