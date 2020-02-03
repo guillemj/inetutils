@@ -1,5 +1,13 @@
 2020-02-03  Mats Erik Andersson  <gnu@gisladisker.se>
 
+	whois: AUDA services Australia.
+	Update server name.  Forwarded from Adam King:
+	https://lists.gnu.org/archive/html/bug-inetutils/2018-07/msg00001.html
+
+	* whois/tld_serv_list (.au): Update server, now at AUDA.
+
+2020-02-03  Mats Erik Andersson  <gnu@gisladisker.se>
+
 	Better portability for BSD install.
 	Install hooks for programs that require root ownership, were written
 	with GNU install in mind.  Reported and suggested by Bill Cole:
