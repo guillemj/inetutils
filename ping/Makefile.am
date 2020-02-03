@@ -39,10 +39,10 @@ SUIDMODE = -o root -m 4755
 
 install-ping-hook:
 	-@for x in $(bin_PROGRAMS); do \
-	$(INSTALL_PROGRAM) $$x $(SUIDMODE) $(AM_INSTALL_PROGRAM_FLAGS) $(DESTDIR)$(bindir)/`echo $$x|sed '$(transform)'` ; \
-	if test $$? -ne 0; then \
-	  echo "WARNING: insufficient access; not installing $$x"; \
-	  echo "NOTE: To install $$x run 'make install' as root"; \
+	$(INSTALL_PROGRAM) $(SUIDMODE) $(AM_INSTALL_PROGRAM_FLAGS) $$x $(DESTDIR)$(bindir)/`echo $$x|sed '$(transform)'` ; OUTCOME=$$?; \
+	if test $$OUTCOME -ne 0; then \
+	  echo "WARNING: Failed to install $$x (exit code $$OUTCOME)"; \
+	  echo "NOTE: This program often needs to be owned by root."; \
 	fi \
 	done
 

@@ -1,3 +1,16 @@
+2020-02-03  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Better portability for BSD install.
+	Install hooks for programs that require root ownership, were written
+	with GNU install in mind.  Reported and suggested by Bill Cole:
+	https://lists.gnu.org/archive/html/bug-inetutils/2018-07/msg00005.html
+
+	* ping/Makefile.am (install-ping-hook): Place program switches
+	to INSTALL_PROGRAM before file argument, thus helping BSD install.
+	Rewrite failure comment, and add exit error code.
+	* src/Makefile.am (install-traceroute-hook, install-rsh-hook)
+	(install-rlogin-hook, install-rcp-hook): Likewise.
+
 2020-02-01  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	tests: Less system logging.
