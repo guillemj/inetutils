@@ -1,3 +1,20 @@
+2020-02-04  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Buffer overflow in tftp and tftpd.
+	Recent versions of Gnu libc and Gcc are injecting buffer checks
+	into strcpy().  Both executables, tftp and tftpd, are effectively
+	copying into a formally declared `char th_msg[1]', ignorant of
+	the underlying buffer being of size PKTSIZE.
+	Problem was reported by Mike Gilbert and Ricardo Ribalda Delgado:
+	https://lists.gnu.org/archive/html/bug-inetutils/2017-12/msg00001.html
+	https://lists.gnu.org/archive/html/bug-inetutils/2019-07/msg00002.html
+
+	* src/tftp.c (nak): Replace strcpy() by memcpy(), after the
+	needed calculation of string length.
+	* src/tftpd.c (nak): Likewise.
+
+	* tests/tftp.sh: New compound test with multiple requests.
+
 2020-02-03  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	whois: AUDA services Australia.

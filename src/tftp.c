@@ -1294,8 +1294,8 @@ nak (int error)
       pe->e_msg = strerror (error - 100);
       tp->th_code = EUNDEF;
     }
-  strcpy (tp->th_msg, pe->e_msg);
   length = strlen (pe->e_msg) + 4;
+  memcpy (tp->th_msg, pe->e_msg, length - 3);
   if (trace)
     tpacket ("sent", tp, length);
   if (sendto (f, ackbuf, length, 0, (struct sockaddr *) &peeraddr,

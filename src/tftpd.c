@@ -862,8 +862,8 @@ nak (int error)
       pe->e_msg = strerror (error - 100);
       tp->th_code = EUNDEF;	/* set 'undef' errorcode */
     }
-  strcpy (tp->th_msg, pe->e_msg);
   length = strlen (pe->e_msg);
+  memcpy (tp->th_msg, pe->e_msg, length);
   tp->th_msg[length] = '\0';
   length += 5;
   if (sendto (peer, buf, length, 0, (struct sockaddr *) &from, fromlen) != length)

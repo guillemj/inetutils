@@ -386,7 +386,42 @@ get $name" | \
 	    SUCCESSES=`expr $SUCCESSES + 1`
 	    test -z "$VERBOSE" || echo "Successful comparison for $addr/$name." >&2
 	fi
-   done
+    done
+
+    # Do a compound test with multiple requests.
+    # Issue one request for locally renamed file.
+    rm -f file-small _file-small_ missing-file
+    EFFORTS=`expr $EFFORTS + 1`
+
+    cat <<-EOT |
+	binary
+	get file-small
+	get missing-file
+	get file-small _file-small_
+	quit
+	EOT
+    eval $TFTP ${VERBOSE:+-v} "$addr" $PORT $bucket
+
+    if cmp "$TMPDIR/tftp-test/file-small" file-small 2>/dev/null \
+	&& test ! -s missing-file \
+	&& cmp "$TMPDIR/tftp-test/file-small" _file-small_ 2>/dev/null
+    then
+	SUCCESSES=`expr $SUCCESSES + 1`
+	test -z "$VERBOSE" || echo "Successful compound test." >&2
+    else
+	echo "Failure during compound test." >&2
+
+	# Investigate probable causes.
+	test -s _file-small_ ||
+	    echo "Third get request failed after file known to be missing." >&2
+	{ test ! -f missing-file || test -s missing-file ; } &&
+	    echo "The missing file did not appear as empty." >&1
+	test -s file-small ||
+	    echo "Not even the first request succeeded." >&2
+	RESULT=1
+    fi
+
+    rm -f file-small _file-small_ missing-file
 done
 
 # Test the ability of inetd to reload configuration:
