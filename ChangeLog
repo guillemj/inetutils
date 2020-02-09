@@ -1,3 +1,17 @@
+2020-02-09  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	test-snprintf: New test program.
+
+	An implementation dependent feature of snprintf() is tested.
+	The BSD unices and OpenSolaris relatives are known to be more
+	forgiving, than is Linux/glibc and kfreebsd/glibc.  The issue
+	was brought to our attention by Zhixiong Chi in:
+	https://lists.gnu.org/archive/html/bug-inetutils/2019-05/msg00002.html
+
+	* tests/test-snprintf.c: New file.
+	* tests/Makefile.am (check_PROGRAMS, TESTS): Add `test-snprintf'.
+	* tests/.gitignore: Likewise.
+
 2020-02-04  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	Buffer overflow in tftp and tftpd.

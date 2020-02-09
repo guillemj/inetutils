@@ -5,6 +5,7 @@ ls
 readutmp
 runtime-ipv6
 tcpget
+test-snprintf
 tools.sh
 waitdaemon
 *.log

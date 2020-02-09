@@ -23,7 +23,7 @@ LDADD = $(iu_LIBRARIES)
 noinst_PROGRAMS = identify
 identify_LDADD = $(top_builddir)/lib/libgnu.a $(LIBUTIL)
 
-check_PROGRAMS = localhost readutmp runtime-ipv6 waitdaemon
+check_PROGRAMS = localhost readutmp runtime-ipv6 test-snprintf waitdaemon
 
 dist_check_SCRIPTS = utmp.sh
 
@@ -86,7 +86,7 @@ if ENABLE_ifconfig
 dist_check_SCRIPTS += ifconfig.sh
 endif
 
-TESTS = localhost waitdaemon $(dist_check_SCRIPTS)
+TESTS = localhost test-snprintf waitdaemon $(dist_check_SCRIPTS)
 
 TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT)
 
