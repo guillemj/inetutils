@@ -1,3 +1,14 @@
+2020-02-10  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Simplify coding of test program `runtime-ipv6', by using
+	standard getopt() library function, thus making the code
+	self sufficient.
+
+	* tests/runtime-ipv6.c: Migrate away from argp_parse() to
+	standard getopt().  Let environment variable VERBOSE contribute
+	a short message in case the program tests successfully.
+	Also use AI_NUMERICSERV for completeness.
+
 2020-02-09  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	test-snprintf: New test program.
