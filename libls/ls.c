@@ -119,7 +119,6 @@ ls_main (int argc, char **argv)
   static char dot[] = ".", *dotav[] = { dot, NULL };
   struct winsize win;
   int ch, fts_options;
-  int kflag = 0;
   char *p;
 
   /*
@@ -227,7 +226,6 @@ ls_main (int argc, char **argv)
 	  break;
 	case 'k':
 	  blocksize = 1024;
-	  kflag = 1;
 	  break;
 	case 'o':
 	  f_flags = 1;
