@@ -144,6 +144,8 @@ char portstr[8];		/* Numeric port as string.  */
 /* Requester credentials.  */
 struct credentials cred;
 
+jmp_buf errcatch;
+
 static struct sockaddr_storage ctrl_addr;	/* Control address.  */
 static socklen_t ctrl_addrlen;
 static struct sockaddr_storage data_source;	/* Port address.  */

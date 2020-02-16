@@ -88,7 +88,7 @@ extern void user (const char *);
 extern char *sgetsave (const char *);
 
 /* Exported from ftpd.c.  */
-jmp_buf errcatch;
+extern jmp_buf errcatch;
 extern struct sockaddr_storage data_dest;
 extern socklen_t data_dest_len;
 extern struct sockaddr_storage his_addr;
