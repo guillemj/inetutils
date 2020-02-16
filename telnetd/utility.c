@@ -63,7 +63,7 @@ static int ncc;
 static char ptyibuf[BUFSIZ], *ptyip;
 static int pcc;
 
-int not42;
+extern int not42;
 
 static int
 readstream (int p, char *ibuf, int bufsize)
