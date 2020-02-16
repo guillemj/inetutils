@@ -1010,7 +1010,7 @@ suboption (void)
 	   * protocol must remain unsevered.  Check that DP fits in
 	   * full within TEMP.  Otherwise report buffer error.
 	   */
-	  if (strlen (dp) > sizeof (temp) - 4 - 2)
+	  if (strlen ((char *) dp) >= sizeof (temp) - 4 - 2)
 	    {
 	      printf ("lm_will: not enough room in buffer\n");
 	      break;
