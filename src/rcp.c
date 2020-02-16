@@ -566,7 +566,7 @@ toremote (char *targ, int argc, char *argv[])
 void
 tolocal (int argc, char *argv[])
 {
-  int i, len, tos;
+  int i, tos;
   char *bp, *host, *src, *suser, *vect[1];
 #if defined IP_TOS && defined IPPROTO_IP && defined IPTOS_THROUGHPUT
   struct sockaddr_storage ss;
@@ -578,8 +578,6 @@ tolocal (int argc, char *argv[])
       src = colon (argv[i]);
       if (!src)
 	{			/* Local to local. */
-	  len = strlen (PATH_CP) + strlen (argv[i]) +
-		strlen (target) + 20;
 	  if (asprintf (&bp, "exec %s%s%s %s %s",
 			PATH_CP,
 			iamrecursive ? " -R" : "",
