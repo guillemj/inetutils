@@ -286,19 +286,20 @@ ping_set_packetsize (PING * ping, size_t size)
 }
 
 int
-ping_set_dest (PING * ping, char *host)
+ping_set_dest (PING * ping, const char *host)
 {
 #if HAVE_DECL_GETADDRINFO
   int rc;
   struct addrinfo hints, *res;
-  char *p;
+  char *rhost;
 
 # ifdef HAVE_IDN
-  rc = idna_to_ascii_lz (host, &p, 0);	/* P is allocated.  */
+  rc = idna_to_ascii_lz (host, &rhost, 0);	/* P is allocated.  */
   if (rc)
     return 1;
-# else /* !HAVE_IDN */
-  p = host;
+  host = rhost;
+#else
+  rhost = NULL;
 # endif
 
   memset (&hints, 0, sizeof (hints));
@@ -311,20 +312,24 @@ ping_set_dest (PING * ping, char *host)
   hints.ai_flags |= AI_CANONIDN;
 # endif
 
-  rc = getaddrinfo (p, NULL, &hints, &res);
+  rc = getaddrinfo (host, NULL, &hints, &res);
 
   if (rc)
-    return 1;
+    {
+      free (rhost);
+      return 1;
+    }
 
   memcpy (&ping->ping_dest.ping_sockaddr, res->ai_addr, res->ai_addrlen);
   if (res->ai_canonname)
     ping->ping_hostname = strdup (res->ai_canonname);
   else
-    ping->ping_hostname = strdup (p);
-
 # ifdef HAVE_IDN
-  free (p);
+    ping->ping_hostname = host;
+#else
+    ping->ping_hostname = strdup (host);
 # endif
+
   freeaddrinfo (res);
 
   return 0;
@@ -341,14 +346,14 @@ ping_set_dest (PING * ping, char *host)
     {
       struct hostent *hp;
 # ifdef HAVE_IDN
-      char *p;
+      char *rhost;
       int rc;
 
-      rc = idna_to_ascii_lz (host, &p, 0);
+      rc = idna_to_ascii_lz (host, &rhost, 0);
       if (rc)
 	return 1;
-      hp = gethostbyname (p);
-      free (p);
+      hp = gethostbyname (rhost);
+      free (rhost);
 # else /* !HAVE_IDN */
       hp = gethostbyname (host);
 # endif
