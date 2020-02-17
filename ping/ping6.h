@@ -23,7 +23,7 @@
 #define USE_IPV6 1
 
 static PING *ping_init (int type, int ident);
-static int ping_set_dest (PING * ping, char *host);
+static int ping_set_dest (PING * ping, const char *host);
 static int ping_recv (PING * p);
 static int ping_xmit (PING * p);
 

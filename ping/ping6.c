@@ -997,7 +997,7 @@ ping_recv (PING * p)
 }
 
 static int
-ping_set_dest (PING * ping, char *host)
+ping_set_dest (PING * ping, const char *host)
 {
   int err;
   struct addrinfo *result, hints;
@@ -1007,8 +1007,9 @@ ping_set_dest (PING * ping, char *host)
   err = idna_to_ascii_lz (host, &rhost, 0);
   if (err)
     return 1;
+  host = rhost;
 #else /* !HAVE_IDN */
-  rhost = host;
+  rhost = NULL;
 #endif
 
   memset (&hints, 0, sizeof (hints));
@@ -1021,19 +1022,22 @@ ping_set_dest (PING * ping, char *host)
   hints.ai_flags |= AI_CANONIDN;
 #endif
 
-  err = getaddrinfo (rhost, NULL, &hints, &result);
+  err = getaddrinfo (host, NULL, &hints, &result);
   if (err)
-    return 1;
+    {
+      free (rhost);
+      return 1;
+    }
 
   memcpy (&ping->ping_dest.ping_sockaddr6, result->ai_addr, result->ai_addrlen);
 
   if (result->ai_canonname)
     ping->ping_hostname = strdup (result->ai_canonname);
   else
-    ping->ping_hostname = strdup (rhost);
-
 #if HAVE_IDN
-  free (rhost);
+    ping->ping_hostname = host;
+#else
+  ping->ping_hostname = strdup (host);
 #endif
   freeaddrinfo (result);
 
