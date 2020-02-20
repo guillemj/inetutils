@@ -993,18 +993,10 @@ sink (int argc, char *argv[])
 	  need = strlen (targ) + strlen (cp) + 250;
 	  if (need > cursize)
 	    {
-	      free (namebuf);
-	      namebuf = malloc (need);
-	      if (namebuf)
-		cursize = need;
-	      else
-		{
-		  run_err ("%s", strerror (errno));
-		  cursize = 0;
-		  continue;
-		}
+	      if (!(namebuf = malloc (need)))
+		run_err ("%s", strerror (errno));
 	    }
-	  snprintf (namebuf, cursize, "%s%s%s", targ, *targ ? "/" : "", cp);
+	  snprintf (namebuf, need, "%s%s%s", targ, *targ ? "/" : "", cp);
 	  np = namebuf;
 	}
       else
