@@ -1,5 +1,13 @@
 2020-02-20  Mats Erik Andersson  <gnu@gisladisker.se>
 
+	rexecd, rshd: Avoid false failure message.
+
+	* src/rexecd.c (doit) [HAVE_SETLOGIN]: Only call setsid() in case
+	the session leader is different from the present process.
+	* src/rshd.c (doit) [HAVE_SETLOGIN]: Likewise.
+
+2020-02-20  Mats Erik Andersson  <gnu@gisladisker.se>
+
 	rcp: Recursive reception was broken.
 
 	The commit 67b49c54 broke the use case of locally receiving

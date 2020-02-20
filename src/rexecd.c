@@ -556,8 +556,9 @@ doit (int f, struct sockaddr *fromp, socklen_t fromlen)
 
 #ifdef HAVE_SETLOGIN
       /* Not sufficient to call setpgid() on BSD systems.  */
-      if (setsid () < 0)
-	syslog (LOG_ERR, "setsid() failed: %m");
+      if (getsid ((pid_t) 0) != getpid ())
+	if (setsid () < 0)
+	  syslog (LOG_ERR, "setsid() failed: %m");
 #elif defined HAVE_SETPGID /* !HAVE_SETLOGIN */
       setpgid (0, getpid ());
 #endif

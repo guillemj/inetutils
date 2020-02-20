@@ -1833,8 +1833,9 @@ doit (int sockfd, struct sockaddr *fromp, socklen_t fromlen)
    */
 #ifdef HAVE_SETLOGIN
   /* Not sufficient to call setpgid() on BSD systems.  */
-  if (setsid () < 0)
-    syslog (LOG_ERR, "setsid() failed: %m");
+  if (getsid ((pid_t) 0) != getpid ())
+    if (setsid () < 0)
+      syslog (LOG_ERR, "setsid() failed: %m");
 
   if (setlogin (pwd->pw_name) < 0)
     syslog (LOG_ERR, "setlogin() failed: %m");
