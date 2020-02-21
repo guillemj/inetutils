@@ -114,9 +114,9 @@ parse_level (char *str)
   if (p)
     *p++ = 0;
 
-  fac = decode (str, facilitynames, "facility");
+  fac = decode (str, (CODE *) facilitynames, "facility");
   if (p)
-    prio = decode (p, prioritynames, "priority");
+    prio = decode (p, (CODE *) prioritynames, "priority");
 
   return MAKE_PRI (fac, prio);
 }

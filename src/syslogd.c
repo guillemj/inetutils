@@ -1155,9 +1155,9 @@ textpri (int pri)
   static char res[20];
   CODE *c_pri, *c_fac;
 
-  for (c_fac = facilitynames; c_fac->c_name
+  for (c_fac = (CODE *) facilitynames; c_fac->c_name
        && !(c_fac->c_val == LOG_FAC (pri) << 3); c_fac++);
-  for (c_pri = prioritynames; c_pri->c_name
+  for (c_pri = (CODE *) prioritynames; c_pri->c_name
        && !(c_pri->c_val == LOG_PRI (pri)); c_pri++);
 
   snprintf (res, sizeof (res), "%s.%s", c_fac->c_name, c_pri->c_name);
@@ -2258,7 +2258,7 @@ cfline (const char *line, struct filed *f)
 	}
       else
 	{
-	  pri = decode (bp, prioritynames);
+	  pri = decode (bp, (CODE *) prioritynames);
 	  if (pri < 0 || (pri > LOG_PRIMASK && pri != INTERNAL_NOPRI))
 	    {
 	      snprintf (ebuf, sizeof (ebuf),
@@ -2304,7 +2304,7 @@ cfline (const char *line, struct filed *f)
 	      }
 	  else
 	    {
-	      i = decode (buf, facilitynames);
+	      i = decode (buf, (CODE *) facilitynames);
 
 	      if (i < 0 || i > (LOG_NFACILITIES << 3))
 		{

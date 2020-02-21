@@ -1,3 +1,22 @@
+2020-02-21  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Various compiler warnings, getting closer to `-Werror'.
+
+	* libls/print.c (printlong): The functions major() and minor() have
+	no portable value type, so cast as `int'.
+
+	* ping/ping.c (decode_type): Initialize HOSTNAME to NULL.
+
+	* src/hostname.c (parse_opt, main) <SET_NAME_ACTION>: The prototype
+	of sethostname() is not portable, so cast as `void *'.  Do this
+	also on both members in a conditional clause.
+	* src/logger.c (parse_level): Cast PRIORITYNAMES and FACILITYNAMES
+	as `CODE *', since BSD-systems assign these a constant type.
+	* src/syslogd.c (textpri, cfline): Likewise.
+	* src/rcp.c (source, rsource): Type length of `stat.st_mode' is not
+	portable, so cast as `int'.
+	* src/traceroute.c (trace_write): Make loop variable I unsigned.
+
 2020-02-20  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	rexecd, rshd: Avoid false failure message.

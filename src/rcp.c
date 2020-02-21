@@ -744,7 +744,7 @@ source (int argc, char *argv[])
 	}
 #define RCP_MODEMASK	(S_ISUID|S_ISGID|S_ISVTX|S_IRWXU|S_IRWXG|S_IRWXO)
       snprintf (buf, sizeof buf, "C%04o %jd %s\n",
-		stb.st_mode & RCP_MODEMASK, (intmax_t) stb.st_size, last);
+		(int) stb.st_mode & RCP_MODEMASK, (intmax_t) stb.st_size, last);
       write (rem, buf, strlen (buf));
       if (response () < 0)
 	goto next;
@@ -829,7 +829,7 @@ rsource (char *name, struct stat *statp)
       return;
     }
 
-  sprintf (buf, "D%04o %d %s\n", statp->st_mode & RCP_MODEMASK, 0, last);
+  sprintf (buf, "D%04o %d %s\n", (int) statp->st_mode & RCP_MODEMASK, 0, last);
   write (rem, buf, strlen (buf));
   free (buf);
 

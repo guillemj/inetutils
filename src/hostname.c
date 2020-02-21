@@ -90,7 +90,7 @@ parse_opt (int key, char *arg, struct argp_state *state)
       break;
 
     case 'F':
-      set_name_action = sethostname;
+      set_name_action = (void *) sethostname;
       args->hostname_file = arg;
       break;
 
@@ -115,7 +115,7 @@ parse_opt (int key, char *arg, struct argp_state *state)
       break;
 
     case ARGP_KEY_ARG:
-      set_name_action = sethostname;
+      set_name_action = (void *) sethostname;
       args->hostname_new = strdup (arg);
       if (args->hostname_new == NULL)
         error (EXIT_FAILURE, errno, "strdup");
@@ -159,7 +159,7 @@ main (int argc, char *argv[])
 
   if (get_name_action == xgetdomainname || get_name_action == xgethostname)
     get_name (&args);
-  else if (set_name_action == sethostname)
+  else if ((void *) set_name_action == (void *) sethostname)
     set_name (&args);
 
   return 0;

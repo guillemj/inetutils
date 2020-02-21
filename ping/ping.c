@@ -333,7 +333,7 @@ main (int argc, char **argv)
 
 int (*decode_type (const char *arg)) (char *hostname)
 {
-  int (*ping_type) (char *hostname);
+  int (*ping_type) (char *hostname) = NULL;
 
   if (strcasecmp (arg, "echo") == 0)
     ping_type = ping_echo;

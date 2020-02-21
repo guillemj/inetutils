@@ -701,7 +701,7 @@ trace_write (trace_t * t)
     case TRACE_ICMP:
       {
 	icmphdr_t hdr;
-	int i;
+	unsigned int i;
 
 	/* Deposit deterministic values throughout the header!  */
 	for (i = 0; i < sizeof (hdr); ++i)
