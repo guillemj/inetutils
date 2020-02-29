@@ -264,6 +264,7 @@ main (int argc, char *argv[])
 	case 1:
 	  puts (_("This TLD has no whois server, but you can access the "
 		  "whois database at"));
+	  /* FALLTHROUGH */
 	case 2:
 	  puts (server + 1);
 	  exit (EXIT_SUCCESS);
