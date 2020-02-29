@@ -860,7 +860,7 @@ suboption (void)
 	  name = gettermname ();
 	  len = strlen (name) + 4 + 2;
 
-	  if ((len < NETROOM ()) && (len <= sizeof (temp)))
+	  if ((len < NETROOM ()) && (len <= (int) sizeof (temp)))
 	    {
 	      snprintf ((char *) temp, sizeof (temp), "%c%c%c%c%s%c%c",
 			IAC, SB, TELOPT_TTYPE, TELQUAL_IS,
