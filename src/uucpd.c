@@ -310,13 +310,15 @@ dologout (void)
     }
 }
 
+# define SCPYN(a, b)	strncpy(a, b, sizeof (a) - 1); (a)[sizeof (a) - 1] = 0
+
 /*
  * Record login in wtmp file.
  */
 void
 dologin (struct passwd *pw, struct sockaddr *sap, socklen_t salen)
 {
-  char line[32];
+  char line[NI_MAXHOST]; /* remote is copied here later on */
 #if defined PATH_LASTLOG && defined HAVE_STRUCT_LASTLOG
   int f;
 #endif
@@ -353,7 +355,7 @@ dologin (struct passwd *pw, struct sockaddr *sap, socklen_t salen)
 
   if (hp)
     {
-      strncpy (remotehost, hp->h_name, sizeof (remotehost));
+      SCPYN (remotehost, hp->h_name);
       endhostent ();
     }
   else
@@ -378,9 +380,9 @@ dologin (struct passwd *pw, struct sockaddr *sap, socklen_t salen)
 
     ut.ut_type = USER_PROCESS;
     ut.ut_pid = getpid();
-    strncpy (ut.ut_line, line, sizeof (ut.ut_line));
-    strncpy (ut.ut_user, pw->pw_name, sizeof (ut.ut_user));
-    strncpy (ut.ut_host, remotehost, sizeof (ut.ut_host));
+    SCPYN (ut.ut_line, line);
+    SCPYN (ut.ut_user, pw->pw_name);
+    SCPYN (ut.ut_host, remotehost);
 # ifdef HAVE_STRUCT_UTMPX_UT_SYSLEN
     if (strlen (remotehost) < sizeof (ut.ut_host))
       ut.ut_syslen = strlen (remotehost) + 1;
@@ -398,7 +400,6 @@ dologin (struct passwd *pw, struct sockaddr *sap, socklen_t salen)
 #endif /* HAVE_PUTUTXLINE && !HAVE_LOGWTMPX && !HAVE_LOGWTMP */
 
 #if defined PATH_LASTLOG && defined HAVE_STRUCT_LASTLOG
-# define SCPYN(a, b)	strncpy(a, b, sizeof (a))
   f = open (PATH_LASTLOG, O_RDWR);
   if (f >= 0)
     {
@@ -408,7 +409,7 @@ dologin (struct passwd *pw, struct sockaddr *sap, socklen_t salen)
       time (&t);
       ll.ll_time = t;
       lseek (f, (long) pw->pw_uid * sizeof (struct lastlog), 0);
-      strcpy (line, remotehost);
+      SCPYN (line, remotehost);
       SCPYN (ll.ll_line, line);
       SCPYN (ll.ll_host, remotehost);
       write (f, (char *) &ll, sizeof (ll));
