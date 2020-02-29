@@ -215,6 +215,7 @@ domacro (int argc, char *argv[])
 		   * use of '$' was detected.  Present input is the
 		   * dollar sign.
 		   */
+		  /* FALLTHROUGH */
 		default:
 		  *cp2++ = *cp1;	/* Copy present character.  */
 		  break;
