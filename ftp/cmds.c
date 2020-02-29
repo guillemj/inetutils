@@ -1035,7 +1035,7 @@ remglob (char **argv, int doswitch)
 	args = argv;
       if ((cp = *++args) == NULL)
 	args = NULL;
-      return cp ? 0 : strdup (cp);
+      return cp ? strdup (cp) : NULL;
     }
   if (ftemp == NULL)
     {
