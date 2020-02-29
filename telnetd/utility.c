@@ -733,6 +733,7 @@ getterminaltype (char *uname, size_t len)
     }
 #else /* !AUTHENTICATION */
   (void) uname;	/* Silence warning.  */
+  (void) len;	/* Silence warning.  */
 #endif
 
 #ifdef	ENCRYPTION
