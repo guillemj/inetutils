@@ -2583,10 +2583,8 @@ tn (int argc, char *argv[])
     }
 
   free (hostname);
-  hostname = malloc (strlen (hostp) + 1);
-  if (hostname)
-    strcpy (hostname, hostp);
-  else
+  hostname = strdup (hostp);
+  if (!hostname)
     {
       printf ("Can't allocate memory to copy hostname\n");
       return 0;
