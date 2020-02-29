@@ -1725,10 +1725,10 @@ pswitch (int flag)
   ip->ntflg = ntflag;
   ntflag = op->ntflg;
   strncpy (ip->nti, ntin, sizeof (ntin) - 1);
-  (ip->nti)[strlen (ip->nti)] = '\0';
+  (ip->nti)[sizeof (ntin) - 1] = '\0';
   strcpy (ntin, op->nti);
   strncpy (ip->nto, ntout, sizeof (ntout) - 1);
-  (ip->nto)[strlen (ip->nto)] = '\0';
+  (ip->nto)[sizeof (ntout) - 1] = '\0';
   strcpy (ntout, op->nto);
   ip->mapflg = mapflag;
   mapflag = op->mapflg;
