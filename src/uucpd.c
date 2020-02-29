@@ -95,8 +95,8 @@ void doit (struct sockaddr *sap, socklen_t salen);
 char *uucico_location = PATH_UUCICO;
 int mypid;
 
-char Username[64];
-char Logname[64];
+char Username[72];
+char Logname[72];
 char *nenv[] = {
   Username,
   Logname,
@@ -249,8 +249,8 @@ doit (struct sockaddr *sap, socklen_t salen)
     }
 
   alarm (0);
-  sprintf (Username, "USER=%s", user);
-  sprintf (Logname, "LOGNAME=%s", user);
+  snprintf (Username, sizeof (Username), "USER=%s", user);
+  snprintf (Logname, sizeof (Logname), "LOGNAME=%s", user);
   dologin (pw, sap, salen);
   setgid (pw->pw_gid);
 #ifdef HAVE_INITGROUPS
