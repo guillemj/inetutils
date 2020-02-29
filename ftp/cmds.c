@@ -2400,6 +2400,7 @@ domap (char *name)
 	      break;
 	    }
 	  /* Fall through, as '$' must be used verbatim.  */
+	  /* FALLTHROUGH */
 	default:
 	  if (*cp2 != *cp1)
 	    {
