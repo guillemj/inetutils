@@ -171,9 +171,10 @@ hookup (char *host, int port)
     }
 
   if (res->ai_canonname)
-    strncpy (hostnamebuf, res->ai_canonname, sizeof (hostnamebuf));
+    strncpy (hostnamebuf, res->ai_canonname, sizeof (hostnamebuf) - 1);
   else
-    strncpy (hostnamebuf, rhost, sizeof (hostnamebuf));
+    strncpy (hostnamebuf, rhost, sizeof (hostnamebuf) - 1);
+  hostnamebuf[sizeof (hostnamebuf) - 1] = 0;
 
   hostname = hostnamebuf;
   free (rhost);
