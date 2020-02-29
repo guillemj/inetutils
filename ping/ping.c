@@ -253,6 +253,7 @@ parse_opt (int key, char *arg, struct argp_state *state)
     case ARGP_KEY_NO_ARGS:
       argp_error (state, "missing host operand");
 
+      /* FALLTHROUGH */
     default:
       return ARGP_ERR_UNKNOWN;
     }
