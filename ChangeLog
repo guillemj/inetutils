@@ -1,3 +1,17 @@
+2020-04-27  Tim Rühsen  <tim.ruehsen@gmx.de>
+
+	telnet: Use memove for overlapping memory instead of strncpy.
+
+	Overlapping source and destination buffers are not supported
+	by strncpy and give undefined results.
+
+	7.24.2.3 of ISO/IEC 9899:201x:
+	"If  copying  takes  place  between  objects  thatoverlap,
+	the behavior is undefined."
+
+	* telnet/commands.c (cmds): Use memove for overlapping memory
+	instead of strncpy.
+
 2020-04-12  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	whois: Delegation of IP and AS.

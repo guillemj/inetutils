@@ -3108,11 +3108,11 @@ cmdrc (char *m1, char *m2)
 	  if (isspace (line[0]))
 	    continue;
 	  if (strncasecmp (line, m1, l1) == 0)
-	    strncpy (line, &line[l1], sizeof (line) - l1);
+	    memmove (line, &line[l1], strlen(&line[l1]) + 1);
 	  else if (strncasecmp (line, m2, l2) == 0)
-	    strncpy (line, &line[l2], sizeof (line) - l2);
+	    memmove (line, &line[l2], strlen(&line[l2]) + 1);
 	  else if (strncasecmp (line, "DEFAULT", 7) == 0)
-	    strncpy (line, &line[7], sizeof (line) - 7);
+	    memmove (line, &line[7], strlen(&line[7]) + 1);
 	  else
 	    continue;
 	  if (line[0] != ' ' && line[0] != '\t' && line[0] != '\n')
