@@ -655,7 +655,7 @@ print_dst_unreach (struct icmp6_hdr *icmp6)
 static void
 print_packet_too_big (struct icmp6_hdr *icmp6)
 {
-  printf ("Packet too big, mtu=%d\n", icmp6->icmp6_mtu);
+  printf ("Packet too big, mtu=%u\n", icmp6->icmp6_mtu);
 }
 
 static struct icmp_code_descr icmp_time_exceeded_desc[] = {

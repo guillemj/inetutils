@@ -1,3 +1,7 @@
+2020-04-04  Alfred M. Szmidt  <ams@gnu.org>
+
+	* ping/ping6.c (print_packet_too_big): Use %u when printing MTU.
+
 2020-02-29  Tim Rühsen <tim.ruehsen@gmx.de>
 
 	uucpd: Fix buffer overflows.
