@@ -72,7 +72,9 @@
 #include <arpa/inet.h>
 #include <arpa/telnet.h>
 
-#ifdef HAVE_IDNA_H
+#if defined HAVE_IDN2_H && defined HAVE_IDN2
+# include <idn2.h>
+#elif defined HAVE_IDNA_H
 # include <idna.h>
 #endif
 
@@ -2454,7 +2456,7 @@ tn (int argc, char *argv[])
   const int on = 1;
   int err;
   char *cmd, *hostp = 0, *portp = 0, *user = 0;
-#ifdef HAVE_IDN
+#if defined HAVE_IDN || defined HAVE_IDN2
   char *hosttmp = 0;
 #endif
 
@@ -2602,7 +2604,7 @@ tn (int argc, char *argv[])
   }
 #endif /* AUTHENTICATION || ENCRYPTION */
 
-#ifdef HAVE_IDN
+#if defined HAVE_IDN || defined HAVE_IDN2
   err = idna_to_ascii_lz (hostp, &hosttmp, 0);
   if (err)
     {
@@ -2611,7 +2613,7 @@ tn (int argc, char *argv[])
       return 0;
     }
   hostp = hosttmp;
-#endif /* !HAVE_IDN */
+#endif /* !HAVE_IDN && !HAVE_IDN2 */
 
 #ifdef IPV6
   hints.ai_socktype = SOCK_STREAM;
@@ -2786,7 +2788,7 @@ tn (int argc, char *argv[])
 #endif /* !IPV6 */
 
   cmdrc (hostp, hostname);
-#ifdef HAVE_IDN
+#if defined HAVE_IDN || defined HAVE_IDN2
   /* Last use of HOSTP, alias HOSTTMP.  */
   free (hosttmp);
 #endif

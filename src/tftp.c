@@ -73,7 +73,9 @@
 #ifdef HAVE_LOCALE_H
 # include <locale.h>
 #endif
-#ifdef HAVE_IDNA_H
+#if defined HAVE_IDN2_H && defined HAVE_IDN2
+# include <idn2.h>
+#elif defined HAVE_IDNA_H
 # include <idna.h>
 #endif
 
@@ -313,14 +315,14 @@ resolve_name (char *name)
   struct sockaddr_storage ss;
   struct addrinfo hints, *ai, *aiptr;
 
-#ifdef HAVE_IDN
+#if defined HAVE_IDN || defined HAVE_IDN2
   err = idna_to_ascii_lz (name, &rname, 0);
   if (err)
     {
       fprintf (stderr, "tftp: %s: %s\n", name, idna_strerror (err));
       return RESOLVE_FAIL;
     }
-#else /* !HAVE_IDN */
+#else /* !HAVE_IDN && !HAVE_IDN2 */
   rname = name;
 #endif
 
@@ -342,7 +344,7 @@ resolve_name (char *name)
       return RESOLVE_FAIL;
     }
 
-#ifdef HAVE_IDN
+#if defined HAVE_IDN || defined HAVE_IDN2
   free (rname);
 #endif
 

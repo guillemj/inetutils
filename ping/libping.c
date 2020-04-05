@@ -32,7 +32,9 @@
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
-#ifdef HAVE_IDNA_H
+#if defined HAVE_IDN2_H && defined HAVE_IDN2
+# include <idn2.h>
+#elif defined HAVE_IDNA_H
 # include <idna.h>
 #endif
 
@@ -293,7 +295,7 @@ ping_set_dest (PING * ping, const char *host)
   struct addrinfo hints, *res;
   char *rhost;
 
-# ifdef HAVE_IDN
+# if defined HAVE_IDN || defined HAVE_IDN2
   rc = idna_to_ascii_lz (host, &rhost, 0);	/* P is allocated.  */
   if (rc)
     return 1;
@@ -324,7 +326,7 @@ ping_set_dest (PING * ping, const char *host)
   if (res->ai_canonname)
     ping->ping_hostname = strdup (res->ai_canonname);
   else
-# ifdef HAVE_IDN
+# if defined HAVE_IDN || defined HAVE_IDN2
     ping->ping_hostname = host;
 #else
     ping->ping_hostname = strdup (host);
@@ -345,7 +347,7 @@ ping_set_dest (PING * ping, const char *host)
   else
     {
       struct hostent *hp;
-# ifdef HAVE_IDN
+# if defined HAVE_IDN || defined HAVE_IDN2
       char *rhost;
       int rc;
 
@@ -354,7 +356,7 @@ ping_set_dest (PING * ping, const char *host)
 	return 1;
       hp = gethostbyname (rhost);
       free (rhost);
-# else /* !HAVE_IDN */
+# else /* !HAVE_IDN && !HAVE_IDN2 */
       hp = gethostbyname (host);
 # endif
       if (!hp)

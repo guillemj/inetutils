@@ -1,3 +1,30 @@
+2020-04-05  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	Support for libidn2 in addition to libidn.
+
+	* am/libidn.m4 (have_IDN2, have_IDN): New local variables.
+	Detect presence of libidn2 by checking for `idn2_to_ascii_lz',
+	but still aim at backwards compatibility.  Detect header file
+	`idna.h' as well as `idn2.h', but prefer libidn2 to libidn,
+	should both libraries be detected.
+	* configure.ac (--with-idn): Mention that IDN2 is acceptable.
+	(idn_link): New variable.
+	(ftp_PROPS, ping_PROPS, talk_PROPS, telnet_PROPS, tftp_PROPS)
+	(traceroute_PROPS): Update these to state `idn', or `idn2'.
+
+	* ftp/ftp.c [HAVE_IDN2_H && HAVE_IDN2]: Include `idn2.h'.
+	[(!HAVE_IDN2_H || !HAVE_IDN2) && HAVE_IDNA_H]: Include `idna.h'.
+	(hookup) [HAVE_IDN || HAVE_IDN2]: Use compatibility function
+	idna_to_ascii_lz().
+	* ping/libping.c (ping_set_dest): Likewise.
+	* ping/ping6.c (ping_set_dest): Likewise.
+	* src/tftp.c (resolve_name): Likewise.
+	* src/traceroute.c (main): Likewise.
+	* talk/get_addrs.c (get_addrs)
+	[HAVE_DECL_GETADDRINFO || HAVE_IDN || HAVE_IDN2]: Declare ERR.
+	[HAVE_IDN || HAVE_IDN2]: Likewise.
+	* telnet/commands.c (tn): Declare HOSTTMP.  Likewise.
+
 2020-04-04  Alfred M. Szmidt  <ams@gnu.org>
 
 	* ping/ping6.c (print_packet_too_big): Use %u when printing MTU.

@@ -81,7 +81,9 @@
 #include <stdarg.h>
 #include <sys/select.h>
 
-#ifdef HAVE_IDNA_H
+#if defined HAVE_IDN2_H && defined HAVE_IDN2
+# include <idn2.h>
+#elif defined HAVE_IDNA_H
 # include <idna.h>
 #endif
 
@@ -135,7 +137,7 @@ hookup (char *host, int port)
   if (p && p != host && isprint (p[1]))
     host = ++p;
 
-#ifdef HAVE_IDN
+#if defined HAVE_IDN || defined HAVE_IDN2
   status = idna_to_ascii_lz (host, &rhost, 0);
   if (status)
     {
@@ -143,7 +145,7 @@ hookup (char *host, int port)
       code = -1;
       return ((char *) 0);
     }
-#else /* !HAVE_IDN */
+#else /* !HAVE_IDN && !HAVE_IDN2 */
   rhost = strdup (host);
 #endif
 

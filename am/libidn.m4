@@ -1,4 +1,4 @@
-# libidn.m4 serial 1
+# libidn.m4 serial 2
 dnl Copyright (C) 2013-2020 Free Software Foundation, Inc.
 dnl
 dnl This file is part of GNU Inetutils.
@@ -44,9 +44,21 @@ then
     INCIDN=-I$2
   fi
 
-  AC_CHECK_LIB([idn], [idna_to_ascii_lz],
-	       [LIBIDN="$LIBIDN -lidn"], [INCIDN= LIBIDN=],
-	       [$LIBIDN])
+  AC_CHECK_LIB([idn2], [idn2_to_ascii_lz], [have_IDN2=yes], , [$LIBIDN])
+
+  AC_CHECK_LIB([idn], [idna_to_ascii_lz], [have_IDN=yes], , [$LIBIDN])
+
+  if test x"$have_IDN2" = xyes
+  then
+    LIBIDN="$LIBIDN -lidn2"
+  else
+    if test x"$have_IDN" = xyes
+    then
+      LIBIDN="$LIBIDN -lidn"
+    else
+      INCIDN= LIBIDN=
+    fi
+  fi
 
   # Some systems are known to install <idna.h> below
   # '/usr/include/idn'.  The caching performed by
@@ -54,16 +66,23 @@ then
   # repeated call of the macro.  Functional alternative?
   save_CPPFLAGS=$CPPFLAGS
   CPPFLAGS="$CPPFLAGS $INCIDN"
-  AC_CHECK_HEADERS([idna.h])
+
+  AC_CHECK_HEADERS([idna.h idn2.h])
 
   AC_MSG_CHECKING([if GNU libidn is available])
-  if test "$ac_cv_lib_idn_idna_to_ascii_lz" = yes \
-      && test "$ac_cv_header_idna_h" = yes; then
-    AC_DEFINE(HAVE_IDN, 1, [Define to 1 for use of GNU Libidn.])
-    AC_MSG_RESULT($ac_cv_lib_idn_idna_to_ascii_lz)
+  if test "$ac_cv_lib_idn2_idn2_to_ascii_lz" = yes \
+      && test "$ac_cv_header_idn2_h" = yes; then
+    AC_DEFINE(HAVE_IDN2, 1, [Define to 1 for use of GNU Libidn2.])
+    AC_MSG_RESULT($ac_cv_lib_idn2_idn2_to_ascii_lz)
   else
-    AC_MSG_RESULT([no])
-    INCIDN= LIBIDN=
+    if test "$ac_cv_lib_idn_idna_to_ascii_lz" = yes \
+	&& test "$ac_cv_header_idna_h" = yes; then
+      AC_DEFINE(HAVE_IDN, 1, [Define to 1 for use of GNU Libidn.])
+      AC_MSG_RESULT($ac_cv_lib_idn_idna_to_ascii_lz)
+    else
+      AC_MSG_RESULT([no])
+      INCIDN= LIBIDN=
+    fi
   fi
   CPPFLAGS=$save_CPPFLAGS
 fi

@@ -86,7 +86,7 @@ AC_ARG_WITH([pam],
                            [Add support for PAM]))
 AC_ARG_WITH([idn],
   AS_HELP_STRING([--with-idn[[=DIR]]],
-		 [Use IDN support, with optional inclusion directory]), ,
+		 [Use IDN or IDN2 support, with optional inclusion directory]), ,
 		 [with_idn=no])
 AC_ARG_WITH([libidn-prefix],
   AS_HELP_STRING([--with-libidn-prefix[[=DIR]]],
@@ -1124,12 +1124,14 @@ rlogind_PROPS="${rlogind_PROPS:+$rlogind_PROPS }$LIBWRAP"
 
 # Support for libidn.
 
-ftp_PROPS="${ftp_PROPS:+$ftp_PROPS }${LIBIDN:+-lidn}"
-ping_PROPS="${ping_PROPS:+$ping_PROPS }${LIBIDN:+-lidn}"
-talk_PROPS="${talk_PROPS:+$talk_PROPS }${LIBIDN:+-lidn}"
-telnet_PROPS="${telnet_PROPS:+$telnet_PROPS }${LIBIDN:+-lidn}"
-tftp_PROPS="${tftp_PROPS:+$tftp_PROPS }${LIBIDN:+-lidn}"
-traceroute_PROPS="${traceroute_PROPS:+$traceroute_PROPS }${LIBIDN:+-lidn}"
+idn_link=`expr X"$LIBIDN" : '.*-l\(idn2*\)'`
+
+ftp_PROPS="${ftp_PROPS:+$ftp_PROPS }${LIBIDN:+$idn_link}"
+ping_PROPS="${ping_PROPS:+$ping_PROPS }${LIBIDN:+$idn_link}"
+talk_PROPS="${talk_PROPS:+$talk_PROPS }${LIBIDN:+$idn_link}"
+telnet_PROPS="${telnet_PROPS:+$telnet_PROPS }${LIBIDN:+$idn_link}"
+tftp_PROPS="${tftp_PROPS:+$tftp_PROPS }${LIBIDN:+$idn_link}"
+traceroute_PROPS="${traceroute_PROPS:+$traceroute_PROPS }${LIBIDN:+$idn_link}"
 
 # Termcap variants.
 

@@ -53,7 +53,9 @@
 #ifdef HAVE_LOCALE_H
 # include <locale.h>
 #endif
-#ifdef HAVE_IDNA_H
+#if defined HAVE_IDN2_H && defined HAVE_IDN2
+# include <idn2.h>
+#elif defined HAVE_IDNA_H
 # include <idna.h>
 #endif
 
@@ -301,13 +303,13 @@ main (int argc, char **argv)
 # endif
 #endif
 
-#ifdef HAVE_IDN
+#if defined HAVE_IDN || defined HAVE_IDN2
   rc = idna_to_ascii_lz (hostname, &rhost, 0);
   free (hostname);
 
   if (rc)
     error (EXIT_FAILURE, 0, "unknown host");
-#else /* !HAVE_IDN */
+#else /* !HAVE_IDN && !HAVE_IDN2 */
   rhost = hostname;
 #endif
 
