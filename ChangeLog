@@ -1,3 +1,16 @@
+2020-04-06  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	whois: Include ERX ranges for APNIC.
+
+	The content of the following web page was scanned to identify
+	the ranges within old B-classes that were assigned to APNIC
+	by the ERX project, Early Registration Transfer.  After some
+	cross checking, a few intermediate ranges for other registars
+	were included for better resolution.
+	https://www.apnic.net/manage-ip/manage-historical-resources/erx-project/erx-transfer-to-apnic/
+
+	* whois/ip_del_list: Add a large amount of APNIC address ranges.
+
 2020-04-05  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	Support for libidn2 in addition to libidn.

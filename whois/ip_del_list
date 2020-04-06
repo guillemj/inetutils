@@ -63,21 +63,257 @@
 ## The B class space is a mess :-( - something could still be missing
 # Ranges administered by ARIN are caught by default.
 #
+128.134.0.0/16	apnic	# ERX
+128.184.0.0/16	apnic	# ERX
+128.250.0.0/16	apnic	# ERX
+
+129.60.0.0/16	apnic	# ERX
+129.78.0.0/16	apnic	# ERX
+129.94.0.0/16	apnic	# ERX
+129.96.0.0/16	apnic	# ERX
+129.127.0.0/16	apnic	# ERX
+129.136.0.0/16	apnic	# ERX
+129.180.0.0/16	apnic	# ERX
+129.249.0.0/16	apnic	# ERX
+129.254.0.0/16	apnic	# ERX
+
+130.34.0.0/16	apnic	# ERX
+130.54.0.0/16	apnic	# ERX
+130.56.0.0/16	apnic	# ERX
+130.69.0.0/16	apnic	# ERX
+130.87.0.0/16	apnic	# ERX
+130.95.0.0/16	apnic	# ERX
+130.102.0.0/16	apnic	# ERX
+130.116.0.0/16	apnic	# ERX
+130.123.0.0/16	apnic	# ERX
+130.130.0.0/16	apnic	# ERX
+130.153.0.0/16	apnic	# ERX
+130.155.0.0/16	apnic	# ERX
+130.158.0.0/16	apnic	# ERX
+130.194.0.0/16	apnic	# ERX
+130.195.0.0/18	apnic
+130.195.64.0/19	apnic
+130.195.96.0/19	ripe
+130.195.128.0/17	apnic
+130.216.0.0/15	apnic	# ERX
+130.220.0.0/16	apnic	# ERX
+
+131.112.0.0/15	apnic	# ERX
+131.170.0.0/16	apnic	# ERX
+131.172.0.0/16	apnic	# ERX
+131.181.0.0/16	apnic	# ERX
+131.185.0.0/16	apnic	# ERX
+131.203.0.0/16	apnic	# ERX
+131.206.0.0/16	apnic	# ERX
+131.217.0.0/16	apnic	# ERX
+131.236.0.0/16	apnic	# ERX
+131.242.0.0/16	apnic	# ERX
+131.244.0.0/15	apnic	# ERX
+131.248.0.0/16	apnic	# ERX
+
+132.179.0.0/16	apnic	# ERX
+132.181.0.0/16	apnic	# ERX
+132.182.0.0/16	apnic	# ERX
+132.186.0.0/16	apnic	# ERX
+132.222.0.0/16	apnic	# ERX
+132.234.0.0/16	apnic	# ERX
+
 133.0.0.0/8	apnic	# administered
+
+134.7.0.0/16	apnic	# ERX
+134.18.0.0/16	apnic	# ERX
+134.75.0.0/16	apnic	# ERX
+134.115.0.0/16	apnic	# ERX
+134.144.0.0/16	apnic	# ERX
+134.148.0.0/16	apnic	# ERX
+134.159.0.0/16	apnic	# ERX
+134.178.0.0/16	apnic	# ERX
+134.180.0.0/16	apnic	# ERX
+134.196.0.0/16	apnic	# ERX
+134.208.0.0/16	apnic	# ERX
+134.211.0.0/16	apnic	# ERX
+134.237.0.0/16	apnic	# ERX
+
+136.153.0.0/16	apnic	# ERX
+136.154.0.0/16	apnic	# ERX
+136.186.0.0/15	apnic	# ERX
+136.198.0.0/16	apnic	# ERX
+
+137.68.0.0/16	apnic	# ERX
+137.76.0.0/16	apnic	# ERX
+137.92.0.0/16	apnic	# ERX
+137.109.0.0/16	apnic	# ERX
+137.111.0.0/16	apnic	# ERX
+137.132.0.0/16	apnic	# ERX
+137.147.0.0/16	apnic	# ERX
+137.153.0.0/16	apnic	# ERX
+137.154.0.0/16	apnic	# ERX
+137.157.0.0/16	apnic	# ERX
+137.166.0.0/16	apnic	# ERX
+137.172.0.0/16	apnic	# ERX
+137.189.0.0/16	apnic	# ERX
+137.219.0.0/16	apnic	# ERX
+
+138.7.0.0/16	apnic	# ERX
+138.19.0.0/16	apnic	# ERX
+138.24.0.0/16	apnic	# ERX
+138.30.0.0/16	apnic	# ERX
+138.44.0.0/16	apnic	# ERX
+138.71.0.0/16	apnic	# ERX
+138.75.0.0/16	apnic	# ERX
+138.77.0.0/16	apnic	# ERX
+138.79.0.0/16	apnic	# ERX
+138.80.0.0/16	apnic	# ERX
+138.101.0.0/16	apnic	# ERX
+138.107.0.0/16	apnic	# ERX
+138.130.0.0/16	apnic	# ERX
+138.194.0.0/16	apnic	# ERX
+138.206.0.0/16	apnic	# ERX
+138.211.0.0/16	apnic	# ERX
+138.212.0.0/15	apnic	# ERX
+138.217.0.0/16	apnic	# ERX
+138.235.0.0/16	apnic	# ERX
+138.243.0.0/16	apnic	# ERX
+138.252.0.0/16	apnic	# ERX
+
 139.20.0.0/14	ripe
 139.24.0.0/14	ripe
 139.28.0.0/15	ripe
+139.44.0.0/16	apnic	# ERX
+139.59.0.0/16	apnic	# ERX
+139.80.0.0/16	apnic	# ERX
+139.86.0.0/16	apnic	# ERX
+139.130.0.0/16	apnic	# ERX
+139.132.0.0/16	apnic	# ERX
+139.134.0.0/16	apnic	# ERX
+139.152.0.0/16	apnic	# ERX
+139.154.0.0/16	apnic	# ERX
+139.163.0.0/16	apnic	# ERX
+139.168.0.0/16	apnic	# ERX
+139.175.0.0/16	apnic	# ERX
+139.188.0.0/16	apnic	# ERX
+139.223.0.0/16	apnic	# ERX
+139.230.0.0/16	apnic	# ERX
+
+140.79.0.0/16	apnic	# ERX
+140.81.0.0/16	apnic	# ERX
+140.83.0.0/16	apnic	# ERX
+140.92.0.0/16	apnic	# ERX
+140.96.0.0/16	apnic	# ERX
+140.109.0.0/16	apnic
+140.112.0.0/12	apnic	# ERX
+140.128.0.0/13	apnic	# ERX
+140.136.0.0/15	apnic	# ERX
+140.138.0.0/16	apnic	# ERX
+140.159.0.0/16	apnic	# ERX
+140.168.0.0/16	apnic	# ERX
+140.200.0.0/16	apnic	# ERX
+140.253.0.0/16	apnic	# ERX
+
 141.0.0.0/10	ripe
 141.64.0.0/12	ripe
 141.80.0.0/14	ripe
 141.84.0.0/15	ripe
+141.103.0.0/16	apnic	# ERX
+141.120.0.0/16	apnic	# ERX
+141.132.0.0/16	apnic	# ERX
+141.168.0.0/16	apnic	# ERX
+141.178.0.0/16	apnic	# ERX
+141.223.0.0/16	apnic	# ERX
+141.229.0.0/16	apnic	# ERX
+141.243.0.0/16	apnic	# ERX
 141.0.0.0/8	ripe	# administered
+
+143.89.0.0/16	apnic	# ERX
+143.90.0.0/16	apnic	# ERX
+143.92.0.0/16	apnic	# ERX
+143.94.0.0/16	apnic	# ERX
+143.96.0.0/16	apnic	# ERX
+143.119.0.0/16	apnic	# ERX
+143.125.0.0/16	apnic	# ERX
+143.136.0.0/16	apnic	# ERX
+143.171.0.0/16	apnic	# ERX
+143.174.0.0/16	apnic	# ERX
+143.188.0.0/16	apnic	# ERX
+143.201.0.0/16	apnic	# ERX
+143.216.0.0/16	apnic	# ERX
+143.218.0.0/16	apnic	# ERX
+143.221.0.0/16	apnic	# ERX
+143.238.0.0/16	apnic	# ERX
+143.248.0.0/16	apnic	# ERX
+143.253.0.0/16	apnic	# ERX
+
+144.1.0.0/16	apnic	# ERX
+144.6.0.0/16	apnic	# ERX
+144.16.0.0/16	apnic	# ERX
+144.53.0.0/16	apnic	# ERX
+144.55.0.0/16	apnic	# ERX
+144.66.0.0/16	apnic	# ERX
+144.79.0.0/16	apnic	# ERX
+144.97.0.0/16	apnic	# ERX
+144.110.0.0/16	apnic	# ERX
+144.120.0.0/16	apnic	# ERX
+144.130.0.0/15	apnic	# ERX
+144.132.0.0/14	apnic	# ERX
+144.136.0.0/14	apnic	# ERX
+144.140.0.0/14	apnic	# ERX
+144.199.0.0/16	apnic	# ERX
+144.205.0.0/16	apnic	# ERX
+144.213.0.0/16	apnic	# ERX
+144.214.0.0/16	apnic	# ERX
+144.218.0.0/16	apnic	# ERX
+
 145.224.0.0/12	ripe
 145.240.0.0/13	ripe
 145.248.0.0/14	ripe
 145.252.0.0/15	ripe
 145.254.0.0/16	ripe
 145.0.0.0/8	ripe	# administered
+
+146.11.0.0/16	apnic	# ERX
+146.51.0.0/16	apnic	# ERX
+146.56.0.0/16	apnic	# ERX
+146.62.0.0/16	apnic	# ERX
+146.90.0.0/16	apnic	# ERX
+146.116.0.0/15	apnic	# ERX
+146.118.0.0/16	apnic	# ERX
+146.144.0.0/16	apnic	# ERX
+146.171.0.0/16	apnic	# ERX
+146.178.0.0/16	apnic	# ERX
+146.195.0.0/16	apnic	# ERX
+146.196.0.0/17	apnic	# ERX
+146.196.128.0/17	afrinic
+146.221.0.0/16	apnic	# ERX
+
+147.6.0.0/16	apnic	# ERX
+147.8.0.0/16	apnic	# ERX
+147.10.0.0/16	apnic	# ERX
+147.41.0.0/16	apnic	# ERX
+147.43.0.0/16	apnic	# ERX
+147.60.0.0/16	apnic	# ERX
+147.66.0.0/16	apnic	# ERX
+147.69.0.0/16	apnic	# ERX
+147.76.0.0/16	apnic	# ERX
+147.109.0.0/16	apnic	# ERX
+147.132.0.0/16	apnic	# ERX
+147.157.0.0/16	apnic	# ERX
+147.158.0.0/16	apnic	# ERX
+147.176.0.0/16	apnic	# ERX
+147.200.0.0/16	apnic	# ERX
+147.209.0.0/16	apnic	# ERX
+147.211.0.0/16	apnic	# ERX
+147.212.0.0/16	apnic	# ERX
+
+148.145.0.0/16	apnic	# ERX
+148.161.0.0/16	apnic	# ERX
+148.182.0.0/16	apnic	# ERX
+148.195.0.0/16	apnic	# ERX
+
+149.135.0.0/16	apnic	# ERX
+149.144.0.0/16	apnic	# ERX
+149.167.0.0/16	apnic	# ERX
+149.171.0.0/16	apnic	# ERX
+149.176.0.0/16	apnic	# ERX
 149.202.0.0/15	ripe
 149.204.0.0/16	ripe
 149.206.0.0/15	ripe
@@ -85,8 +321,10 @@
 149.224.0.0/12	ripe
 149.240.0.0/13	ripe
 149.248.0.0/14	ripe
+
 150.254.0.0/16	ripe
-150.0.0.0/8	apnic	# administered
+150.0.0.0/8	apnic	# administered, most by ERX
+
 151.13.0.0/16	ripe
 151.14.0.0/15	ripe
 151.16.0.0/12	ripe
@@ -100,21 +338,317 @@
 151.92.0.0/15	ripe
 151.95.0.0/16	ripe
 151.99.0.0/16	ripe	# interbusiness
+151.130.0.0/16	apnic	# ERX
+151.135.0.0/16	apnic	# ERX
+151.158.0.0/16	apnic	# ERX
+151.172.0.0/16	apnic	# ERX
+151.178.0.0/16	apnic	# ERX
 151.0.0.0/8	ripe	# administered
+
+152.76.0.0/16	apnic	# ERX
+152.83.0.0/16	apnic	# ERX
+152.91.0.0/16	apnic	# ERX
+152.98.0.0/15	apnic	# ERX
+152.101.0.0/16	apnic	# ERX
+152.102.0.0/15	apnic	# ERX
+152.104.0.0/16	apnic	# ERX
+152.118.0.0/16	apnic	# ERX
+152.147.0.0/16	apnic	# ERX
+152.149.0.0/16	apnic	# ERX
+152.153.0.0/16	apnic	# ERX
+152.226.0.0/16	apnic	# ERX
+
+153.20.0.0/16	apnic	# ERX
+153.107.0.0/16	apnic	# ERX
+153.111.0.0/16	apnic	# ERX
 153.0.0.0/8	apnic	# administered
+
 154.0.0.0/8	afrinic	# administered
+
+155.32.0.0/16	apnic	# ERX
+155.59.0.0/16	apnic	# ERX
+155.60.0.0/16	apnic	# ERX
+155.69.0.0/16	apnic	# ERX
+155.71.0.0/16	apnic	# ERX
+155.143.0.0/16	apnic	# ERX
+155.144.0.0/16	apnic	# ERX
+155.160.0.0/16	apnic	# ERX
+155.187.0.0/16	apnic	# ERX
+155.205.0.0/16	apnic	# ERX
+155.230.0.0/16	apnic	# ERX
+
+156.13.0.0/16	apnic	# ERX
+156.16.0.0/16	apnic	# ERX
+156.22.0.0/16	apnic	# ERX
+156.31.0.0/16	apnic	# ERX
+156.50.0.0/16	apnic	# ERX
+156.59.0.0/16	apnic	# ERX
+156.62.0.0/16	apnic	# ERX
+156.69.0.0/16	apnic	# ERX
+156.147.0.0/16	apnic	# ERX
+156.149.0.0/16	apnic	# ERX
+
+157.1.0.0/16	apnic	# ERX
+157.2.0.0/15	apnic	# ERX
+157.4.0.0/14	apnic	# ERX
+157.8.0.0/14	apnic	# ERX
+157.12.0.0/14	apnic	# ERX
+157.16.0.0/14	apnic	# ERX
+157.20.0.0/16	apnic	# ERX
+157.63.0.0/16	apnic	# ERX
+157.64.0.0/12	apnic	# ERX
+157.80.0.0/15	apnic	# ERX
+157.82.0.0/16	apnic	# ERX
+157.85.0.0/16	apnic	# ERX
+157.100.0.0/16	lacnic	# ERX
+157.101.0.0/16	apnic	# ERX
+157.102.0.0/15	apnic	# ERX
+157.104.0.0/13	apnic	# ERX
+157.112.0.0/14	apnic	# ERX
+157.116.0.0/15	apnic	# ERX
+157.118.0.0/16	apnic	# ERX
+157.119.0.0/17	apnic	# ERX
+157.119.128.0/19	apnic	#
+157.119.160.0/20	apnic	#
+157.119.176.0/21	apnic	#
+157.119.184.0/22	apnic	#
+157.119.192.0/18	apnic	# ERX
+157.120.0.0/17	apnic	# ERX
+157.120.128.0/18	apnic	# ERX
+157.120.192.0/19	apnic	# ERX
+157.120.232.0/22	apnic	# ERX
+157.128.0.0/16	apnic	# ERX
+157.155.0.0/16	apnic	# ERX
+157.179.0.0/16	apnic	# ERX
+157.192.0.0/16	apnic	# ERX
+157.197.0.0/16	apnic	# ERX
+157.205.0.0/16	apnic	# ERX
+157.211.0.0/16	apnic	# ERX
+157.227.0.0/16	apnic	# ERX
+
+158.40.0.0/16	apnic	# ERX
+158.44.0.0/15	apnic	# ERX
+158.54.0.0/16	apnic	# ERX
+158.89.0.0/16	apnic	# ERX
+158.108.0.0/16	apnic	# ERX
+158.132.0.0/16	apnic	# ERX
+158.144.0.0/16	apnic	# ERX
+158.161.0.0/16	apnic	# ERX
+158.182.0.0/16	apnic	# ERX
+158.198.0.0/15	apnic	# ERX
+158.200.0.0/13	apnic	# ERX
+158.208.0.0/13	apnic	# ERX
+158.217.0.0/13	apnic	# ERX
+
+159.13.0.0/16	apnic	# ERX
+159.52.0.0/16	apnic	# ERX
+159.73.0.0/16	apnic	# ERX
+159.80.0.0/16	apnic	# ERX
+159.111.0.0/16	apnic	# ERX
+159.117.0.0/16	apnic	# ERX
+159.196.0.0/16	apnic	# ERX
+159.207.0.0/16	apnic	# ERX
+159.211.0.0/16	apnic	# ERX
+159.226.0.0/16	apnic	# ERX
+159.228.0.0/16	apnic	# ERX
+159.248.0.0/16	apnic	# ERX
+
+160.4.0.0/16	apnic	# ERX
+160.11.0.0/16	apnic	# ERX
+160.12.0.0/14	apnic	# ERX
+160.16.0.0/15	apnic	# ERX
+160.18.0.0/16	apnic	# ERX
+160.21.0.0/16	apnic	# ERX
+160.22.0.0/15	apnic	# ERX
+160.24.0.0/14	apnic	# ERX
+160.28.0.0/15	apnic	# ERX
+160.30.0.0/16	apnic	# ERX
+160.64.0.0/16	apnic	# ERX
+160.74.0.0/16	apnic	# ERX
+160.96.0.0/16	apnic	# ERX
+160.184.0.0/16	afrinic	# ERX
+160.185.0.0/16	apnic	# ERX
+160.186.0.0/15	apnic	# ERX
+160.188.0.0/14	apnic	# ERX
+160.192.0.0/13	apnic	# ERX
+160.200.0.0/15	apnic	# ERX
+160.202.0.0/20	apnic	# ERX
+160.202.32.0/19	apnic	# ERX
+160.202.128.0/17	apnic	# ERX
+160.203.0.0/16	apnic	# ERX
+160.204.0.0/16	apnic	# ERX
+160.206.0.0/16	apnic	# ERX
+160.215.0.0/16	apnic	# ERX
 160.216.0.0/14	ripe
 160.220.0.0/16	ripe
+160.222.0.0/16	apnic	# ERX
 160.44.0.0/14	ripe
 160.48.0.0/12	ripe
+
+161.29.0.0/16	apnic	# ERX
+161.43.0.0/16	apnic	# ERX
+161.50.0.0/16	apnic	# ERX
+161.64.0.0/16	apnic	# ERX
+161.65.0.0/16	apnic	# ERX
+161.66.0.0/16	apnic	# ERX
+161.75.0.0/16	apnic	# ERX
+161.93.0.0/16	apnic	# ERX
+161.94.0.0/16	apnic	# ERX
+161.95.0.0/16	apnic	# ERX
+161.96.0.0/16	apnic	# ERX
+161.117.0.0/16	apnic	# ERX
+161.118.0.0/16	apnic	# ERX
+161.122.0.0/16	apnic	# ERX
+161.126.0.0/16	apnic	# ERX
+161.139.0.0/16	apnic	# ERX
+161.142.0.0/16	apnic	# ERX
+161.143.0.0/16	apnic	# ERX
+161.146.0.0/16	apnic	# ERX
+161.152.0.0/16	apnic	# ERX
+161.200.0.0/16	apnic	# ERX
+161.207.0.0/16	apnic	# ERX
+161.212.0.0/16	apnic	# ERX
+161.229.0.0/16	apnic	# ERX
+161.246.0.0/16	apnic	# ERX
+161.248.0.0/16	apnic	# ERX
+
+162.4.0.0/16	apnic	# ERX
+162.105.0.0/16	apnic	# ERX
+162.112.0.0/16	apnic	# ERX
+162.145.0.0/16	apnic	# ERX
+162.146.0.0/15	apnic	# ERX
+
+163.7.0.0/16	apnic	# ERX
+163.8.0.0/16	apnic	# ERX
+#163.13.0.0 - 163.32.255.255	apnic	# ERX
+#163.42.0.0 - 163.61.255.255	apnic	# ERX
+163.122.0.0/16	apnic	# ERX
+163.127.0.0/16	apnic	# ERX
+163.128.0.0/16	apnic	# ERX
+#163.130.0.0 - 163.149.255.255	apnic	# ERX
+163.152.0.0/16	apnic	# ERX
 163.156.0.0/14	ripe
 163.160.0.0/12	ripe
+163.180.0.0/16	apnic	# ERX
+163.189.0.0/16	apnic	# ERX
+#163.208.0.0 - 163.212.255.255	apnic	# ERX
+#163.214.0.0 - 163.221.255.255	apnic	# ERX
+#163.223.0.0 - 163.227.255.255	apnic	# ERX
+163.232.0.0/16	apnic	# ERX
+163.239.0.0/16	apnic	# ERX
 163.0.0.0/8	apnic	# administered
+
 164.0.0.0/11	ripe
 164.32.0.0/13	ripe
 164.40.0.0/16	ripe
+164.43.0.0/16	apnic	# ERX
+164.46.0.0/16	apnic	# ERX
+164.53.0.0/16	apnic	# ERX
+164.69.0.0/16	apnic	# ERX
+164.70.0.0/15	apnic	# ERX
+164.75.0.0/16	apnic	# ERX
+164.78.0.0/16	apnic	# ERX
+164.80.0.0/16	apnic	# ERX
+164.97.0.0/16	apnic	# ERX
+164.100.0.0/16	apnic	# ERX
+164.108.0.0/16	apnic	# ERX
+164.112.0.0/16	apnic	# ERX
+164.115.0.0/16	apnic	# ERX
+164.124.0.0/15	apnic	# ERX
 164.128.0.0/12	ripe
+164.160.0.0/16	afrinic
+164.161.0.0/16	apnic	# ERX
+164.162.0.0/16	apnic	# ERX
+164.163.0.0/16	lacnic	# ERX
+164.164.0.0/16	apnic	# ERX
+
+165.12.0.0/16	apnic	# ERX
+165.14.0.0/15	apnic	# ERX
+165.16.0.0/15	apnic	# ERX
+165.18.0.0/16	apnic	# ERX
+165.21.0.0/16	apnic	# ERX
+165.31.0.0/16	apnic	# ERX
+165.67.0.0/16	apnic	# ERX
+165.69.0.0/16	apnic	# ERX
+165.76.0.0/16	apnic	# ERX
+165.84.0.0/16	apnic	# ERX
+165.86.0.0/16	apnic	# ERX
+165.93.0.0/16	apnic	# ERX
+165.96.0.0/16	apnic	# ERX
+165.99.0.0/16	apnic	# ERX
+165.100.0.0/15	apnic	# ERX
+165.102.0.0/16	apnic	# ERX
+165.108.0.0/16	apnic	# ERX
+165.118.0.0/16	apnic	# ERX
+165.132.0.0/15	apnic	# ERX
+165.141.0.0/16	apnic	# ERX
+165.142.0.0/16	apnic	# ERX
+165.186.0.0/15	apnic	# ERX
+165.191.0.0/16	apnic	# ERX
+165.194.0.0/16	apnic	# ERX
+165.202.0.0/16	apnic	# ERX
+165.205.0.0/16	apnic	# ERX
+165.209.0.0/16	apnic	# ERX
+165.213.0.0/16	apnic	# ERX
+165.220.0.0/16	apnic	# ERX
+165.222.0.0/16	apnic	# ERX
+165.228.0.0/15	apnic	# ERX
+165.240.0.0/14	apnic	# ERX
+165.244.0.0/16	apnic	# ERX
+165.246.0.0/16	apnic	# ERX
+
+166.64.0.0/15	apnic	# ERX
+166.79.0.0/16	apnic	# ERX
+166.81.0.0/16	apnic	# ERX
+166.83.0.0/16	apnic	# ERX
+166.100.0.0/16	apnic	# ERX
+166.103.0.0/16	apnic	# ERX
+166.104.0.0/16	apnic	# ERX
+166.106.0.0/16	apnic	# ERX
+166.111.0.0/16	apnic	# ERX
+166.111.0.0/16	apnic	# ERX
+166.118.0.0/15	apnic	# ERX
+166.120.0.0/15	apnic	# ERX
+166.125.0.0/16	apnic	# ERX
+
+167.30.0.0/16	apnic	# ERX
+167.103.0.0/16	apnic	# ERX
+167.123.0.0/16	apnic	# ERX
+167.130.0.0/16	apnic	# ERX
+167.139.0.0/16	apnic	# ERX
+167.162.0.0/16	apnic	# ERX
+167.169.0.0/16	apnic	# ERX
+167.175.0.0/16	apnic	# ERX
+167.179.0.0/16	apnic	# ERX
+167.189.0.0/16	apnic	# ERX
+167.205.0.0/16	apnic	# ERX
+
+168.70.0.0/16	apnic	# ERX
+168.78.0.0/15	apnic	# ERX
+168.95.0.0/16	apnic	# ERX
+168.106.0.0/16	apnic	# ERX
+168.115.0.0/16	apnic	# ERX
+168.120.0.0/16	apnic	# ERX
+168.126.0.0/16	apnic	# ERX
+168.130.0.0/15	apnic	# ERX
+168.132.0.0/16	apnic	# ERX
+168.134.0.0/16	apnic	# ERX
+168.140.0.0/16	apnic	# ERX
+168.152.0.0/15	apnic	# ERX
+168.154.0.0/16	apnic	# ERX
+168.160.0.0/16	apnic	# ERX
+168.186.0.0/16	apnic	# ERX
+168.188.0.0/16	apnic	# ERX
+168.198.0.0/16	apnic	# ERX
+168.217.0.0/16	apnic	# ERX
+168.219.0.0/16	apnic	# ERX
+168.248.0.0/15	apnic	# ERX
+168.252.0.0/16	apnic	# ERX
+
+169.140.0.0/16	apnic	# ERX
+169.201.0.0/16	apnic	# ERX
 169.208.0.0/12	apnic
+
 171.16.0.0/12	ripe
 171.32.0.0/15	ripe
 171.0.0.0/8	apnic	# administered
