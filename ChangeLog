@@ -1,3 +1,18 @@
+2020-04-12  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	whois: Delegation of IP and AS.
+
+	Attempt improving the list of IP range delegation within the scope
+	of old A-class ranges.  The intention is to establish as many
+	ranges of width 22, or wider, and also to verify old claims.
+
+	* whois/as_del_list: Update and correct existing AS range
+	delegations, and add a few more, random but existing.
+	* whois/ip_del_list: Add a large number of delegations within
+	former A-class ranges, and correct two erroneous instances.
+	* whois/whois.c (whereas): Raise the upper limit of known ASN.
+	(queryformat): Rewrite query statement intended for ARIN.
+
 2020-04-06  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	whois: Include ERX ranges for APNIC.

@@ -20,38 +20,332 @@
 #
 # IANA IPv4 Address Space Registry: 2019-12-27
 #
+# Legend: ERX is read `Early Registration Transfer'.
+#
 
 1.0.0.0/8	apnic
 2.0.0.0/8	ripe
 5.0.0.0/8	ripe
+8.128.0.0/10	apnic	# ERX
+8.208.0.0/12	apnic	# ERX
+
+13.116.0.0/14	ripe	# ERX
+13.120.0.0/14	ripe	# ERX
+13.140.0.0/14	ripe	# ERX
+13.168.0.0/13	ripe	# ERX
+13.176.0.0/13	ripe	# ERX
+13.240.0.0/14	ripe	# ERX
 14.0.0.0/8	apnic
-24.192.0.0/14	apnic
+
+23.19.48.0/22	ripe	# ERX
+23.19.56.0/21	ripe	# ERX
+23.83.64.0/21	ripe	# ERX
+23.83.112.0/20	ripe	# ERX
+23.83.128.0/17	ripe	# ERX
+23.92.112.0/20	ripe	# ERX
+23.105.224.0/19	ripe	# ERX
+23.106.32.0/21	ripe	# ERX
+23.106.56.0/21	ripe	# ERX
+23.106.104.0/21	ripe	# ERX
+23.106.112.0/20	ripe	# ERX
+23.106.232.0/21	ripe	# ERX
+23.106.248.0/21	ripe	# ERX
+23.108.96.0/21	ripe	# ERX
+23.108.208.0/20	ripe	# ERX
+23.109.0.0/16	ripe	# ERX
+23.111.0.0/21	ripe	# ERX
+23.111.12.0/22	ripe	# ERX
+23.111.16.0/20	ripe	# ERX
+23.111.32.0/19	ripe	# ERX
+23.111.80.0/20	ripe	# ERX
+23.111.96.0/19	ripe	# ERX
+23.111.192.0/19	ripe	# ERX
+23.111.224.0/20	ripe	# ERX
+23.111.240.0/21	ripe	# ERX
+###
+### 23.128.0.0/10 claims only sparse, narrow allocation ranges.
+###
+23.226.0.0/20	apnic	# ERX
+### 23.228.0.0/18 McDonald's Corporation
+23.232.128.0/17	apnic	# ERX
+23.239.128.0/19	ripe	# ERX
+### 23.247.128.0/17 seems empty
+23.249.232.0/21	ripe	# ERX
+23.252.66.0/23	ripe	# ERX
+23.252.68.0/24	ripe	# ERX
+23.252.71.0/24	ripe	# ERX
+23.252.72.0/24	ripe	# ERX
+23.252.75.0/24	ripe	# ERX
+23.252.76.0/24	ripe	# ERX
+23.252.79.0/24	ripe	# ERX
+
+24.41.112.0/20	apnic	# ERX
+24.53.192.0/19	apnic	# ERX
 24.132.0.0/14	ripe
+24.152.0.0/17	lacnic
+24.230.0.0/19	apnic	# ERX
+24.232.0.0/16	lacnic
+24.235.22.0/23	ripe	# ERX
+24.235.24.0/21	apnic	# ERX
 25.0.0.0/8	ripe	# administered
 27.0.0.0/8	apnic
 31.0.0.0/8	ripe
 36.0.0.0/8	apnic
 37.0.0.0/8	ripe
 39.0.0.0/8	apnic
+40.72.0.0/15	apnic	# ERX
+40.125.128.0/17	apnic	# ERX
+40.126.64.0/18	apnic	# ERX
 41.0.0.0/8	afrinic
 42.0.0.0/7	apnic
+45.4.0.0/14	lacnic
+45.8.0.0/13	ripe	# ERX
+45.64.0.0/16	apnic	# ERX
+45.65.0.0/18	apnic	# ERX
+45.65.64.0/18	ripe	# ERX
+45.65.128.0/17	lacnic
+45.66.0.0/15	ripe	# ERX
+45.68.0.0/14	lacnic
+45.75.0.0/17	apnic	# ERX
+45.75.128.0/17	ripe	# ERX
+45.80.0.0/12	ripe	# ERX
+45.96.0.0/12	afrinic
+45.112.0.0/15	apnic	# ERX
+45.114.0.0/18	apnic	# ERX
+45.114.64.0/19	apnic	# ERX
+45.114.96.0/20	apnic	# ERX
+45.114.112.0/21	apnic	# ERX
+45.114.120.0/22	ripe	# ERX
+45.114.124.0/22	apnic	# ERX
+45.114.128.0/18	apnic	# ERX
+45.114.192.0/19	apnic	# ERX
+45.114.228.0/22	apnic	# ERX
+45.114.232.0/21	apnic	# ERX
+45.114.240.0/20	apnic	# ERX
+45.115.0.0/16	apnic	# ERX
+45.116.0.0/15	apnic	# ERX
+45.118.0.0/16	apnic	# ERX
+45.119.0.0/17	apnic	# ERX
+45.119.128.0/18	apnic	# ERX
+45.119.192.0/20	apnic	# ERX
+45.119.212.0/22	apnic	# ERX
+45.119.216.0/21	apnic	# ERX
+45.119.224.0/19	apnic	# ERX
+45.120.0.0/13	apnic	# ERX
+45.128.0.0/11	ripe	# ERX
+45.160.0.0/11	lacnic
+45.192.0.0/12	afrinic
+45.208.0.0/13	afrinic
+45.216.0.0/14	afrinic
+45.220.0.0/15	afrinic
+45.222.0.0/16	afrinic
+45.224.0.0/12	lacnic
+45.240.0.0/13	afrinic
+45.248.0.0/18	apnic	# ERX
+45.248.64.0/19	apnic	# ERX
+45.248.96.0/20	apnic	# ERX
+45.248.112.0/21	apnic	# ERX
+45.248.120.0/22	apnic	# ERX
+45.248.128.0/17	apnic	# ERX
+45.249.0.0/16	apnic	# ERX
+45.250.0.0/20	apnic	# ERX
+45.250.16.0/21	apnic	# ERX
+45.250.24.0/22	ripe	# ERX
+45.250.28.0/22	apnic	# ERX
+45.250.32.0/19	apnic	# ERX
+45.250.64.0/18	apnic	# ERX
+45.250.128.0/17	apnic	# ERX
+45.251.0.0/16	apnic	# ERX
+45.252.0.0/14	apnic	# ERX
 46.0.0.0/8	ripe
+47.8.0.0/15	apnic	# ERX
+47.11.0.0/16	apnic	# ERX
+47.15.0.0/16	apnic	# ERX
+47.29.0.0/16	apnic	# ERX
+47.30.0.0/15	apnic	# ERX
+47.92.0.0/14	apnic	# ERX
+47.96.0.0/15	apnic	# ERX
+47.98.0.0/15	apnic	# ERX
+47.100.0.0/14	apnic	# ERX
+47.104.0.0/13	apnic	# ERX
+47.112.0.0/12	apnic	# ERX
+47.247.0.0/16	apnic	# ERX
 49.0.0.0/8	apnic
+50.60.0.0/15	ripe	# ERX
+50.119.0.0/16	ripe	# ERX
 51.0.0.0/8	ripe	# administered
+52.80.0.0/14	apnic	# ERX
+52.130.0.0/15	apnic	# ERX
 53.0.0.0/8	ripe	# Daimler AG
-57.0.0.0/8	ripe	# administered
+54.36.0.0/15	ripe	# ERX
+54.38.0.0/16	ripe	# ERX
+54.222.0.0/15	apnic	# ERX
+57.0.0.0/8	ripe	# administered, ERX
 58.0.0.0/7	apnic
 60.0.0.0/7	apnic
 62.0.0.0/8	ripe
-63.208.0.0/13	rr.level3.net
+63.140.0.0/20	apnic	# ERX
+63.141.34.0/23	ripe	# ERX
+63.141.36.0/23	ripe	# ERX
+63.142.0.0/20	ripe	# ERX
+63.246.128.0/22	ripe	# ERX
+63.246.132.0/23	ripe	# ERX
+63.246.136.0/23	ripe	# ERX
+63.246.139.0/24	ripe	# ERX
+63.246.142.0/24	ripe	# ERX
+63.246.144.0/21	ripe	# ERX
+63.246.152.0/24	ripe	# ERX
+63.246.156.0/22	ripe	# ERX
+63.247.192.0/20	ripe	# ERX
+63.247.208.0/20	ripe	# ERX
+63.250.56.0/21	ripe	# ERX
+
+64.16.192.0/19	ripe	# ERX
+64.28.0.0/19	ripe	# ERX
+64.28.128.0/20	lacnic
+64.32.64.0/18	lacnic
+64.33.0.0/18	apnic	# ERX
+64.43.0.0/17	ripe	# ERX
+64.43.128.0/18	ripe	# ERX
+64.56.160.0/19	apnic	# ERX
+64.57.112.0/20	afrinic
+64.63.64.0/18	apnic	# ERX
+64.65.64.0/18	ripe	# ERX
+64.119.16.0/20	apnic	# ERX
+64.120.88.0/21	apnic	# ERX
+64.120.110.0/23	apnic	# ERX
+64.120.112.0/21	apnic	# ERX
+64.120.120.0/23	apnic	# ERX
+64.137.192.0/18	ripe	# ERX
+64.188.32.0/20	apnic	# ERX
+64.253.32.0/19	ripe	# ERX
+65.18.112.0/20	apnic	# ERX
+65.18.128.0/18	ripe	# ERX
+65.18.208.0/20	ripe	# ERX
+65.39.64.0/19	ripe	# ERX
+65.99.0.0/18	apnic	# ERX
+65.99.64.0/19	apnic	# ERX
+65.99.128.0/18	ripe	# ERX
+65.181.64.0/19	apnic	# ERX
+66.18.64.0/19	afrinic
+66.42.32.0/19	apnic	# ERX
+66.60.0.0/18	lacnic
+66.79.96.0/19	ripe	# ERX
+66.81.160.0/19	ripe	# ERX
+66.84.64.0/20	ripe	# ERX
+66.96.192.0/18	apnic	# ERX
+66.98.0.0/18	lacnic
+66.98.64.0/19	lacnic
+# Empty 66.118.0.0/18
+66.118.128.0/18	ripe	# ERX
+# Empty 66.118.224.0/19
+66.128.32.0/20	lacnic
+66.133.80.0/20	apnic	# ERX
+66.181.160.0/19	apnic	# ERX
+# Empty 66.187.240.0/20
+# Empty 66.196.128.0/18
+66.203.124.0/22	ripe	# ERX
+66.203.144.0/20	apnic	# ERX
+66.205.64.0/19	ripe	# ERX
+66.212.96.0/19	ripe	# ERX
+66.228.0.0/20	apnic	# ERX
+66.231.64.0/20	lacnic
+66.232.0.0/20	apnic	# ERX
+66.234.160.0/20	apnic	# ERX
+66.248.204.0/22	ripe	# ERX
+66.251.128.0/18	afrinic
+67.22.32.0/20	ripe	# ERX
+67.22.48.0/21	ripe	# ERX
+67.22.56.0/22	ripe	# ERX
+67.158.52.0/24	apnic	# ERX
+67.209.128.0/19	ripe	# ERX
+67.211.64.0/20	apnic	# ERX
+67.213.140.0/22	apnic	# ERX
+67.215.112.0/20	apnic	# ERX
+67.218.224.0/19	ripe	# ERX
+68.65.228.0/22	apnic	# ERX
+68.65.232.0/21	apnic	# ERX
+68.70.192.0/20	ripe	# ERX
+68.79.0.0/18	apnic	# ERX
+69.6.0.0/18	ripe	# ERX
+69.6.64.0/20	apnic	# ERX
+69.63.64.0/20	afrinic
+69.67.32.0/20	afrinic
+69.72.80.0/21	apnic	# ERX
+69.94.32.0/20	apnic	# ERX
+69.94.64.0/20	ripe	# ERX
+69.94.80.0/20	apnic	# ERX
+69.94.96.0/20	apnic	# ERX
+69.94.112.0/20	ripe	# ERX
+69.160.0.0/19	apnic	# ERX
+69.160.168.0/21	apnic	# ERX
+69.172.64.0/19	apnic	# ERX
+69.172.96.0/19	ripe	# ERX
+69.194.64.0/18	ripe	# ERX
+69.194.160.0/20	apnic	# ERX
+69.230.192.0/18	apnic	# ERX
+69.231.128.0/18	apnic	# ERX
+69.234.192.0/18	apnic	# ERX
+69.235.128.0/18	apnic	# ERX
+70.34.60.0/23	apnic	# ERX
+70.34.62.0/24	apnic	# ERX
+71.131.192.0/18	apnic	# ERX
+71.132.0.0/18	apnic	# ERX
+71.136.64.0/18	apnic	# ERX
+71.137.0.0/18	apnic	# ERX
+72.35.248.0/22	apnic	# ERX
+72.35.252.0/23	apnic	# ERX
+72.44.16.0/20	lacnic
+72.255.0.0/18	apnic	# ERX
+72.255.224.0/19	apnic	# ERX
+
+# 73.0.0.0/8	Comcast Cable Communications
+74.50.208.0/21	apnic	# ERX
+74.114.48.0/22	apnic	# ERX
+74.118.80.0/22	apnic	# ERX
+76.73.0.0/17	apnic	# ERX
+76.77.48.0/20	apnic	# ERX
 77.0.0.0/8	ripe
 78.0.0.0/7	ripe
 80.0.0.0/4	ripe
+
+96.9.64.0/19	apnic	# ERX
+96.9.128.0/19	ripe	# ERX
+96.9.160.0/19	apnic	# ERX
+96.30.64.0/18	apnic	# ERX
+96.125.144.0/20	ripe	# ERX
+98.128.0.0/16	ripe	# ERX
+
 101.0.0.0/8	apnic
 102.0.0.0/8	afrinic
 103.0.0.0/8	apnic
+104.37.32.0/21	ripe	# ERX
+104.153.84.0/22	ripe	# ERX
+104.160.0.0/19	ripe	# ERX
+104.161.128.0/17	apnic	# ERX
+104.166.128.0/18	ripe	# ERX
+104.200.112.0/20	apnic	# ERX
+104.232.36.0/23	ripe	# ERX
+104.233.64.0/18	ripe	# ERX
+104.243.216.0/22	ripe	# ERX
+104.244.8.0/22	ripe	# ERX
+104.250.32.0/19	apnic	# ERX
+104.251.144.0/20	apnic	# ERX
+
 105.0.0.0/8	afrinic
 106.0.0.0/8	apnic
+107.150.64.0/19	ripe	# ERX
+107.150.162.0/23	ripe	# ERX
+107.150.164.0/22	ripe	# ERX
+107.150.168.0/21	ripe	# ERX
+107.150.176.0/22	ripe	# ERX
+107.153.0.0/16	apnic	# ERX
+107.161.160.0/20	ripe	# ERX
+### Empty 107.168.0.0/15
+107.181.128.0/19	ripe	# ERX
+107.191.68.0/24	ripe	# ERX
+108.179.64.0/18	ripe	# ERX
+
 109.0.0.0/8	ripe
 110.0.0.0/7	apnic
 112.0.0.0/6	apnic

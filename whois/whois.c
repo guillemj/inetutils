@@ -381,7 +381,7 @@ whereas (int asn, struct as_del aslist[])
 {
   int i;
 
-  if (asn > 16383)
+  if (asn > 398287)
     puts (_("Unknown AS number. Please upgrade this program."));
   for (i = 0; aslist[i].serv; i++)
     if (asn >= aslist[i].first && asn <= aslist[i].last)
@@ -441,7 +441,7 @@ queryformat (const char *server, const char *flags, const char *query)
       (strcmp (server, "whois.arin.net") == 0 ||
        strcmp (server, "whois.nic.mil") == 0) &&
       strncasecmp (query, "AS", 2) == 0 && query[2] >= '0' && query[2] <= '9')
-    sprintf (buf, "AS %s", query + 2);	/* fix query for ARIN */
+    sprintf (buf, "a %s", query + 2);	/* fix query for ARIN */
   else if (!isripe && strcmp (server, "whois.corenic.net") == 0)
     sprintf (buf, "--machine %s", query);	/* machine readable output */
   else if (!isripe && strcmp (server, "whois.ncst.ernet.in") == 0 &&

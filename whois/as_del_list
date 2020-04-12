@@ -15,20 +15,28 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see `http://www.gnu.org/licenses/'.
 
-1877	1901	ripe
+1877	1903	ripe
+2042	2042	apnic
 2043	2043	ripe
+2045	2045	ripe
 2047	2047	ripe
+2049	2049	ripe
 2057	2136	ripe
 2585	2614	ripe
+2772	2772	apnic
 2773	2822	ripe
+2823	2823	apnic
 2830	2879	ripe
 3154	3353	ripe
-4608	4863	apnic
+4608	4865	apnic
 5377	5631	ripe
-5800	5927	whois.nic.mil
 6656	6911	ripe
 7467	7722	apnic
 8192	9215	ripe
-9261	10239	apnic
+9216	10239	apnic
 12288	13311	ripe
 15360	16383	ripe
+47104	48127	ripe
+48128	49151	ripe
+49152	52223	ripe
+52224	53247	lacnic
