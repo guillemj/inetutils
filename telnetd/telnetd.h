@@ -271,7 +271,7 @@ void io_drain (void);
 
 int stilloob (int s);
 void ptyflush (void);
-char *nextitem (char *current);
+char *nextitem (char *current, const char *endp);
 void netclear (void);
 void netflush (void);
 

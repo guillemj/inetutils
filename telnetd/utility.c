@@ -487,10 +487,14 @@ stilloob (int s)
  * character.
  */
 char *
-nextitem (char *current)
+nextitem (char *current, const char *endp)
 {
+  if (current >= endp)
+    return NULL;
   if ((*current & 0xff) != IAC)
     return current + 1;
+  if (current + 1 >= endp)
+    return NULL;
 
   switch (*(current + 1) & 0xff)
     {
@@ -498,19 +502,20 @@ nextitem (char *current)
     case DONT:
     case WILL:
     case WONT:
-      return current + 3;
+      return current + 3 <= endp ? current + 3 : NULL;
 
     case SB:			/* loop forever looking for the SE */
       {
 	char *look = current + 2;
 
-	for (;;)
-	  if ((*look++ & 0xff) == IAC && (*look++ & 0xff) == SE)
+	while (look < endp)
+	  if ((*look++ & 0xff) == IAC && look < endp && (*look++ & 0xff) == SE)
 	    return look;
 
-      default:
-	return current + 2;
+	return NULL;
       }
+    default:
+      return current + 2 <= endp ? current + 2 : NULL;
     }
 }				/* end of nextitem */
 
@@ -532,8 +537,9 @@ nextitem (char *current)
  * us in any case.
  */
 #define wewant(p)					\
-  ((nfrontp > p) && ((*p&0xff) == IAC) &&		\
-   ((*(p+1)&0xff) != EC) && ((*(p+1)&0xff) != EL))
+  ((nfrontp > p) && ((*p & 0xff) == IAC) &&		\
+   (nfrontp > p + 1 && (((*(p + 1) & 0xff) != EC) &&	\
+                        ((*(p + 1) & 0xff) != EL))))
 
 
 void
@@ -548,7 +554,7 @@ netclear (void)
   thisitem = netobuf;
 #endif /* ENCRYPTION */
 
-  while ((next = nextitem (thisitem)) <= nbackp)
+  while ((next = nextitem (thisitem, nbackp)) != NULL && next <= nbackp)
     thisitem = next;
 
   /* Now, thisitem is first before/at boundary. */
@@ -559,15 +565,18 @@ netclear (void)
   good = netobuf;		/* where the good bytes go */
 #endif /* ENCRYPTION */
 
-  while (nfrontp > thisitem)
+  while (thisitem != NULL && nfrontp > thisitem)
     {
       if (wewant (thisitem))
 	{
 	  int length;
 
-	  for (next = thisitem; wewant (next) && nfrontp > next;
-	       next = nextitem (next))
+	  for (next = thisitem;
+	       next != NULL && wewant (next) && nfrontp > next;
+	       next = nextitem (next, nfrontp))
 	    ;
+	  if (next == NULL)
+	    next = nfrontp;
 
 	  length = next - thisitem;
 	  memmove (good, thisitem, length);
@@ -576,7 +585,7 @@ netclear (void)
 	}
       else
 	{
-	  thisitem = nextitem (thisitem);
+	  thisitem = nextitem (thisitem, nfrontp);
 	}
     }
 
