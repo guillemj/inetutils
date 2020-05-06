@@ -80,6 +80,10 @@ const char *hide_strings[] = {
   "Signature Domains' Whois Service", "agree to abide by the above",
   "Access to ASNIC", "by this policy.",
   "* Copyright (C) 1998 by SGNIC", "* modification.",
+  "% The RIPE Database is subject", "\n",
+  "% This query was served", "\n",
+  "% Copyright LACNIC", "%  only for lawful",
+  "# ARIN WHOIS data and services", "# Copyright 19",
   NULL, NULL
 };
 

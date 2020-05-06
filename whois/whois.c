@@ -477,7 +477,7 @@ do_query (const int sock, const char *query)
 	{
 	  if (strncmp (buf, hide_strings[i + 1], strlen (hide_strings[i + 1]))
 	      == 0)
-	    hide = 2;		/* stop hiding */
+	    hide = 0;		/* go into testing mode */
 	  continue;		/* hide this line */
 	}
       if (hide == 0)

@@ -1,3 +1,15 @@
+2020-05-07  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	whois: Improved hiding of legal disclaimers.
+
+	* whois/as_del_list: Two additional delegations.
+	* whois/data.h (hide_strings): Add string patterns for present
+	day services at ARIN, LACNIC, and RIPE.
+	* whois/whois.c (do_query): After successful location of a stop
+	pattern, go back into search state, instead of cancelling further
+	matching.  The service at ARIN inserts identical disclaimer at
+	the beginning, as well as at the end of a response.
+
 2020-05-06  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	* bootstrap: Updated from gnulib.
