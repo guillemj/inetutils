@@ -1,3 +1,7 @@
+2020-05-06  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	* bootstrap: Updated from gnulib.
+
 2020-04-27  Tim Rühsen  <tim.ruehsen@gmx.de>
 
 	telnet: Use memove for overlapping memory instead of strncpy.
