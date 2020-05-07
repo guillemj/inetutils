@@ -1,5 +1,15 @@
 2020-05-07  Mats Erik Andersson  <gnu@gisladisker.se>
 
+	whois: Tweak command line arguments.
+
+	* whois/whois.c (whichwhois): Skip any single character token,
+	as it must be a search directive for a server.  Prune the known
+	IPv6 delegations to reflect only the valid one.  Use ARIN as
+	default IPv6 serving instance, since the old 6BONE server is no
+	longer responsive.
+
+2020-05-07  Mats Erik Andersson  <gnu@gisladisker.se>
+
 	whois: Improved hiding of legal disclaimers.
 
 	* whois/as_del_list: Two additional delegations.

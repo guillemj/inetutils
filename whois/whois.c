@@ -301,6 +301,12 @@ whichwhois (const char *s)
   unsigned long ip;
   unsigned int i;
 
+  /* Step over any single glyph preamble, as it must be some
+   * kind of informed instructions for an anticipated server.
+   */
+  while ((*s != '\0') && (*(s + 1) != '\0') && (*(s + 1) == ' '))
+    s += 2;
+
   /* -v or -t has been used */
   if (*s == '\0')
     return "whois.ripe.net";
@@ -308,14 +314,12 @@ whichwhois (const char *s)
   /* IPv6 address */
   if (strchr (s, ':'))
     {
-      if (strncasecmp (s, "2001:2", 6) == 0)	/* XXX ugly hack! */
-	return "whois.apnic.net";
-      if (strncasecmp (s, "2001:4", 6) == 0)
-	return "whois.arin.net";
-      if (strncasecmp (s, "2001:6", 6) == 0)
+      /* Temporary hack until a delegation list is implemented.  */
+      /* The only easily found /20 delegation .  */
+      if (strncasecmp (s, "2001:2", 6) == 0)
 	return "whois.ripe.net";
-      /* if (strncasecmp(s, "3ffe", 4) == 0) */
-      return "whois.6bone.net";
+
+      return "whois.arin.net";
     }
 
   /* email address */
