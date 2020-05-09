@@ -111,6 +111,11 @@ struct ip_del ip_assign[] = {
   {0, 0, NULL}
 };
 
+struct ip_del ip6_assign[] = {
+#include "ip6_del.h"
+  {0, 0, NULL}
+};
+
 struct as_del
 {
   unsigned short first;

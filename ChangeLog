@@ -1,3 +1,21 @@
+2020-05-08  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	whois: Delegation list for IPv6 ranges.
+
+	* whois/.gitignore: Add `ip6_del.h'.
+	* whois/Makefile.am (BUILT_SOURCES): Add `ip6_del.h'.
+	(EXTRA_DIST): Add `ip6_del_list', `ip6_del.h', `make_ip6_del.pl'.
+	(noinst_HEADERS): Add `ip6_del.h'.
+	(ip6_del.h): New target.
+	* whois/data.h (ip6_assign): New array.
+	* whois/ip6_del_list: New file.
+	* whois/make_ip6_del.pl: New file.
+	* whois/whois.c (whichwhois): Regard absence of period, colon,
+	and hyphen as evidence of NSI NIC or ASN.  Test for this and for
+	email address before any test for numeric addressing.  Implement
+	code for IPv6 delegation matching, to be triggered by the presence
+	of a colon in the given query string.
+
 2020-05-07  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	whois: Tweak command line arguments.

@@ -311,23 +311,12 @@ whichwhois (const char *s)
   if (*s == '\0')
     return "whois.ripe.net";
 
-  /* IPv6 address */
-  if (strchr (s, ':'))
-    {
-      /* Temporary hack until a delegation list is implemented.  */
-      /* The only easily found /20 delegation .  */
-      if (strncasecmp (s, "2001:2", 6) == 0)
-	return "whois.ripe.net";
-
-      return "whois.arin.net";
-    }
-
   /* email address */
   if (strchr (s, '@'))
     return "";
 
-  /* no dot and no hyphen means it's a NSI NIC handle or ASN (?) */
-  if (!strpbrk (s, ".-"))
+  /* no dot, no colon, and no hyphen means it's an NSI NIC handle or ASN (?) */
+  if (!strpbrk (s, ".-:"))
     {
       const char *p;
 
@@ -341,6 +330,31 @@ whichwhois (const char *s)
 	return "whois.networksolutions.com";
       else			/* it's a NSI NIC handle or something we don't know about */
 	return "";
+    }
+
+  /* IPv6 address */
+  if (strchr (s, ':'))
+    {
+      int a = 0, b = 0;
+
+      /* Only the first two double-octets are ever scanned.
+       * At least one is required.
+       */
+      if (sscanf (s, "%x:%x:", &a, &b) == 0)
+	return "";
+
+      /* Mask off any non-significant bits and generate prefix.  */
+      ip = (a & 0xffff) << 16 | (b & 0xffff);
+
+      for (i = 0; ip6_assign[i].serv; i++)
+	if ((ip & ip6_assign[i].mask) == ip6_assign[i].net)
+	  return ip6_assign[i].serv;
+
+      if (verb)
+	puts (_("Delegation server of this address is not known.\n"
+		"The fallback is ARIN, hoping for success."));
+
+      return "whois.arin.net";
     }
 
   /* smells like an IP? */

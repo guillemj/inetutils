@@ -1,0 +1,43 @@
+# Copyright (C) 2020 Free Software Foundation, Inc.
+#
+# This file is part of GNU Inetutils.
+#
+# GNU Inetutils is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or (at
+# your option) any later version.
+#
+# GNU Inetutils is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see `http://www.gnu.org/licenses/'.
+
+# Accepted format of entry line:
+#
+#     hex:hex::/num	ripe	# comments
+#     hex:hex::/num	whois.arin.net
+#
+# where HEX are hexadecimal numbers of at most four significant digits,
+# and NUM are decimal numbers in the range 1 to 32, inclusive.
+
+# The default hard-coded server is ARIN.
+# The first established match is chosen as query server.
+
+2001:2000::/20	ripe
+2001:3000::/21	ripe
+2001:3800::/22	ripe
+
+2001:4000::/23	ripe
+2001:4200::/23	afrinic
+2001:4400::/23	apnic
+2001:4600::/23	ripe
+2001:4a00::/23	ripe
+2001:4c00::/23	ripe
+
+2400:0::/12	apnic
+2800:0::/12	lacnic
+2a00:0::/11	ripe
+2c00:0::/12	afrinic

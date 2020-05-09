@@ -26,19 +26,22 @@ EXTRA_PROGRAMS = whois
 
 whois_SOURCES = whois.c
 
-EXTRA_DIST = as_del_list ip_del_list tld_serv_list \
-  make_as_del.pl  make_ip_del.pl make_tld_serv.pl \
-  as_del.h ip_del.h tld_serv.h
+EXTRA_DIST = as_del_list ip_del_list ip6_del_list tld_serv_list \
+  make_as_del.pl  make_ip_del.pl make_ip6_del.pl make_tld_serv.pl \
+  as_del.h ip_del.h ip6_del.h tld_serv.h
 
-noinst_HEADERS = data.h as_del.h ip_del.h tld_serv.h whois.h
+noinst_HEADERS = data.h as_del.h ip_del.h ip6_del.h tld_serv.h whois.h
 
-BUILT_SOURCES = as_del.h ip_del.h tld_serv.h
+BUILT_SOURCES = as_del.h ip_del.h ip6_del.h tld_serv.h
 
 as_del.h: $(srcdir)/as_del_list $(srcdir)/make_as_del.pl
 	LANG=C perl $(srcdir)/make_as_del.pl < $(srcdir)/as_del_list > as_del.h
 
 ip_del.h: $(srcdir)/ip_del_list $(srcdir)/make_ip_del.pl
 	LANG=C perl $(srcdir)/make_ip_del.pl < $(srcdir)/ip_del_list > ip_del.h
+
+ip6_del.h: $(srcdir)/ip6_del_list $(srcdir)/make_ip6_del.pl
+	LANG=C perl $(srcdir)/make_ip6_del.pl < $(srcdir)/ip6_del_list > ip6_del.h
 
 tld_serv.h: $(srcdir)/tld_serv_list $(srcdir)/make_tld_serv.pl
 	LANG=C perl $(srcdir)/make_tld_serv.pl < $(srcdir)/tld_serv_list > tld_serv.h
