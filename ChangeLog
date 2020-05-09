@@ -102,12 +102,14 @@
 	uucpd: Fix buffer overflows.
 
 	This fixes several missing string termination issues with strncpy.
-	Also REMOTEHOST with size NI_MAXHOST was strcpy'ed into LINE which
+	Also REMOTEHOST of size NI_MAXHOST was strcpy'ed into LINE, which
 	just had 32 bytes on the stack.
 
-	* src/uucpd.c (dologout): Increase LINE size.  Use exisiting SCPYN
+	* src/uucpd.c (SCPYN): Promote macro to global scope, but expand
+	its action by writing the final NUL character.
+	(dologin): Increase size of LINE.  Use existing macro SCPYN
 	instead of strncpy.
-	(SCPYN): New macro.
+	[PATH_LASTLOG && HAVE_STRUCT_LASTLOG]: Delete local macro SCPYN.
 
 2020-02-29  Tim Rühsen <tim.ruehsen@gmx.de>
 
@@ -116,23 +118,22 @@
 	Usernames >= 56 bytes would overflow the char arrays Username and
 	Logname.  This change mitigates this, but still silently truncates
 	these arrays.  Silent truncation should be checked throughout the
-	code possibly within a more comprehensive code review.
+	code, possibly within a more comprehensive code review.
 
-	* src/uucpd.c (Usernaem, Logname): Increase size to 72 bytes.
+	* src/uucpd.c (Username, Logname): Increase size to 72 bytes.
 	(doit): Use snprintf instead of sprintf.
 
 2020-02-29  Tim Rühsen <tim.ruehsen@gmx.de>
 
 	telnet: Use strdup instead malloc+strcpy.
 
-	* telnet/commands.c (tn): Use strdup instead malloc/strcpy.
+	* telnet/commands.c (tn): Assign HOSTNAME using strdup().
 
 2020-02-29  Tim Rühsen <tim.ruehsen@gmx.de>
 
 	telnet: Fix -Wsign-compare in suboption.
 
-	* telnet/telnet.c (suboption): Explicit cast to int to silence
-	-Wsign-compare.
+	* telnet/telnet.c (suboption): Explicitly cast sizeof() to int.
 
 2020-02-29  Tim Rühsen <tim.ruehsen@gmx.de>
 
@@ -174,7 +175,7 @@
 
 	ftp: Fix return value of remglob.
 
-	* ftp/cmds.c (remglob): Turn around NULL check.
+	* ftp/cmds.c (remglob): Switch roles of old values after NULL check.
 
 2020-02-29  Tim Rühsen <tim.ruehsen@gmx.de>
 
@@ -184,7 +185,7 @@
 
 2020-02-29  Tim Rühsen <tim.ruehsen@gmx.de>
 
-	ftp: Fix 2x misuse of strncpy (read buffer overflow).
+	ftp: Fix two misuses of strncpy (read buffer overflow).
 
 	* ftp/ftp.c (pswitch): Correctly set the terminating NUL.
 
@@ -198,30 +199,31 @@
 
 	whois: Silence -Wimplicit-fallthrough.
 
-	* whois/whois.c (main): Squeelch warnings.
+	* whois/whois.c (main): Squeelch warning.
 
 2020-02-29  Tim Rühsen <tim.ruehsen@gmx.de>
 
 	ping, ping6: Silence -Wimplicit-fallthrough.
 
-	* ping/ping.c (parse_opt): Squeelch warnings.
+	* ping/ping.c (parse_opt): Squeelch warning.
 	* ping/ping6.c (parse_opt): Likewise.
 
 2020-02-17  Tim Rühsen <tim.ruehsen@gmx.de>
 
 	ping6: Fix memleak in ping_set_dest.
 
-	* ping/ping6.c (ping_set_dest): Rerrange code to avoid memory
-	leak.
-	* ping/ping6.h (ping_set_dest): Change type; update callees.
+	* ping/ping6.c (ping_set_dest): New function signature.
+	Rearrange code to avoid memory leak.
+	* ping/ping6.h (ping_set_dest): Change signature in declaration.
 
 2020-02-17  Tim Rühsen <tim.ruehsen@gmx.de>
 
 	ping: Fix memleak in ping_set_dest.
 
-	* ping/libping.c (ping_set_dest): Rerrange code to avoid memory
-	leak.
-	* ping/ping.h (ping_set_dest): Change type; update callees.
+	* ping/libping.c (ping_set_dest): New function signature.
+	Rearrange code to avoid memory leak.
+	[HAVE_DECL_GETADDRINFO]: Rename P as RHOST.
+	* ping/ping.h (ping_set_dest): Change signature in declaration.
 
 2020-02-16  Tim Rühsen <tim.ruehsen@gmx.de>
 
@@ -251,9 +253,10 @@
 	telnet: Fix silent truncation (off-by-one check)
 
 	If the DISPLAY variable had exactly 44 bytes, the SE byte (end sub
-	negotiation) was silently truncated.
+	negotiation) was silently truncated.  This concerns CVE-2019-0053.
 
-	* telnet/telnet.c (suboption): Use >= instead of >.
+	* telnet/telnet.c (suboption): Add case of equality in conditional,
+	supplementing strict inequality.
 
 2020-02-21  Mats Erik Andersson  <gnu@gisladisker.se>
 

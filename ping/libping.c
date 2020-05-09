@@ -296,7 +296,7 @@ ping_set_dest (PING * ping, const char *host)
   char *rhost;
 
 # if defined HAVE_IDN || defined HAVE_IDN2
-  rc = idna_to_ascii_lz (host, &rhost, 0);	/* P is allocated.  */
+  rc = idna_to_ascii_lz (host, &rhost, 0);	/* RHOST is allocated.  */
   if (rc)
     return 1;
   host = rhost;

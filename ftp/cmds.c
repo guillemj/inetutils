@@ -1240,7 +1240,7 @@ sethash (int argc _GL_UNUSED_PARAMETER, char **argv)
 	{
 	case 'g':
 	case 'G':
-	  hashbytes *= 1024 * 1024 * 1024;	/* Cascaded multiplication!  */
+	  hashbytes *= 1024 * 1024 * 1024;
 	  break;
 	case 'm':
 	case 'M':
