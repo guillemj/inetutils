@@ -1,3 +1,8 @@
+2020-05-10  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	* whois/data.h (hide_strings): Add Brazilian pattern.
+	* whois/ip6_del_list: Update with more ranges.
+
 2020-05-08  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	whois: Delegation list for IPv6 ranges.

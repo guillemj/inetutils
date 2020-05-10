@@ -83,6 +83,7 @@ const char *hide_strings[] = {
   "% The RIPE Database is subject", "\n",
   "% This query was served", "\n",
   "% Copyright LACNIC", "%  only for lawful",
+  "% Copyright (c) Nic.br", "%  any similar purpose",
   "# ARIN WHOIS data and services", "# Copyright 19",
   NULL, NULL
 };
