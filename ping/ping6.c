@@ -256,7 +256,8 @@ main (int argc, char **argv)
   setsockopt (ping->ping_fd, SOL_SOCKET, SO_BROADCAST, (char *) &one, sizeof (one));
 
   /* Reset root privileges */
-  setuid (getuid ());
+  if (setuid (getuid ()) != 0)
+    exit (EXIT_FAILURE);
 
   /* Force line buffering regardless of output device.  */
   setvbuf (stdout, NULL, _IOLBF, 0);
