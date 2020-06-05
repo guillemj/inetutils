@@ -929,7 +929,8 @@ linux_if_nameindex (void)
   if (fd < 0)
     return NULL;
 
-  content = read_file (PATH_PROCNET_DEV, &length);
+  /* Read a public text file.  */
+  content = read_file (PATH_PROCNET_DEV, 0, &length);
   if (content == NULL)
     return NULL;
 
