@@ -1,3 +1,8 @@
+2020-11-10  Mats Erik Andersson  <gnu@gisladisker.se>
+
+	* configure.ac (AC_PREREQ): Require autoconf 2.64, caused
+	by changes in Gnulib.
+
 2020-06-05  Mats Erik Andersson  <gnu@gisladisker.se>
 
 	* ifconfig/system/linux.c (linux_if_nameindex): New, incompatible
