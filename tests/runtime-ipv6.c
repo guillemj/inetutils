@@ -1,5 +1,5 @@
 /* runtime-ipv6 - Check that system is able to set IPv6 address.
-  Copyright (C) 2020 Free Software Foundation, Inc.
+  Copyright (C) 2020, 2021 Free Software Foundation, Inc.
 
   This file is part of GNU Inetutils.
 
