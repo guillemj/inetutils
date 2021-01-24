@@ -1,5 +1,9 @@
 2021-01-24  Simon Josefsson  <simon@josefsson.org>
 
+	* configure.ac: Fix disabling when all rcmd is missing.
+
+2021-01-24  Simon Josefsson  <simon@josefsson.org>
+
 	Build/doc fixes.
 
 	* README-alpha (Checking Out the Sources): Use git URL mentioned

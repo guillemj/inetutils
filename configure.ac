@@ -323,7 +323,7 @@ fi
 if test "$ac_cv_func_rcmd" != yes \
    && test "$ac_cv_func_orcmd" != yes \
    && test "$ac_cv_func_rcmd_af" != yes \
-   && "$ac_cv_func_orcmd_af" != yes
+   && test "$ac_cv_func_orcmd_af" != yes
 then
   IU_DISABLE_TARGET(rcp)
   IU_DISABLE_TARGET(rlogin)
