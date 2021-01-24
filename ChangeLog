@@ -1,6 +1,7 @@
 2021-01-24  Simon Josefsson  <simon@josefsson.org>
 
 	* configure.ac: Fix disabling when all rcmd is missing.
+	* configure.ac: Warn when rcmd is missing.
 	* README-alpha (Prerequisites): Mention xz, for dist.
 
 2021-01-24  Simon Josefsson  <simon@josefsson.org>

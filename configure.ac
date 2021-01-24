@@ -325,6 +325,7 @@ if test "$ac_cv_func_rcmd" != yes \
    && test "$ac_cv_func_rcmd_af" != yes \
    && test "$ac_cv_func_orcmd_af" != yes
 then
+  AC_MSG_WARN([Disabling rcp, rlogin and rsh, since no rcmd.])
   IU_DISABLE_TARGET(rcp)
   IU_DISABLE_TARGET(rlogin)
   IU_DISABLE_TARGET(rsh)
