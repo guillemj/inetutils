@@ -61,6 +61,7 @@ you have the latest stable version.
 - Texinfo <https://www.gnu.org/software/texinfo>
 - help2man <https://www.gnu.org/software/help2man>
 - ncurses <https://www.gnu.org/software/ncurses/> (optional, for talk)
+- xz <https://tukaani.org/xz/> (for 'make dist')
 
 * Building
 
