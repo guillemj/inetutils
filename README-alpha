@@ -40,7 +40,7 @@ the version control repository.
 To download the source tree from the repository, issue the following
 command:
 
-  git clone git://git.savannah.gnu.org/inetutils.git
+  git clone https://git.savannah.gnu.org/git/inetutils.git
 
 This will give you read-only access.  If you think you need write
 access, contact the mailing list.
@@ -51,13 +51,16 @@ You need the following packages, we don't make any extra effort to
 accommodate older versions of these packages, so please make sure that
 you have the latest stable version.
 
-- Autoconf <http://www.gnu.org/software/autoconf/>
-- Automake <http://www.gnu.org/software/automake/>
-- Bison <http://www.gnu.org/software/bison/>
-- Gnulib <http://www.gnu.org/software/gnulib/>
-- M4 <http://www.gnu.org/software/m4/>
-- Texinfo <http://www.gnu.org/software/texinfo>
-- help2man <http://www.gnu.org/software/help2man>
+- shell <https://www.gnu.org/software/bash/>
+- C compiler <https://www.gnu.org/software/gcc/>
+- Autoconf <https://www.gnu.org/software/autoconf/>
+- Automake <https://www.gnu.org/software/automake/>
+- Bison <https://www.gnu.org/software/bison/>
+- Gnulib <https://www.gnu.org/software/gnulib/>
+- M4 <https://www.gnu.org/software/m4/>
+- Texinfo <https://www.gnu.org/software/texinfo>
+- help2man <https://www.gnu.org/software/help2man>
+- ncurses <https://www.gnu.org/software/ncurses/> (optional, for talk)
 
 * Building
 

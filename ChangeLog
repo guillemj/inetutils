@@ -1,5 +1,10 @@
 2021-01-24  Simon Josefsson  <simon@josefsson.org>
 
+	Build/doc fixes.
+
+	* README-alpha (Checking Out the Sources): Use git URL mentioned
+	on Savannah page.
+	(Prerequisites): Add bash, gcc, ncurses.
 	* bootstrap: Updated from gnulib.
 
 2020-11-10  Mats Erik Andersson  <gnu@gisladisker.se>
