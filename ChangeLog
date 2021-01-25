@@ -1,3 +1,11 @@
+2021-01-25  Simon Josefsson  <simon@josefsson.org>
+
+	git-version-gen: Sync with git-version-gen usage instructions.
+
+	* Makefile.am (EXTRA_DIST): Add.
+	(BUILT_SOURCES): Use srcdir.
+	(.version): Likewise.
+
 2021-01-24  Simon Josefsson  <simon@josefsson.org>
 
 	* configure.ac: Fix disabling when all rcmd is missing.
