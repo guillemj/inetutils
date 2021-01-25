@@ -1,5 +1,12 @@
 2021-01-25  Simon Josefsson  <simon@josefsson.org>
 
+	Only do what git-version-gen recommends regarding .version.
+
+	* Makefile.am (DISTCLEANFILES): Don't distclean
+	$(top_builddir)/.version.
+
+2021-01-25  Simon Josefsson  <simon@josefsson.org>
+
 	Fix hostname.sh to not call system hostname, and improve
 	diagnostics.
 

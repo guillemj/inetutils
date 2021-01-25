@@ -29,7 +29,6 @@ SUBDIRS = lib \
 	tests
 
 DISTCLEANFILES = pathdefs.make paths.defs \
-	$(top_builddir)/.version \
 	$(PACKAGE)-$(VERSION).tar.gz $(PACKAGE)-$(VERSION).tar.xz
 
 # git-version-gen
