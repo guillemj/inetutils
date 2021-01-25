@@ -46,7 +46,7 @@ test $errno -eq 0 || echo "Failed to get hostname." >&2
 test $errno -eq 0 || exit $errno
 
 test `$hostname` = `uname -n` || errno=$?
-test $errno -eq 0 || echo "Failed to get same hostname as uname does." >&2
+test $errno -eq 0 || echo "Failed to get same hostname as uname does (`$hostname` vs `uname -n`)." >&2
 test $errno -eq 0 || exit $errno
 
 if test `func_id_uid` != 0; then
@@ -64,7 +64,7 @@ else
 
 	trap posttest 0 1 2 3 15
 
-	SAVEDNAME=`hostname` || errno=$?
+	SAVEDNAME=`$hostname` || errno=$?
 	echo $SAVEDNAME > $NAMEFILE
 
 	if test $errno -eq 0 && test -s $NAMEFILE; then

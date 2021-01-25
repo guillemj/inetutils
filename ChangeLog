@@ -1,5 +1,12 @@
 2021-01-25  Simon Josefsson  <simon@josefsson.org>
 
+	Fix hostname.sh to not call system hostname, and improve
+	diagnostics.
+
+	* tests/hostname.sh: Fix typo.  Improve output on failures.
+
+2021-01-25  Simon Josefsson  <simon@josefsson.org>
+
 	Fix 'make check' on broken platforms without /etc/protocols.
 
 	* tests/traceroute-localhost.sh: Skip test if /etc/protocols
