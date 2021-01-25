@@ -1,5 +1,11 @@
 2021-01-25  Simon Josefsson  <simon@josefsson.org>
 
+	Silence 'make syntax-check'.
+
+	* libls/ls.c: Don't include <intprops.h> if we are not using it.
+
+2021-01-25  Simon Josefsson  <simon@josefsson.org>
+
 	Don't use deprecated gnulib module 'gettext' and replace
 	readline.m4 with gnulib readline module.
 

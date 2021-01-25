@@ -66,7 +66,6 @@
 #include <grp.h>
 #include <termios.h>
 
-#include <intprops.h>
 #include <inttostr.h>
 #include "ls.h"
 #include "extern.h"
