@@ -26,6 +26,16 @@
 
 . ./tools.sh
 
+PROTOCOLS=/etc/protocols
+if test ! -r $PROTOCOLS; then
+    cat <<-EOT >&2
+	This test requires the availability of "$PROTOCOLS",
+	a file which can not be found in the current system.
+	Therefore skipping this test.
+	EOT
+    exit 77
+fi
+
 PING=${PING:-../ping/ping$EXEEXT}
 TARGET=${TARGET:-127.0.0.1}
 

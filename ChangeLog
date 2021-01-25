@@ -1,5 +1,13 @@
 2021-01-25  Simon Josefsson  <simon@josefsson.org>
 
+	Fix 'make check' on broken platforms without /etc/protocols.
+
+	* tests/traceroute-localhost.sh: Skip test if /etc/protocols
+	doesn't exist, copied from existing code in tests/inetd.sh.
+	* tests/ping-localhost.sh: Likewise.
+
+2021-01-25  Simon Josefsson  <simon@josefsson.org>
+
 	git-version-gen: Sync with git-version-gen usage instructions.
 
 	* Makefile.am (EXTRA_DIST): Add.
