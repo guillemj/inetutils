@@ -1,5 +1,13 @@
 2021-01-25  Simon Josefsson  <simon@josefsson.org>
 
+	Don't use deprecated gnulib module 'gettext' and replace
+	readline.m4 with gnulib readline module.
+
+	* bootstrap.conf (gnulib_modules): Remove gettext.  Add readline.
+	* am/readline.m4: Remove file.
+
+2021-01-25  Simon Josefsson  <simon@josefsson.org>
+
 	Only do what git-version-gen recommends regarding .version.
 
 	* Makefile.am (DISTCLEANFILES): Don't distclean
