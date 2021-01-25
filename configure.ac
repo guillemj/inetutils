@@ -21,7 +21,7 @@
 AC_PREREQ(2.64)
 
 AC_INIT([GNU inetutils],
- m4_esyscmd([build-aux/git-version-gen .tarball-version 's/inetutils-/v/;s/_/./g']),
+ m4_esyscmd([build-aux/git-version-gen .tarball-version]),
  [bug-inetutils@gnu.org])
 
 AC_CONFIG_SRCDIR([src/inetd.c])

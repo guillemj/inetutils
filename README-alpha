@@ -104,33 +104,6 @@ You can track the development process through the
 <commit-inetutils@gnu.org> mailing list.  This is a medium volume
 moderated list.
 
-* Release procedures
-
-[This is only useful for the maintainers of GNU inetutils.]
-
-To make an release issue the following commands:
-
-  make alpha        # or stable
-
-When doing a stable release:
-
- - record the release date in NEWS
-
- - create a tag:
-
-   $ git tag -s -a inetutils-N_M -m "inetutils N.M"
-
- - make tarball release:
-
-   $ make stable
-
- - upload tar ball to ftp.gnu.org (follow the instructions from 'make
-   stable')
-
- - post an announcment to info-gnu@gnu.org
-
- - update web manual and coverage testing
-
 ** Announcement template
 
 Subject: GNU inetutils VERSION released

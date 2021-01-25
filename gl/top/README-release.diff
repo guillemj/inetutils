@@ -1,0 +1,13 @@
+--- README-release.orig	2021-01-25 14:53:16.617112508 +0100
++++ README-release	2021-01-25 14:53:48.201386387 +0100
+@@ -19,10 +19,6 @@
+ 
+     git push origin master
+ 
+-* Check that the NixOS/Hydra autobuilder is reporting all is well:
+-
+-    https://hydra.nixos.org/project/gnu/@PACKAGE@-master
+-
+ * Run the following command to download any new translations:
+ 
+     ./bootstrap && ./configure

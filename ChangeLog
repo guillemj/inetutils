@@ -1,3 +1,25 @@
+2021-01-26  Simon Josefsson  <simon@josefsson.org>
+
+	Sync release process with gnulib approach.
+
+	* NEWS: Fix syntax to conform to gnulib release-prep rules.
+	* cfg.mk: Drop news-check-regexp.
+	* bootstrap.conf (gnulib_modules): Use readme-release.  Drop now
+	implicit announce-gen, gnupload and maintainer-makefile.
+	* bootstrap.conf (bootstrap_epilogue): Add function, fixing
+	README-release.
+	* gl/top/README-release.diff: Add file.
+	* .gitignore: Add README-release.
+	* cfg.mk (exclude_file_name_regexp--sc_trailing_blank): Add, for
+	README-release.diff.
+	* configure.ac (AC_INIT): Don't use sed-expression, it is
+	incompatible with gnulib's do-release-commit-and-tag.
+	* cfg.mk (git-version-gen-tag-sed-script): Drop.
+	* .prev-version: Add file, indicating 1.9.4 as previous release.
+	* README-alpha (Release procedures): Removed, replaced by
+	README-release.
+	* cfg.mk (release-prep-hook): Don't disable it, we now support it.
+
 2021-01-25  Simon Josefsson  <simon@josefsson.org>
 
 	Silence 'make syntax-check'.

@@ -17,10 +17,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see `http://www.gnu.org/licenses/'.
 
-git-version-gen-tag-sed-script = 's/inetutils-/v/; s/_/./g'
-
-news-check-regexp = '^Version $(VERSION_REGEXP):'
-
 _makefile_at_at_check_exceptions = ' && !/PATHDEFS_MAKE/'
 
 _build-aux = build-aux
@@ -56,6 +52,9 @@ exclude_file_name_regexp--sc_prohibit_have_config_h = \
 exclude_file_name_regexp--sc_obsolete_symbols = \
 	^tests/identify.c$$
 
+exclude_file_name_regexp--sc_trailing_blank = \
+	^gl/top/README-release.diff$$
+
 htmldir = ../www-$(PACKAGE)
 
 manual_title = GNU network utilities
@@ -67,8 +66,6 @@ web-coverage:
 upload-web-coverage:
 	cd $(htmldir) && \
 		cvs commit -m "Update." coverage
-
-release-prep-hook =
 
 sc_unsigned_char:
 	@prohibit=u''_char \
