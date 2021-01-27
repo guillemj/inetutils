@@ -1,3 +1,8 @@
+2021-01-27  Simon Josefsson  <simon@josefsson.org>
+
+	* .gitignore: Rewrite to use leading / for most top-level files,
+	and general update.
+
 2021-01-26  Simon Josefsson  <simon@josefsson.org>
 
 	Sync release process with gnulib approach.
