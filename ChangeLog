@@ -1,5 +1,9 @@
 2021-01-27  Simon Josefsson  <simon@josefsson.org>
 
+	* bootstrap.conf (buildreq): Add gzip and xz.
+
+2021-01-27  Simon Josefsson  <simon@josefsson.org>
+
 	* .gitignore: Rewrite to use leading / for most top-level files,
 	and general update.
 
