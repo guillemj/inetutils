@@ -1,5 +1,10 @@
 2021-01-28  Simon Josefsson  <simon@josefsson.org>
 
+	* tests/hostname.sh: Use system hostname, not system uname, for
+	comparison.
+
+2021-01-28  Simon Josefsson  <simon@josefsson.org>
+
 	* configure.ac: Don't call gl_FUNC_READLINE.  Not needed since we
 	now use readline gnulib module.
 
