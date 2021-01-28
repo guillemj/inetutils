@@ -183,17 +183,6 @@ AC_CHECK_LIB(util, logwtmp, LIBUTIL=-lutil)
 AC_CHECK_LIB(util, logwtmpx, LIBUTIL=-lutil)
 AC_SUBST(LIBUTIL)
 
-# FreeBSD 9.0 has changed access to wtmp system, abolishing
-# logout(), logwtmp(), etcetera.  We need to use LIBUTIL
-# for rpl_openpty() and forkpty() in libgnu.a.
-if test "$ac_cv_func_login_tty" = yes \
-   || test "$ac_cv_have_decl_openpty" = yes; then
-  # Make sure that linking contains `-lutil'.
-  if test -z "$LIBUTIL"; then
-    LIBUTIL=-lutil
-  fi
-fi
-
 # Check if they want support for PAM.  Certain daemons like ftpd have
 # support for it.
 

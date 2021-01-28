@@ -29,7 +29,7 @@ AM_CPPFLAGS = \
 LDADD = \
 	$(top_builddir)/libtelnet/libtelnet.a \
 	$(iu_LIBRARIES) \
-	$(LIBTERMCAP) $(LIBUTIL) $(LIBCRYPT) $(LIBAUTH)
+	$(LIBTERMCAP) $(LIBUTIL) $(PTY_LIB) $(LIBCRYPT) $(LIBAUTH)
 
 if ENABLE_hstrerror
 LDADD += $(LIBRESOLV)

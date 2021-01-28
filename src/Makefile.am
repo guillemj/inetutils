@@ -34,7 +34,8 @@ AM_CPPFLAGS = \
 
 LDADD = \
 	$(iu_LIBRARIES) \
-	$(LIBUTIL)
+	$(LIBUTIL) \
+	$(PTY_LIB)
 
 inetdaemondir = @inetdaemondir@
 

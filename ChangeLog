@@ -1,3 +1,13 @@
+2021-01-28  Simon Josefsson  <simon@josefsson.org>
+
+	Fix link failure with absent -lutil on Solaris 10.
+
+	* configure.ac (LIBUTIL): Prefer PTY_LIBS in Makefile.am over
+	adding -lutil for pty-functions.
+	* src/Makefile.am (LDADD): Add PTY_LIB.
+	* telnetd/Makefile.am (LDADD): Likewise.
+	* tests/Makefile.am (identify_LDADD): Likewise.
+
 2021-01-27  Simon Josefsson  <simon@josefsson.org>
 
 	* bootstrap.conf (buildreq): Add gzip and xz.
