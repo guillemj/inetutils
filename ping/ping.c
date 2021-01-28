@@ -295,7 +295,7 @@ main (int argc, char **argv)
 
   /* Reset root privileges */
   if (setuid (getuid ()) != 0)
-    exit (EXIT_FAILURE);
+    error (EXIT_FAILURE, errno, "setuid");
 
   /* Force line buffering regardless of output device.  */
   setvbuf (stdout, NULL, _IOLBF, 0);

@@ -1,5 +1,13 @@
 2021-01-28  Simon Josefsson  <simon@josefsson.org>
 
+	ping, ping6: Fix unchecked setuid return.
+
+	* ping/ping.c (main): Fail if setuid fail.  Trivial patch from
+	Jayakrishna Vadayath <jvadayat@asu.edu>.
+	* ping/ping6.c (main): Likewise.
+
+2021-01-28  Simon Josefsson  <simon@josefsson.org>
+
 	* tests/hostname.sh: Use uname as fallback if system lack hostname
 	command.  Only require mktemp when running root test.
 
