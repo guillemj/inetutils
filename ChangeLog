@@ -1,5 +1,11 @@
 2021-01-28  Simon Josefsson  <simon@josefsson.org>
 
+	* telnet/commands.c (logoutcmd): Renamed from logout.  Conflicts
+	with system utmp.h's logout(3).
+	(cmdtab): Use logoutcmd instead of logout.
+
+2021-01-28  Simon Josefsson  <simon@josefsson.org>
+
 	* tests/libls.sh (LSDIR): Fix parallel testing.  Found on Guix and
 	Debian, solution is to not use CWD as test directory for libls.
 	Inspired by trivial patch by Guillem Jover <guillem@hadrons.org>.

@@ -1661,7 +1661,7 @@ quit (void)
 }
 
 int
-logout (void)
+logoutcmd (void)
 {
   send_do (TELOPT_LOGOUT, 1);
   netflush ();
@@ -2863,7 +2863,7 @@ static int help (int argc, char **argv);
 
 static Command cmdtab[] = {
   {"close", closehelp, bye, 1},
-  {"logout", logouthelp, logout, 1},
+  {"logout", logouthelp, logoutcmd, 1},
   {"display", displayhelp, display, 0},
   {"mode", modestring, modecmd, 0},
   {"open", openhelp, tn, 0},
