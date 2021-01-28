@@ -1,5 +1,10 @@
 2021-01-28  Simon Josefsson  <simon@josefsson.org>
 
+	* configure.ac: Don't call gl_FUNC_READLINE.  Not needed since we
+	now use readline gnulib module.
+
+2021-01-28  Simon Josefsson  <simon@josefsson.org>
+
 	Fix link failure with absent -lutil on Solaris 10.
 
 	* configure.ac (LIBUTIL): Prefer PTY_LIBS in Makefile.am over

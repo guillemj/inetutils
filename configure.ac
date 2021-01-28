@@ -163,11 +163,6 @@ AC_SEARCH_LIBS([getpeername], [socket])
 # See if a termcap library is available (under one of several names)
 IU_LIB_TERMCAP
 
-# Find libreadline -- the ftp client will be built without
-# command editing and history capability if readline() cannot
-# be found, neither in libreadline, nor in libedit.
-gl_FUNC_READLINE
-
 # See if there's a separate libcrypt (many systems put crypt there).
 AC_CHECK_LIB(crypt, crypt, LIBCRYPT=-lcrypt)
 AC_SUBST(LIBCRYPT)
