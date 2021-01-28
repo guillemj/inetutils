@@ -48,36 +48,40 @@ if test -n "${VERBOSE:+set}"; then
     set -x
 fi
 
+# Don't use CWD . because parallel testing may create and remove files
+# here while we work.
+LSDIR=..
+
 # IMPORTANT: Execute an initial call to $LS, just to get going.
 # In case this is a coverage run, as NixOS does, this very first
 # call will create `ls.gcda', whose creation would interfere with
 # the counting after `$LS -a1' and `$LS -A1'.
 #
-$LS -alTt >/dev/null 2>&1
+$LS -alTt $LSDIR >/dev/null 2>&1
 
 # Several runs with different switches are compared by
 # a simple count of printed lines.
 #
-REPLY_a1=`$LS -a1`
-REPLY_A1=`$LS -A1`
+REPLY_a1=`$LS -a1 $LSDIR`
+REPLY_A1=`$LS -A1 $LSDIR`
 
-REPLY_C=`$LS -C`
-REPLY_Cf=`$LS -Cf`
-REPLY_Cr=`$LS -Cr`
-REPLY_Ct=`$LS -Ct`
-REPLY_x=`$LS -x`
-REPLY_m=`$LS -m`
+REPLY_C=`$LS -C $LSDIR`
+REPLY_Cf=`$LS -Cf $LSDIR`
+REPLY_Cr=`$LS -Cr $LSDIR`
+REPLY_Ct=`$LS -Ct $LSDIR`
+REPLY_x=`$LS -x $LSDIR`
+REPLY_m=`$LS -m $LSDIR`
 
-REPLY_l=`$LS -l`
-REPLY_lT=`$LS -l`
-REPLY_n=`$LS -n`
+REPLY_l=`$LS -l $LSDIR`
+REPLY_lT=`$LS -l $LSDIR`
+REPLY_n=`$LS -n $LSDIR`
 
 # In an attempt to counteract lack of subsecond accuracy,
 # probe the parent directory where timing is known to be more
 # varied, than in the subdirectory "tests/".
 #
-REPLY_Ccts=`$LS -Ccts ..`
-REPLY_Cuts=`$LS -Cuts ..`
+REPLY_Ccts=`$LS -Ccts $LSDIR`
+REPLY_Cuts=`$LS -Cuts $LSDIR`
 
 # All the following failure causes are checked and possibly
 # brought to attention, independently of the other instances.

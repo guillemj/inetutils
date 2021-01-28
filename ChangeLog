@@ -1,5 +1,11 @@
 2021-01-28  Simon Josefsson  <simon@josefsson.org>
 
+	* tests/libls.sh (LSDIR): Fix parallel testing.  Found on Guix and
+	Debian, solution is to not use CWD as test directory for libls.
+	Inspired by trivial patch by Guillem Jover <guillem@hadrons.org>.
+
+2021-01-28  Simon Josefsson  <simon@josefsson.org>
+
 	ping, ping6: Fix unchecked setuid return.
 
 	* ping/ping.c (main): Fail if setuid fail.  Trivial patch from
