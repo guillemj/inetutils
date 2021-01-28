@@ -1,5 +1,10 @@
 2021-01-28  Simon Josefsson  <simon@josefsson.org>
 
+	* tests/hostname.sh: Use uname as fallback if system lack hostname
+	command.  Only require mktemp when running root test.
+
+2021-01-28  Simon Josefsson  <simon@josefsson.org>
+
 	* tests/hostname.sh: Use system hostname, not system uname, for
 	comparison.
 
