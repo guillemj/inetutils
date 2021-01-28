@@ -46,6 +46,7 @@ test $errno -eq 0 || exit $errno
 sys_hostname=`hostname` || errno=$?
 if test $errno -ne 0; then
     echo "System hostname failed (rc $errno out $sys_hostname)." >&2
+    errno=0
     sys_hostname=`uname -n` || errno=$?
     test $errno -eq 0 || echo "Failed uname (rc $errno out $sys_hostname)." >&2
     test $errno -eq 0 || exit $errno
