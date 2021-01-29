@@ -127,6 +127,13 @@ Causes problems when sending binary data through telnet connections.
 
 * telnetd
 
+** Fix BraveStarr telnetd remote exploit CVE-2020-10188.
+
+We used Debian's patch which is based on a patch to NetKit, see:
+https://nvd.nist.gov/vuln/detail/CVE-2020-10188
+https://appgateresearch.blogspot.com/2020/02/bravestarr-fedora-31-netkit-telnetd_28.html
+https://src.fedoraproject.org/rpms/telnet/raw/master/f/telnet-0.17-overflow-exploit.patch
+
 ** Use tty, not pty on Solaris.
 
 Setting of terminal attributes as well setting of window size must be
