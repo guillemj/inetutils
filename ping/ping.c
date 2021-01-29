@@ -80,8 +80,6 @@ int (*decode_type (const char *arg)) (char *hostname);
 static int decode_ip_timestamp (char *arg);
 static int send_echo (PING * ping);
 
-#define MIN_USER_INTERVAL (200000/PING_PRECISION)
-
 const char args_doc[] = "HOST ...";
 const char doc[] = "Send ICMP ECHO_REQUEST packets to network hosts."
                    "\vOptions marked with (root only) are available only to "
@@ -168,7 +166,7 @@ parse_opt (int key, char *arg, struct argp_state *state)
         argp_error (state, "invalid value (`%s' near `%s')", arg, endptr);
       options |= OPT_INTERVAL;
       interval = v * PING_PRECISION;
-      if (!is_root && interval < MIN_USER_INTERVAL)
+      if (!is_root && interval < PING_MIN_USER_INTERVAL)
         error (EXIT_FAILURE, 0, "option value too small: %s", arg);
       break;
 

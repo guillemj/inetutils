@@ -1,3 +1,15 @@
+2021-01-29  Simon Josefsson  <simon@josefsson.org>
+
+	ping6: Don't allow unprivileged users to flood ping.
+
+	* ping/ping6.c (parse_opt): For non-root users, limit interval
+	like ping.c to avoid DoS.  Reported in
+	<https://bugs.debian.org/926750>.
+	* ping/ping_common.h (PING_MIN_USER_INTERVAL): Add.
+	* ping/ping.c (MIN_USER_INTERVAL): Remove, replaced by
+	PING_MIN_USER_INTERVAL.
+	(parse_opt): Update use.
+
 2021-01-28  Simon Josefsson  <simon@josefsson.org>
 
 	* telnet/commands.c (logoutcmd): Renamed from logout.  Conflicts

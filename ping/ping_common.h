@@ -75,6 +75,9 @@ struct ping_stat
   (t).tv_usec = ((i)%PING_PRECISION)*(1000000/PING_PRECISION) ;\
 } while (0)
 
+
+#define PING_MIN_USER_INTERVAL (200000/PING_PRECISION)
+
 /* FIXME: Adjust IPv6 case for options and their consumption.  */
 #define _PING_BUFLEN(p, u) ((u)? ((p)->ping_datalen + sizeof (struct icmp6_hdr)) : \
 				   (MAXIPLEN + (p)->ping_datalen + ICMP_TSLEN))

@@ -163,6 +163,9 @@ parse_opt (int key, char *arg, struct argp_state *state)
     case 'i':
       options |= OPT_INTERVAL;
       interval = ping_cvt_number (arg, 0, 0);
+      interval *= PING_PRECISION;
+      if (!is_root && interval < PING_MIN_USER_INTERVAL)
+	error (EXIT_FAILURE, 0, "option value too small: %s", arg);
       break;
 
     case 'l':
