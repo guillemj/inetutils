@@ -540,7 +540,10 @@ getreply (int expecteof)
 	  if (pflag == 2)
 	    {
 	      if (c != '\r' && c != ')')
-		*pt++ = c;
+		{
+		  if (pt < &pasv[sizeof(pasv) - 1])
+		    *pt++ = c;
+		}
 	      else
 		{
 		  *pt = '\0';

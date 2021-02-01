@@ -1,3 +1,9 @@
+2021-02-01  Alfred M. Szmidt  <ams@gnu.org>
+
+	* ftp/ftp.c (getreply): Fix possible buffer overflow (backport
+	from OpenBSD); reported by O. Bittner, D. Maier, M. Munier,
+	J. Beier of SecT, TU Berlin.
+
 2021-01-29  Simon Josefsson  <simon@josefsson.org>
 
 	ping6: Don't allow unprivileged users to flood ping.
