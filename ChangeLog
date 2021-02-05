@@ -1,5 +1,13 @@
 2021-02-05  Simon Josefsson  <simon@josefsson.org>
 
+	Use gnulib sys_types module so we can assume sys/types.h.
+
+	* tests/waitdaemon.c, tests/runtime-ipv6.c, tests/readutmp.c: Drop
+	HAVE_SYS_TYPES_H test.
+	* bootstrap.conf (gnulib_modules): Add explicit sys_types.
+
+2021-02-05  Simon Josefsson  <simon@josefsson.org>
+
 	Fix some autoreconf 2.71 warnings.
 
 	* configure.ac: Remove obsolete AC_HEADER_STDC, AC_HEADER_TIME,
