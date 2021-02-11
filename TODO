@@ -2,7 +2,18 @@
 
 Write documentation (NEWS and manual) for how IPv6/IPv4 gets mapped by
 inetd.
-
+
+* New tools
+
+Before adding any new tools -- spend time reviewing all existing
+implementations for command-line parameters and behaviour.
+
+** arp
+Common ancient tool
+
+** nc (netcat)
+Widely used tool but few maintained alternatives.
+
 * General
 
 broadcasted terminals: provide a client/daemon that broadcasts a users
@@ -107,13 +118,32 @@ Add more utilities:
 Add internationalization, read: gettext support, and provide
 translations, especially for the clients.
 
-2.0 will be a release that tries to put as much as possible into
+3.0 will be a release that tries to put as much as possible into
 libraries (startup code, etc).  We would also like to try and write
 (or convince someone else to write) a gopher and gopherd pair.
 
 Make src/hostname.c handle missing 'sethostname' functions on
 platforms that doesn't have them (it could just print an error
 message).
+
+Fix all warnings with autoconf 2.71+
+
+use gitlog-to-changelog instead of manual ChangeLog entries
+
+enhance man pages so they fully supersede NetKit and BSD man pages
+
+generally use gnulib for portability more than we use today:
+  - gnulib has fts.c that we have a custom libls/ for
+  - getaddrinfo/getnameinfo with IDN support to simplify IDN complexity
+  - more system header files replacements
+  - ruserok/wtmp stuff
+
+Mingw/cygwin support?
+
+Remove Kerberos V4 support?  I'm not sure there are any usable
+Kerberos V4 implementations around anymore, and it is is
+single-DES-only so they are completely insecure anyway.
+
 
 * libicmp
 
@@ -122,9 +152,14 @@ Handle timestamp, router discovery and address packets.
 
 * ping/ping6
 
+Make it setuid-less on kernels that can handle it, e.g., Linux
+
 Ability to send router discovery, address and maybe timestamp packets.
 
 Ability to ping multiple host in one go.
+
+Merge into one binary to avoid code duplication with different
+semantics, ping6 should map to 'ping -6'.
 
 * ifconfig
 
@@ -160,6 +195,10 @@ communicating by the STREAMS protocol, not as a Unix socket.
 Consider supporting this variation.  Our local socket code
 is correct, but it cannot communicate with the native syslog
 service via `/dev/log', only via UDP.
+
+* traceroute
+
+Support setuid-less operations, compare other alternative implementations
 
 * whois
 
