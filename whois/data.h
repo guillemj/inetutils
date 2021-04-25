@@ -68,7 +68,6 @@ const char *rwhois_servers[] = {
 const char *gtlds[] = {
   ".com",
   ".net",
-  ".org",
   ".edu",
   NULL
 };
