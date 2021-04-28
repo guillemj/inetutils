@@ -2449,7 +2449,7 @@ int
 tn (int argc, char *argv[])
 {
 #ifdef IPV6
-  struct addrinfo *result, *aip, hints;
+  struct addrinfo *result, *aip, hints, *hostaddr;
 #else
   struct hostent *host = 0;
   struct sockaddr_in sin;
@@ -2458,7 +2458,7 @@ tn (int argc, char *argv[])
 #endif
   const int on = 1;
   int err;
-  char *cmd, *hostp = 0, *portp = 0, *user = 0;
+  char *cmd, *hostp = 0, *portp = 0, *user = 0, *srchostp = 0;
 #if defined HAVE_IDN || defined HAVE_IDN2
   char *hosttmp = 0;
 #endif
@@ -2506,6 +2506,16 @@ tn (int argc, char *argv[])
 	  --argc;
 	  continue;
 	}
+      if (strcmp (*argv, "-b") == 0)
+	{
+	  --argc;
+	  ++argv;
+	  if (argc == 0)
+	    goto usage;
+	  srchostp = *argv++;
+	  --argc;
+	  continue;
+	}
       if (strcmp (*argv, "-a") == 0)
 	{
 	  --argc;
@@ -2546,7 +2556,7 @@ tn (int argc, char *argv[])
 	  continue;
 	}
     usage:
-      printf ("usage: %s [-4] [-6] [-l user] [-a] host-name [port]\n", cmd);
+      printf ("usage: %s [-4] [-6] [-l user] [-b addr] [-a] host-name [port]\n", cmd);
       return 0;
     }
   if (hostp == 0)
@@ -2624,6 +2634,18 @@ tn (int argc, char *argv[])
   hints.ai_flags = AI_IDN;
 # endif
 
+  if (srchostp)
+    {
+      err = getaddrinfo (srchostp, "0", &hints, &hostaddr);
+      if (err < 0)
+	{
+	  printf ("Could not resolve %s: %s\n", srchostp,
+		  gai_strerror (err));
+	  return 0;
+	}
+      hints.ai_family = hostaddr->ai_family;
+    }
+
   err = getaddrinfo (hostp, portp, &hints, &result);
   if (err)
     {
@@ -2669,6 +2691,16 @@ tn (int argc, char *argv[])
 	  return 0;
 	}
 
+      if (srchostp)
+	{
+	  err = bind(net, hostaddr->ai_addr, hostaddr->ai_addrlen);
+	  if (err < 0)
+	    {
+	      perror ("telnet: bind");
+	      return 0;
+	    }
+	}
+
       if (debug)
 	{
 	  err = setsockopt (net, SOL_SOCKET, SO_DEBUG, &on, sizeof (on));
@@ -2698,6 +2730,8 @@ tn (int argc, char *argv[])
     }
   while (!connected);
 
+  if (srchostp)
+    freeaddrinfo(hostaddr);
   freeaddrinfo (result);
 #else /* !IPV6 */
   temp = inet_addr (hostp);

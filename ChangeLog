@@ -1,3 +1,16 @@
+2021-04-28  Simon Josefsson  <simon@josefsson.org>
+
+	telnet: Support --bind (-b) for NetKit compatibility.
+	* NEWS: Add.
+	* doc/inetutils.texi (telnet invocation): Add --bind (-b).
+	* telnet/commands.c (tn): New variables hostaddr and srchostp.
+	Parse -b parameter.  Update usage string.  If -b is set, call
+	getaddrinfo on it and pass that ai_addr on to bind.
+	* telnet/main.c (srcaddr): New global variable.
+	(argp_options): Add --bind (-b).
+	(parse_opt): Set srcaddr to -b value.
+	(main): Propagate -b value to tn function.
+
 2021-02-11  Simon Josefsson  <simon@josefsson.org>
 
 	* TODO: Add items discussed on mailing list.

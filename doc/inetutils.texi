@@ -2996,6 +2996,12 @@ Use an 8-bit data path.
 @opindex --login
 Attempt automatic login.
 
+@item -b @var{address}
+@itemx --bind=@var{address}
+@opindex -b
+@opindex --bind
+Bind to specific local @var{address}.
+
 @item -c
 @itemx --no-rc
 @opindex -c

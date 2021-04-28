@@ -105,7 +105,7 @@ tninit (void)
 }
 
 int family = 0;
-char *user;
+char *user, *srcaddr;
 #ifdef	FORWARD
 extern int forward_flags;
 #endif /* FORWARD */
@@ -132,6 +132,8 @@ static struct argp_option argp_options[] = {
   /* FIXME: Called "8bit" in r* utils */
   { "binary", '8', NULL, 0,
     "use an 8-bit data transmission", GRID+1 },
+  { "bind", 'b', "ADDRESS", 0,
+    "bind to specific local ADDRESS", GRID+1 },
   { "login", 'a', NULL, 0,
     "attempt automatic login", GRID+1 },
   { "no-rc", 'c', NULL, 0,
@@ -313,6 +315,10 @@ parse_opt (int key, char *arg, struct argp_state *state _GL_UNUSED_PARAMETER)
       break;
 #endif
 
+    case 'b':
+      srcaddr = arg;
+      break;
+
     default:
       return ARGP_ERR_UNKNOWN;
     }
@@ -374,7 +380,7 @@ main (int argc, char *argv[])
     {
       /* The command line contains at least one argument.
        */
-      char *args[8], **argp = args;
+      char *args[10], **argp = args;
 
       if (argc > 2)
 	error (EXIT_FAILURE, 0, "too many arguments");
@@ -383,6 +389,11 @@ main (int argc, char *argv[])
 	{
 	  *argp++ = "-l";
 	  *argp++ = user;
+	}
+      if (srcaddr)
+	{
+	  *argp++ = "-b";
+	  *argp++ = srcaddr;
 	}
       if (family == 4)
 	*argp++ = "-4";
