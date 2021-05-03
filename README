@@ -1,7 +1,14 @@
 GNU inetutils - The GNU Networking Utilities
 
 The GNU Networking Utilities are the common networking utilities,
-clients and servers of the GNU Operating System.
+clients and servers of the GNU Operating System developed by the GNU
+project.
+
+   If you are the author of an awesome program and want to join us in
+   writing Free (libre) Software, please consider making it an
+   official GNU program and become a GNU Maintainer.  You can find
+   instructions on how to do this here:
+   http://www.gnu.org/help/evaluation
 
 The individual utilities were originally derived from the 4.4BSDLite2
 distribution.  Many features were integrated from NetBSD, OpenBSD,
