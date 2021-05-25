@@ -20,7 +20,7 @@
 
 ACLOCAL_AMFLAGS = -I am -I m4
 
-EXTRA_DIST = paths ChangeLog.0 summary.sh.in CHECKLIST
+EXTRA_DIST = paths ChangeLog.0 ChangeLog.1 summary.sh.in CHECKLIST
 
 SUBDIRS = lib \
 	libinetutils libtelnet libicmp libls \
@@ -36,8 +36,17 @@ EXTRA_DIST += $(top_srcdir)/.version
 BUILT_SOURCES = $(top_srcdir)/.version
 $(top_srcdir)/.version:
 	echo $(VERSION) > $@-t && mv $@-t $@
-dist-hook:
+dist-hook: gen-ChangeLog
 	echo $(VERSION) > $(distdir)/.tarball-version
 
 snapshot:
 	$(MAKE) dist distdir=$(PACKAGE)-`date +"%Y%m%d"`
+
+.PHONY: gen-ChangeLog
+gen-ChangeLog:
+	$(AM_V_GEN)if test -d .git; then				\
+		$(top_srcdir)/build-aux/gitlog-to-changelog		\
+			-- v2.0~.. > $(distdir)/cl-t &&			\
+		{ rm -f $(distdir)/ChangeLog &&				\
+		  mv $(distdir)/cl-t $(distdir)/ChangeLog; }		\
+	fi

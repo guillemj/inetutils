@@ -2,6 +2,10 @@ GNU inetutils NEWS -- history of user-visible changes.
 
 * Noteworthy changes in release ?.? (????-??-??) [?]
 
+* ChangeLog is now automatically generated from version controlled logs.
+
+Historical information is preserved as ChangeLog.0 and ChangeLog.1.
+
 * telnet
 
 ** Implement --bind (-b).

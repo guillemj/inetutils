@@ -10,7 +10,7 @@ In particular:
   Nathan Neulinger       (tftpd)
   Thomas Bushnell        (sockaddr sin_len field)
 
-Please see ChangeLog for full credits.
+Please see version control logs and ChangeLog.? for full credits.
 
 Email of contributors in alphabetical order:
 Alex Muntada	   <alexm@ac.upc.es>
