@@ -13,6 +13,10 @@ Historical information is preserved as ChangeLog.0 and ChangeLog.1.
 This is used to bind to a particular local socket, for compatibility
 with NetKit's telnet.
 
+* whois
+
+Updated whois servers for .ORG and .IN.
+
 * Noteworthy changes in release 2.0 (2021-02-05) [stable]
 
 * ping
