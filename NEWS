@@ -2,18 +2,24 @@ GNU inetutils NEWS -- history of user-visible changes.
 
 * Noteworthy changes in release ?.? (????-??-??) [?]
 
-* ChangeLog is now automatically generated from version controlled logs.
+** ChangeLog is now automatically generated from version controlled logs.
 
 Historical information is preserved as ChangeLog.0 and ChangeLog.1.
 
-* telnet
+** ftp
+
+Disable use of readline when environment variable TERM is unset or set
+to "dumb" (caused problems with Emacs AngeFTP on MacOS).  Thanks to
+Alex Bochannek for report, debugging and patch.
+
+** telnet
 
 ** Implement --bind (-b).
 
 This is used to bind to a particular local socket, for compatibility
 with NetKit's telnet.
 
-* whois
+** whois
 
 Updated whois servers for .ORG and .IN.
 

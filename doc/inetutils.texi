@@ -1594,8 +1594,9 @@ Enable debugging output and possibly also socket debugging.
 @itemx --no-edit
 @opindex -e
 @opindex --no-edit
-Disables the editing of commands.  This is default setting
-for batch mode, without a TTY.
+Disables the editing of commands.  This is default setting for batch
+mode, without a TTY, or when the environment variable @env{TERM} is not
+set or its value is @samp{dumb}.
 
 @item -g
 @itemx --no-glob

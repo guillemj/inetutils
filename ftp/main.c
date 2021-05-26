@@ -259,6 +259,10 @@ main (int argc, char *argv[])
       verbose++;
       if (!prompt)
 	prompt = DEFAULT_PROMPT;
+
+      cp = getenv ("TERM");
+      if (cp == NULL || strcmp (cp, "dumb") == 0)
+	usereadline = 0;
     }
   else
     usereadline = 0;
