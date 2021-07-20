@@ -128,8 +128,6 @@ message).
 
 Fix all warnings with autoconf 2.71+
 
-use gitlog-to-changelog instead of manual ChangeLog entries
-
 enhance man pages so they fully supersede NetKit and BSD man pages
 
 generally use gnulib for portability more than we use today:
