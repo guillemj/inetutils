@@ -132,57 +132,57 @@ EXTRA_DIST = $(all) $(all:.1=.h2m) $(all:.8=.h2m)
 
 MAINTAINERCLEANFILES = $(all)
 
-ftp.1: ftp.h2m $(top_srcdir)/ftp/main.c $(top_srcdir)/configure.ac
+ftp.1: ftp.h2m $(top_srcdir)/ftp/main.c $(top_srcdir)/.version
 
-ftpd.8: ftpd.h2m $(top_srcdir)/ftpd/ftpd.c $(top_srcdir)/configure.ac
+ftpd.8: ftpd.h2m $(top_srcdir)/ftpd/ftpd.c $(top_srcdir)/.version
 
-hostname.1: hostname.h2m $(top_srcdir)/src/hostname.c $(top_srcdir)/configure.ac
+hostname.1: hostname.h2m $(top_srcdir)/src/hostname.c $(top_srcdir)/.version
 
-dnsdomainname.1: dnsdomainname.h2m $(top_srcdir)/src/dnsdomainname.c $(top_srcdir)/configure.ac
+dnsdomainname.1: dnsdomainname.h2m $(top_srcdir)/src/dnsdomainname.c $(top_srcdir)/.version
 
-ifconfig.1: ifconfig.h2m $(top_srcdir)/ifconfig/options.c $(top_srcdir)/configure.ac
+ifconfig.1: ifconfig.h2m $(top_srcdir)/ifconfig/options.c $(top_srcdir)/.version
 
-inetd.8: inetd.h2m $(top_srcdir)/src/inetd.c $(top_srcdir)/configure.ac
+inetd.8: inetd.h2m $(top_srcdir)/src/inetd.c $(top_srcdir)/.version
 
-logger.1: logger.h2m $(top_srcdir)/src/logger.c $(top_srcdir)/configure.ac
+logger.1: logger.h2m $(top_srcdir)/src/logger.c $(top_srcdir)/.version
 
-ping.1: ping.h2m $(top_srcdir)/ping/ping.c $(top_srcdir)/configure.ac
+ping.1: ping.h2m $(top_srcdir)/ping/ping.c $(top_srcdir)/.version
 
-ping6.1: ping6.h2m $(top_srcdir)/ping/ping6.c $(top_srcdir)/configure.ac
+ping6.1: ping6.h2m $(top_srcdir)/ping/ping6.c $(top_srcdir)/.version
 
-rcp.1: rcp.h2m $(top_srcdir)/src/rcp.c $(top_srcdir)/configure.ac
+rcp.1: rcp.h2m $(top_srcdir)/src/rcp.c $(top_srcdir)/.version
 
-rexec.1: rexec.h2m $(top_srcdir)/src/rexec.c $(top_srcdir)/configure.ac
+rexec.1: rexec.h2m $(top_srcdir)/src/rexec.c $(top_srcdir)/.version
 
-rexecd.8: rexecd.h2m $(top_srcdir)/src/rexecd.c $(top_srcdir)/configure.ac
+rexecd.8: rexecd.h2m $(top_srcdir)/src/rexecd.c $(top_srcdir)/.version
 
-rlogin.1: rlogin.h2m $(top_srcdir)/src/rlogin.c $(top_srcdir)/configure.ac
+rlogin.1: rlogin.h2m $(top_srcdir)/src/rlogin.c $(top_srcdir)/.version
 
-rlogind.8: rlogind.h2m $(top_srcdir)/src/rlogind.c $(top_srcdir)/configure.ac
+rlogind.8: rlogind.h2m $(top_srcdir)/src/rlogind.c $(top_srcdir)/.version
 
-rsh.1: rsh.h2m $(top_srcdir)/src/rsh.c $(top_srcdir)/configure.ac
+rsh.1: rsh.h2m $(top_srcdir)/src/rsh.c $(top_srcdir)/.version
 
-rshd.8: rshd.h2m $(top_srcdir)/src/rshd.c $(top_srcdir)/configure.ac
+rshd.8: rshd.h2m $(top_srcdir)/src/rshd.c $(top_srcdir)/.version
 
-syslogd.8: syslogd.h2m $(top_srcdir)/src/syslogd.c $(top_srcdir)/configure.ac
+syslogd.8: syslogd.h2m $(top_srcdir)/src/syslogd.c $(top_srcdir)/.version
 
-talk.1: talk.h2m $(top_srcdir)/talk/talk.c $(top_srcdir)/configure.ac
+talk.1: talk.h2m $(top_srcdir)/talk/talk.c $(top_srcdir)/.version
 
-talkd.8: talkd.h2m $(top_srcdir)/talkd/talkd.c $(top_srcdir)/configure.ac
+talkd.8: talkd.h2m $(top_srcdir)/talkd/talkd.c $(top_srcdir)/.version
 
-telnet.1: telnet.h2m $(top_srcdir)/telnet/main.c $(top_srcdir)/configure.ac
+telnet.1: telnet.h2m $(top_srcdir)/telnet/main.c $(top_srcdir)/.version
 
-telnetd.8: telnetd.h2m $(top_srcdir)/telnetd/telnetd.c $(top_srcdir)/configure.ac
+telnetd.8: telnetd.h2m $(top_srcdir)/telnetd/telnetd.c $(top_srcdir)/.version
 
-tftp.1: tftp.h2m $(top_srcdir)/src/tftp.c $(top_srcdir)/configure.ac
+tftp.1: tftp.h2m $(top_srcdir)/src/tftp.c $(top_srcdir)/.version
 
-tftpd.8: tftpd.h2m $(top_srcdir)/src/tftpd.c $(top_srcdir)/configure.ac
+tftpd.8: tftpd.h2m $(top_srcdir)/src/tftpd.c $(top_srcdir)/.version
 
-traceroute.1: traceroute.h2m $(top_srcdir)/src/traceroute.c $(top_srcdir)/configure.ac
+traceroute.1: traceroute.h2m $(top_srcdir)/src/traceroute.c $(top_srcdir)/.version
 
-uucpd.8: uucpd.h2m $(top_srcdir)/src/uucpd.c $(top_srcdir)/configure.ac
+uucpd.8: uucpd.h2m $(top_srcdir)/src/uucpd.c $(top_srcdir)/.version
 
-whois.1: whois.h2m $(top_srcdir)/whois/whois.c $(top_srcdir)/configure.ac
+whois.1: whois.h2m $(top_srcdir)/whois/whois.c $(top_srcdir)/.version
 
 .h2m.1:
 	$(MAKE) man TOOL=$* SECTION=1
