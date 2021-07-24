@@ -810,30 +810,6 @@ AC_CHECK_FUNC(setpgid, , AC_DEFINE([setpgid], setpgrp,
 # the system one doesn't have getopt_long.
 AC_CHECK_FUNC(getopt_long)
 
-AC_CHECK_HEADER(poll.h)
-
-# See if snprintf exists, otherwise just use a bogus version
-AC_CHECK_FUNC(snprintf,
-  [AC_DEFINE([HAVE_SNPRINTF], 1, [Define to one if you have snprintf])])
-
-# See if vsnprintf exists, otherwise use our own.
-AC_CHECK_FUNC(vsnprintf,
-  [AC_DEFINE([HAVE_VSNPRINTF], 1, [Define to one if you have vsnprintf])])
-
-# See if the system has strerror, and replace it if not
-AC_CHECK_FUNC(strerror)
-if test "$ac_cv_func_strerror" = no; then
-  # No strerror, so see if the SYS_ERRLIST variable can be used by
-  # ours
-  AC_CHECK_FUNC(sys_errlist, AC_DEFINE([HAVE_SYS_ERRLIST], 1,
-                              [Define to one if you have sys_errlist.]))
-  if test "$ac_cv_func_sys_errlist" = yes; then
-    AC_CHECK_DECL(sys_errlist, , ,
-      [IU_FLUSHLEFT([#include <stdio.h>
-                    #include <errno.h>])])
-  fi
-fi
-
 # See if the system has hstrerror, and replace it if not
 save_LIBS=$LIBS
 
