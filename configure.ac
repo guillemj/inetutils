@@ -783,8 +783,7 @@ AC_CHECK_FUNCS(login loginx logout logoutx logwtmp logwtmpx)
 LIBS="$_SAVE_LIBS"
 
 # Functions that we will define if necessary.
-AC_REPLACE_FUNCS(getpass getusershell memcmp memcpy memmove memset \
-		 strdup poll)
+AC_REPLACE_FUNCS(getpass getusershell poll)
 
 # Look for the crypt function itself (in libcrypt if possible)
 _SAVE_LIBS="$LIBS"
