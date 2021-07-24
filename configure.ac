@@ -614,7 +614,7 @@ IU_CHECK_LIBIDN([$with_libidn_prefix], [$with_idn])
 
 AC_HEADER_DIRENT
 
-AC_CHECK_HEADERS([arpa/nameser.h arpa/tftp.h errno.h fcntl.h features.h \
+AC_CHECK_HEADERS([arpa/nameser.h arpa/tftp.h fcntl.h features.h \
 		  glob.h memory.h netinet/ether.h netinet/in_systm.h \
 		  netinet/ip.h netinet/ip_icmp.h netinet/ip_var.h \
 		  security/pam_appl.h shadow.h \
@@ -875,13 +875,6 @@ AC_MSG_RESULT([$ac_iu_const_enctype_names])
 ## Checks for function declarations.
 
 AC_CHECK_DECLS(crypt, , , [#include <unistd.h>])
-
-# EWOULDBLOCK is more or less the BSD version of posix EAGAIN.
-IU_CHECK_MACRO(EWOULDBLOCK, [#include <errno.h>], , ,
-  [AC_DEFINE([EWOULDBLOCK], EAGAIN, 1,
-     [Define to EAGAIN if system does not provide EWOULDBLOCK])])
-
-AC_CHECK_DECLS(errno, , , [#include <errno.h>])
 
 # See whether <syslog.h> will declare special internal stuff if we
 # define SYSLOG_NAMES before including it.  We check for various
