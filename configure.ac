@@ -1014,16 +1014,6 @@ AH_BOTTOM(
 # entry in utmpx.  Also for some OS they are better handled with
 # STREAMS.
 case "$host" in
-*-freebsd9* | *-freebsd10* )
-  # FreeBSD 9.0 has implemented a non-standard and singular
-  # UTMPX interface.  The readutmp module from GNUlib does
-  # not support it, but we can fall back to getutxuser() for
-  # use in syslogd and talkd.  For ftpd, rlogind, telnetd,
-  # and uucpd the use of pututxent() should suffice, but
-  # this needs continued observations.
-  #
-  # Other issues?
-  ;;
 *olaris* )
   case "$host" in
   *olaris*10 | *olaris*11 )
@@ -1036,9 +1026,6 @@ case "$host" in
   AC_DEFINE([SOLARIS], 1, [Define to 1 for any Solaris system])
   AC_DEFINE([HAVE_STREAMSPTY], 1,
     [Define to 1 for a system using streams for ptys])
-  ;;
-*irix* | *hpux* )
-  # Known and needed work-arounds?
   ;;
 esac
 

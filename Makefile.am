@@ -28,8 +28,7 @@ SUBDIRS = lib \
 	doc man \
 	tests
 
-DISTCLEANFILES = pathdefs.make paths.defs \
-	$(PACKAGE)-$(VERSION).tar.gz $(PACKAGE)-$(VERSION).tar.xz
+DISTCLEANFILES = pathdefs.make paths.defs
 
 # git-version-gen
 EXTRA_DIST += $(top_srcdir)/.version
@@ -38,9 +37,6 @@ $(top_srcdir)/.version:
 	echo $(VERSION) > $@-t && mv $@-t $@
 dist-hook: gen-ChangeLog
 	echo $(VERSION) > $(distdir)/.tarball-version
-
-snapshot:
-	$(MAKE) dist distdir=$(PACKAGE)-`date +"%Y%m%d"`
 
 .PHONY: gen-ChangeLog
 gen-ChangeLog:
