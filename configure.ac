@@ -909,11 +909,6 @@ AC_CHECK_DECLS(htons, , ,
                  #endif
                  #include <netinet/in.h> ])])
 
-# Our home-grown version of setenv needs to use ENVIRON
-AC_CHECK_DECLS(environ, , ,
-  [IU_FLUSHLEFT([#include <unistd.h>
-                 #include <stdlib.h>])])
-
 # See if we have h_errno (the test is here so we can use -lresolv if
 # necessary).
 AC_CACHE_CHECK([for h_errno], inetutils_cv_var_h_errno,
