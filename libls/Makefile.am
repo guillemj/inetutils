@@ -25,6 +25,6 @@ noinst_LIBRARIES = $(libls_BUILD)
 
 EXTRA_LIBRARIES = libls.a
 
-libls_a_SOURCES = cmp.c stat_flags.c ls.c print.c util.c fts.c
+libls_a_SOURCES = cmp.c stat_flags.c ls.c print.c util.c
 
-noinst_HEADERS = extern.h ls.h fts.h
+noinst_HEADERS = extern.h ls.h

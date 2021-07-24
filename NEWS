@@ -8,6 +8,10 @@ Disable use of readline when environment variable TERM is unset or set
 to "dumb" (caused problems with Emacs AngeFTP on MacOS).  Thanks to
 Alex Bochannek for report, debugging and patch.
 
+** ftpd
+
+Our libls now uses gnulib's fts instead of our own custom version.
+
 ** telnet
 
 *** Implement --bind (-b).

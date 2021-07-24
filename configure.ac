@@ -200,8 +200,8 @@ AC_SUBST(LIBDL)
 AC_SUBST(LIBPAM)
 AC_SUBST(FTPD_LIBPAM)
 
-# Can we use libls? but we must have fchdir()
-if test "$enable_libls" = yes && test "$ac_cv_func_fchdir" = yes ; then
+# Use libls?
+if test "$enable_libls" = yes; then
   LIBLS="../libls/libls.a"
   libls_BUILD="libls.a"
   AC_DEFINE([WITH_LIBLS], 1, [Define to one if you have -lls])
@@ -771,7 +771,7 @@ AC_FUNC_FORK
 AC_FUNC_STRCOLL
 AC_FUNC_MMAP
 
-AC_CHECK_FUNCS(cfsetspeed cgetent dirfd fchdir flock \
+AC_CHECK_FUNCS(cfsetspeed cgetent dirfd flock \
                fork fpathconf ftruncate \
                getcwd getmsg getpwuid_r getspnam getutxent getutxuser \
                initgroups initsetproctitle killpg \
