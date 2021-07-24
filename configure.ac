@@ -653,12 +653,6 @@ fi
 # Checks return type of signal handlers
 AC_TYPE_SIGNAL
 
-AC_CHECK_TYPE(socklen_t, ,
-  [AC_DEFINE([socklen_t], int,
-    [Define to int if <sys/types.h> does not define])],
-  [IU_FLUSHLEFT([#include <sys/types.h>
-                 #include <sys/socket.h>])])
-
 AC_CHECK_TYPES(struct if_nameindex, , ,
   [IU_FLUSHLEFT([#include <sys/types.h>
                  #include <sys/socket.h>
