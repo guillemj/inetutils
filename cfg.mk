@@ -55,7 +55,7 @@ exclude_file_name_regexp--sc_obsolete_symbols = \
 exclude_file_name_regexp--sc_trailing_blank = \
 	^gl/top/README-release.diff$$
 
-old_NEWS_hash = 332d582cf1b06a9579f0be6e8fa5545c
+old_NEWS_hash = 201ce074704595e403c6614987d484e4
 
 htmldir = ../www-$(PACKAGE)
 
