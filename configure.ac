@@ -794,10 +794,6 @@ AC_CHECK_FUNC(_obstack_free)
 AC_CHECK_FUNC(setpgid, , AC_DEFINE([setpgid], setpgrp,
                           [Define to `setpgrp' if you don't have `setpgid'.]))
 
-# We use our own version of getopt (including our own header file) if
-# the system one doesn't have getopt_long.
-AC_CHECK_FUNC(getopt_long)
-
 # See if the system has hstrerror, and replace it if not
 save_LIBS=$LIBS
 
