@@ -749,7 +749,6 @@ IU_CHECK_MEMBERS([struct tftphdr.th_u], , ,
 		  #include <arpa/tftp.h>])
 
 ### Checks for compiler characteristics.
-AC_C_CONST
 
 # See if `weak refs' are possible; these make it possible (with shared
 # libraries) to check for the existance of a standard function at
