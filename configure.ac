@@ -618,7 +618,7 @@ AC_CHECK_HEADERS([arpa/nameser.h arpa/tftp.h fcntl.h features.h \
 		  glob.h memory.h netinet/ether.h netinet/in_systm.h \
 		  netinet/ip.h netinet/ip_icmp.h netinet/ip_var.h \
 		  security/pam_appl.h shadow.h \
-		  stdarg.h stdlib.h string.h stropts.h sys/tty.h \
+		  stropts.h sys/tty.h \
 		  sys/utsname.h sys/ptyvar.h sys/msgbuf.h sys/filio.h \
 		  sys/ioctl_compat.h sys/cdefs.h sys/stream.h sys/mkdev.h \
 		  sys/sockio.h sys/sysmacros.h sys/param.h sys/file.h \
