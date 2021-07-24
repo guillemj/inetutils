@@ -1,13 +1,63 @@
---- README-release.orig	2021-01-25 14:53:16.617112508 +0100
-+++ README-release	2021-01-25 14:53:48.201386387 +0100
-@@ -19,10 +19,6 @@
+--- README-release.orig	2021-07-24 15:01:40.637006120 +0200
++++ README-release	2021-07-24 15:05:35.687402132 +0200
+@@ -21,7 +21,7 @@
  
-     git push origin master
+ * Check that the NixOS/Hydra autobuilder is reporting all is well:
  
--* Check that the NixOS/Hydra autobuilder is reporting all is well:
--
 -    https://hydra.nixos.org/project/gnu/@PACKAGE@-master
--
++    https://hydra.nixos.org/project/gnu/inetutils-master
+ 
  * Run the following command to download any new translations:
  
-     ./bootstrap && ./configure
+@@ -29,8 +29,7 @@
+ 
+ * Pre-release testing: ensure that the following commands succeed:
+ 
+-    c=check ve=check-very-expensive; git grep -q "^$ve:\$" && c=$ve
+-    make $c syntax-check distcheck
++    make check syntax-check distcheck
+ 
+ * To (i) set the date, version number, and release TYPE on line 3 of
+   NEWS, (ii) commit that, and (iii) tag the release, run
+@@ -49,7 +48,7 @@
+   it builds and passes all tests.
+ 
+ * While that's happening, write the release announcement that you will
+-  soon post.  Start with the template, $HOME/announce-@PACKAGE@-X.Y
++  soon post.  Start with the template, $HOME/announce-inetutils-X.Y
+   that was just created by that "make" command.
+ 
+ Once all the builds and tests have passed,
+@@ -73,22 +72,22 @@
+ 
+   Go to the news-submission form:
+ 
+-    https://savannah.gnu.org/news/submit.php?group=@PACKAGE@
++    https://savannah.gnu.org/news/submit.php?group=inetutils
+ 
+   If it does not work, then enable "News" for the project via this link:
+ 
+-    https://savannah.gnu.org/project/admin/editgroupfeatures.php?group=@PACKAGE@
++    https://savannah.gnu.org/project/admin/editgroupfeatures.php?group=inetutils
+ 
+   Write something like the following:
+ 
+-    Subject: @PACKAGE@-X.Y released [stable]
++    Subject: inetutils-X.Y released [stable]
+     +verbatim+
+     ...paste the announcement here...
+     -verbatim-
+ 
+   Then go here to approve it:
+ 
+-    https://savannah.gnu.org/news/approve.php?group=@PACKAGE@
++    https://savannah.gnu.org/news/approve.php?group=inetutils
+ 
+ * Send the announcement email message.
+ 
+@@ -98,4 +97,4 @@
+ 
+   to update the on-line manual accessible at
+ 
+-    https://www.gnu.org/software/@PACKAGE@/manual/
++    https://www.gnu.org/software/inetutils/manual/
