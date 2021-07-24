@@ -57,7 +57,7 @@
 #include <sys/ioctl.h>
 
 #include <errno.h>
-#include "fts.h"
+#include <fts_.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

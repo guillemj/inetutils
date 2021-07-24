@@ -56,7 +56,7 @@
 #include <sys/stat.h>
 
 #include <errno.h>
-#include "fts.h"
+#include <fts_.h>
 #include <grp.h>
 #include <pwd.h>
 #include <stdio.h>

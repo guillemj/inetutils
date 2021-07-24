@@ -55,7 +55,7 @@
 #include <sys/stat.h>
 
 #include <ctype.h>
-#include "fts.h"
+#include <fts_.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
