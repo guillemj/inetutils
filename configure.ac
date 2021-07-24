@@ -158,7 +158,6 @@ gl_INIT
 
 ### Checks for libraries.
 AC_SEARCH_LIBS([inet_ntoa], [nsl])
-AC_SEARCH_LIBS([getpeername], [socket])
 
 # See if a termcap library is available (under one of several names)
 IU_LIB_TERMCAP
