@@ -153,7 +153,7 @@ ls_main (int argc, char **argv)
 
   optind = 1;	/* Reset for reentrant scanning.  */
 
-  fts_options = FTS_PHYSICAL;
+  fts_options = FTS_PHYSICAL | FTS_NOCHDIR;
   while ((ch = getopt (argc, argv, "1ACFLRSTWacdfgiklmnopqrstux")) != -1)
     {
       switch (ch)
