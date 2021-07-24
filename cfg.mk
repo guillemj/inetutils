@@ -17,9 +17,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see `http://www.gnu.org/licenses/'.
 
-_makefile_at_at_check_exceptions = ' && !/PATHDEFS_MAKE/'
+manual_title = GNU Network Utilities
 
-_build-aux = build-aux
+bootstrap-tools = gnulib,autoconf,automake,bison,m4,makeinfo,help2man,make,gzip,tar
+
+old_NEWS_hash = 201ce074704595e403c6614987d484e4
+
+_makefile_at_at_check_exceptions = ' && !/PATHDEFS_MAKE/'
 
 local-checks-to-skip = \
 	sc_cast_of_x_alloc_return_value \
@@ -54,20 +58,6 @@ exclude_file_name_regexp--sc_obsolete_symbols = \
 
 exclude_file_name_regexp--sc_trailing_blank = \
 	^gl/top/README-release.diff$$
-
-old_NEWS_hash = 201ce074704595e403c6614987d484e4
-
-htmldir = ../www-$(PACKAGE)
-
-manual_title = GNU network utilities
-
-web-coverage:
-	rm -fv `find $(htmldir)/coverage -type f | grep -v CVS`
-	cp -rv doc/coverage/* $(htmldir)/coverage/
-
-upload-web-coverage:
-	cd $(htmldir) && \
-		cvs commit -m "Update." coverage
 
 sc_unsigned_char:
 	@prohibit=u''_char \
