@@ -610,7 +610,7 @@ else
     # Do we have sysctl(8) available?
     # It need not be present with the default search path,
     # so locally augment PATH!
-    SYSCTL=`PATH="$PATH":/usr/sbin:/sbin command -v sysctl`
+    SYSCTL=`PATH="$PATH":/usr/sbin:/sbin command -v sysctl || true`
 
     if test -n "$SYSCTL"; then
 	have_sysctl=true
