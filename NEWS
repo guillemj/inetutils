@@ -2,6 +2,13 @@ GNU inetutils NEWS -- history of user-visible changes.
 
 * Noteworthy changes in release ?.? (????-??-??) [?]
 
+** Various bugs fixes, internal improvements and clean ups.
+
+A lot of configure.ac checks were removed that are no longer needed
+since we rely on gnulib for portability.
+
+The tests/ftp-localhost.sh self-test no longer fails on platforms
+where sysctl is missing.
 
 * Noteworthy changes in release 2.1 (2021-07-24) [stable]
 
