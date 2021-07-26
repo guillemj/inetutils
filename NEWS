@@ -2,6 +2,13 @@ GNU inetutils NEWS -- history of user-visible changes.
 
 * Noteworthy changes in release ?.? (????-??-??) [?]
 
+** logger
+
+Code for non-getaddrinfo removed, since we are using gnulib to provide
+getaddrinfo on any platform that lacks it.  This may have resulted in
+logger not using getaddrinfo on platforms that didn't have the
+getaddrinfo prototype, even though we use the gnulib module.
+
 ** Various bugs fixes, internal improvements and clean ups.
 
 A lot of configure.ac checks were removed that are no longer needed
