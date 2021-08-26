@@ -3,6 +3,7 @@ GNU inetutils NEWS -- history of user-visible changes.
 * Noteworthy changes in release ?.? (????-??-??) [?]
 
 ** logger
+** rlogind
 
 Code for non-getaddrinfo removed, since we are using gnulib to provide
 getaddrinfo on any platform that lacks it.  This may have resulted in
