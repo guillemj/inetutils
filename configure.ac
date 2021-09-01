@@ -650,9 +650,6 @@ fi
 
 ### Checks for types.
 
-# Checks return type of signal handlers
-AC_TYPE_SIGNAL
-
 AC_CHECK_TYPES(struct if_nameindex, , ,
   [IU_FLUSHLEFT([#include <sys/types.h>
                  #include <sys/socket.h>
