@@ -1365,6 +1365,13 @@ initconn (void)
 		  uint32_t *pu32 = (uint32_t *) &data_addr_sa4->sin_addr.s_addr;
 		  pu32[0] = htonl ( (h[0] << 24) | (h[1] << 16) | (h[2] << 8) | h[3]);
 		}
+		if (data_addr_sa4->sin_addr.s_addr
+		    != ((struct sockaddr_in *) &hisctladdr)->sin_addr.s_addr)
+		  {
+		    printf ("Passive mode address mismatch.\n");
+		    (void) command ("ABOR");	/* Cancel any open connection.  */
+		    goto bad;
+		  }
 	    } /* LPSV IPv4 */
 	  else /* IPv6 */
 	    {
@@ -1395,6 +1402,13 @@ initconn (void)
 		  pu32[2] = htonl ( (h[8] << 24) | (h[9] << 16) | (h[10] << 8) | h[11]);
 		  pu32[3] = htonl ( (h[12] << 24) | (h[13] << 16) | (h[14] << 8) | h[15]);
 		}
+		if (data_addr_sa6->sin6_addr.s6_addr
+		    != ((struct sockaddr_in6 *) &hisctladdr)->sin6_addr.s6_addr)
+		  {
+		    printf ("Passive mode address mismatch.\n");
+		    (void) command ("ABOR");	/* Cancel any open connection.  */
+		    goto bad;
+		  }
 	    } /* LPSV IPv6 */
 	}
       else /* !EPSV && !LPSV */
@@ -1415,6 +1429,13 @@ initconn (void)
 			 | ((a2 & 0xff) << 8) | (a3 & 0xff) );
 	      data_addr_sa4->sin_port =
 		  htons (((p0 & 0xff) << 8) | (p1 & 0xff));
+	      if (data_addr_sa4->sin_addr.s_addr
+		  != ((struct sockaddr_in *) &hisctladdr)->sin_addr.s_addr)
+		{
+		  printf ("Passive mode address mismatch.\n");
+		  (void) command ("ABOR");	/* Cancel any open connection.  */
+		  goto bad;
+		}
 	    } /* PASV */
 	  else
 	    {
