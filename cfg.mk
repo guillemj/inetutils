@@ -23,6 +23,8 @@ bootstrap-tools = gnulib,autoconf,automake,bison,m4,makeinfo,help2man,make,gzip,
 
 old_NEWS_hash = 9e58290a292044bd6de634f52f6ed940
 
+translation_project_ =
+
 _makefile_at_at_check_exceptions = ' && !/PATHDEFS_MAKE/'
 
 local-checks-to-skip = \
