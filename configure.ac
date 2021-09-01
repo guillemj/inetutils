@@ -611,9 +611,6 @@ AC_CHECK_FUNCS([setlocale])
 IU_CHECK_LIBIDN([$with_libidn_prefix], [$with_idn])
 
 ### Checks for header files.
-
-AC_HEADER_DIRENT
-
 AC_CHECK_HEADERS([arpa/nameser.h arpa/tftp.h fcntl.h features.h \
 		  glob.h memory.h netinet/ether.h netinet/in_systm.h \
 		  netinet/ip.h netinet/ip_icmp.h netinet/ip_var.h \
@@ -746,9 +743,7 @@ IU_CHECK_MEMBERS([struct tftphdr.th_u], , ,
 		  #include <arpa/tftp.h>])
 
 ### Checks for library functions.
-AC_FUNC_CLOSEDIR_VOID
 AC_FUNC_FORK
-AC_FUNC_STRCOLL
 AC_FUNC_MMAP
 
 AC_CHECK_FUNCS(cfsetspeed cgetent dirfd flock \
