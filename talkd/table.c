@@ -21,7 +21,7 @@
 #include <config.h>
 
 #include <intalkd.h>
-#include "unused-parameter.h"
+#include "attribute.h"
 
 typedef struct request_table table_t;
 
@@ -93,7 +93,7 @@ lookup_request (CTL_MSG * request,
 
 static int
 fuzzy_comp (table_t * ptr, CTL_MSG * request,
-	    time_t * unused _GL_UNUSED_PARAMETER)
+	    time_t * unused MAYBE_UNUSED)
 {
   if (ptr->request.type == LEAVE_INVITE
       && strcmp (request->l_name, ptr->request.r_name) == 0

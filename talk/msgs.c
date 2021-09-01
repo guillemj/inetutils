@@ -59,7 +59,7 @@
 #include <time.h>
 #include <signal.h>
 #include <stdio.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 #include "talk.h"
 
 #define MSG_INTERVAL 4
@@ -68,7 +68,7 @@ char *current_state;
 int current_line = 0;
 
 static void
-disp_msg (int sig _GL_UNUSED_PARAMETER)
+disp_msg (int sig MAYBE_UNUSED)
 {
   message (current_state);
 }

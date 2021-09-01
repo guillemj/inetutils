@@ -78,7 +78,7 @@
 #include <xalloc.h>
 #include <argp.h>
 #include <libinetutils.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 
 #ifdef KRB5
 # ifdef HAVE_KRB5_H
@@ -173,7 +173,7 @@ static struct argp_option options[] = {
 
 static error_t
 parse_opt (int key, char *arg,
-	   struct argp_state *state _GL_UNUSED_PARAMETER)
+	   struct argp_state *state MAYBE_UNUSED)
 {
   switch (key)
     {
@@ -784,7 +784,7 @@ sendsig (int sig)
 }
 
 void
-sigpipe (int sig _GL_UNUSED_PARAMETER)
+sigpipe (int sig MAYBE_UNUSED)
 {
   ++end_of_pipe;
 }

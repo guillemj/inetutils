@@ -39,7 +39,7 @@
 #endif
 
 #include <libinetutils.h>
-#include "unused-parameter.h"
+#include "attribute.h"
 
 int usefamily = AF_UNSPEC;	/* Address family for daemon.  */
 
@@ -97,7 +97,7 @@ check_host (struct sockaddr *sa, socklen_t len)
 #endif /* WITH_WRAP */
 
 static void
-reapchild (int signo _GL_UNUSED_PARAMETER)
+reapchild (int signo MAYBE_UNUSED)
 {
   int save_errno = errno;
 

@@ -48,7 +48,7 @@
 #endif
 
 #include <read-file.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 
 #include "../ifconfig.h"
 
@@ -56,7 +56,7 @@
 /* ARPHRD stuff.  */
 
 static void
-print_hwaddr_ether (format_data_t form _GL_UNUSED_PARAMETER,
+print_hwaddr_ether (format_data_t form MAYBE_UNUSED,
 		    unsigned char *data)
 {
   *column += printf ("%02X:%02X:%02X:%02X:%02X:%02X",
@@ -65,7 +65,7 @@ print_hwaddr_ether (format_data_t form _GL_UNUSED_PARAMETER,
 }
 
 static void
-print_hwaddr_arcnet (format_data_t form _GL_UNUSED_PARAMETER,
+print_hwaddr_arcnet (format_data_t form MAYBE_UNUSED,
 		     unsigned char *data)
 {
   *column += printf ("%02X", data[0]);
@@ -73,7 +73,7 @@ print_hwaddr_arcnet (format_data_t form _GL_UNUSED_PARAMETER,
 }
 
 static void
-print_hwaddr_dlci (format_data_t form _GL_UNUSED_PARAMETER,
+print_hwaddr_dlci (format_data_t form MAYBE_UNUSED,
 		   unsigned char *data)
 {
   *column += printf ("%i", *((short *) data));
@@ -99,7 +99,7 @@ print_hwaddr_ax25 (format_data_t form, unsigned char *data)
 }
 
 static void
-print_hwaddr_irda (format_data_t form _GL_UNUSED_PARAMETER,
+print_hwaddr_irda (format_data_t form MAYBE_UNUSED,
 		   unsigned char *data)
 {
   *column += printf ("%02X:%02X:%02X:%02X",
@@ -108,7 +108,7 @@ print_hwaddr_irda (format_data_t form _GL_UNUSED_PARAMETER,
 }
 
 static void
-print_hwaddr_rose (format_data_t form _GL_UNUSED_PARAMETER,
+print_hwaddr_rose (format_data_t form MAYBE_UNUSED,
 		   unsigned char *data)
 {
   *column += printf ("%02X%02X%02X%02X%02X",
@@ -552,8 +552,8 @@ system_fh_hwaddr_query (format_data_t form, int argc, char *argv[])
 }
 
 void
-system_fh_hwaddr (format_data_t form, int argc _GL_UNUSED_PARAMETER,
-		  char *argv[] _GL_UNUSED_PARAMETER)
+system_fh_hwaddr (format_data_t form, int argc MAYBE_UNUSED,
+		  char *argv[] MAYBE_UNUSED)
 {
 #ifdef SIOCGIFHWADDR
   if (ioctl (form->sfd, SIOCGIFHWADDR, form->ifr) < 0)
@@ -589,8 +589,8 @@ system_fh_hwtype_query (format_data_t form, int argc, char *argv[])
 }
 
 void
-system_fh_hwtype (format_data_t form, int argc _GL_UNUSED_PARAMETER,
-		  char *argv[] _GL_UNUSED_PARAMETER)
+system_fh_hwtype (format_data_t form, int argc MAYBE_UNUSED,
+		  char *argv[] MAYBE_UNUSED)
 {
 #ifdef SIOCGIFHWADDR
   if (ioctl (form->sfd, SIOCGIFHWADDR, form->ifr) < 0)

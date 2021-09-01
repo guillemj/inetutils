@@ -33,7 +33,7 @@
 # include <ctype.h>
 # include <syslog.h>
 # include <string.h>
-# include <unused-parameter.h>
+# include <attribute.h>
 
 # include "auth.h"
 # include "misc.h"
@@ -102,7 +102,7 @@ Shishi *shishi_telnet = NULL;
 
 /* FIXME: Reverse return code! */
 int
-krb5shishi_init (TN_Authenticator * ap _GL_UNUSED_PARAMETER,
+krb5shishi_init (TN_Authenticator * ap MAYBE_UNUSED,
 		 int server)
 {
   if (server)
@@ -137,7 +137,7 @@ delayed_shishi_init (void)
 }
 
 void
-krb5shishi_cleanup (TN_Authenticator * ap _GL_UNUSED_PARAMETER)
+krb5shishi_cleanup (TN_Authenticator * ap MAYBE_UNUSED)
 {
   if (shishi_handle == NULL)
     return;
@@ -396,7 +396,7 @@ krb5shishi_reply (TN_Authenticator * ap, unsigned char *data, int cnt)
 }
 
 int
-krb5shishi_status (TN_Authenticator * ap _GL_UNUSED_PARAMETER,
+krb5shishi_status (TN_Authenticator * ap MAYBE_UNUSED,
 		   char *name, size_t len, int level)
 {
   int status;

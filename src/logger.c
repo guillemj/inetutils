@@ -41,7 +41,7 @@
 #include <error.h>
 #include <xalloc.h>
 #include <inttostr.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 
 #define SYSLOG_NAMES
 #include <syslog.h>
@@ -374,7 +374,7 @@ static struct argp_option argp_options[] = {
 };
 
 static error_t
-parse_opt (int key, char *arg, struct argp_state *state _GL_UNUSED_PARAMETER)
+parse_opt (int key, char *arg, struct argp_state *state MAYBE_UNUSED)
 {
   switch (key)
     {

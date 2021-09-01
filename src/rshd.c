@@ -146,7 +146,7 @@
 #include <error.h>
 #include <progname.h>
 #include <argp.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 #include <libinetutils.h>
 #include "xalloc.h"
 
@@ -271,7 +271,7 @@ extern int iruserok (uint32_t raddr, int superuser,
 #endif /* WITH_PAM */
 
 static error_t
-parse_opt (int key, char *arg, struct argp_state *state _GL_UNUSED_PARAMETER)
+parse_opt (int key, char *arg, struct argp_state *state MAYBE_UNUSED)
 {
   switch (key)
     {
@@ -2093,7 +2093,7 @@ topdomain (const char *h)
 static int
 rsh_conv (int num, const struct pam_message **pam_msg,
 	    struct pam_response **pam_resp,
-	    void *data _GL_UNUSED_PARAMETER)
+	    void *data MAYBE_UNUSED)
 {
   struct pam_response *resp;
 

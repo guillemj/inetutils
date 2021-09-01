@@ -91,7 +91,7 @@
 #endif
 
 #include "ftp_var.h"
-#include "unused-parameter.h"
+#include "attribute.h"
 
 #if !HAVE_DECL_FCLOSE
 /* Some systems don't declare fclose in <stdio.h>, so do it ourselves.  */
@@ -410,7 +410,7 @@ login (char *host)
 }
 
 void
-cmdabort (int sig _GL_UNUSED_PARAMETER)
+cmdabort (int sig MAYBE_UNUSED)
 {
 
   printf ("\n");
@@ -597,7 +597,7 @@ empty (fd_set *mask, int sec)
 jmp_buf sendabort;
 
 void
-abortsend (int sig _GL_UNUSED_PARAMETER)
+abortsend (int sig MAYBE_UNUSED)
 {
 
   mflag = 0;
@@ -902,7 +902,7 @@ abort:
 jmp_buf recvabort;
 
 void
-abortrecv (int sig _GL_UNUSED_PARAMETER)
+abortrecv (int sig MAYBE_UNUSED)
 {
 
   mflag = 0;
@@ -1669,7 +1669,7 @@ tvsub (struct timeval *tdiff, struct timeval *t1, struct timeval *t0)
 }
 
 void
-psabort (int sig _GL_UNUSED_PARAMETER)
+psabort (int sig MAYBE_UNUSED)
 {
 
   abrtflag++;
@@ -1782,7 +1782,7 @@ pswitch (int flag)
 }
 
 void
-abortpt (int sig _GL_UNUSED_PARAMETER)
+abortpt (int sig MAYBE_UNUSED)
 {
 
   printf ("\n");
@@ -1924,7 +1924,7 @@ abort:
 }
 
 void
-reset (int argc _GL_UNUSED_PARAMETER, char **argv _GL_UNUSED_PARAMETER)
+reset (int argc MAYBE_UNUSED, char **argv MAYBE_UNUSED)
 {
   fd_set mask;
   int nfnd = 1;

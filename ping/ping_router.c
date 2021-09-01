@@ -40,13 +40,13 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <errno.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 
 #include <ping.h>
 #include <ping_impl.h>
 
 int
-ping_router (char *hostname _GL_UNUSED_PARAMETER)
+ping_router (char *hostname MAYBE_UNUSED)
 {
   return 0;
 }

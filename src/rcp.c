@@ -84,7 +84,7 @@
 # include <utime.h>		/* If we don't have utimes(), use utime(). */
 #endif
 #include <progname.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 #include <libinetutils.h>
 #include <argp.h>
 #include <error.h>
@@ -202,7 +202,7 @@ static struct argp_option options[] = {
 };
 
 static error_t
-parse_opt (int key, char *arg, struct argp_state *state _GL_UNUSED_PARAMETER)
+parse_opt (int key, char *arg, struct argp_state *state MAYBE_UNUSED)
 {
   switch (key)
     {
@@ -1489,7 +1489,7 @@ allocbuf (BUF * bp, int fd, int blksize)
 }
 
 void
-lostconn (int signo _GL_UNUSED_PARAMETER)
+lostconn (int signo MAYBE_UNUSED)
 {
   if (!iamremote)
     error (0, 0, "lost connection");

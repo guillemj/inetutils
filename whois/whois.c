@@ -41,7 +41,7 @@
 #define obstack_chunk_free free
 #include <obstack.h>
 #include <error.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 #include <libinetutils.h>
 
 /* Application-specific */
@@ -103,7 +103,7 @@ static struct argp_option ripe_argp_options[] = {
 
 static error_t
 ripe_argp_parser (int key, char *arg,
-		  struct argp_state *state _GL_UNUSED_PARAMETER)
+		  struct argp_state *state MAYBE_UNUSED)
 {
   if (key > 0 && (unsigned) key < 128)
     {
@@ -142,7 +142,7 @@ static struct argp_option gwhois_argp_options[] = {
 
 static error_t
 gwhois_argp_parser (int key, char *arg,
-		    struct argp_state *state _GL_UNUSED_PARAMETER)
+		    struct argp_state *state MAYBE_UNUSED)
 {
   char *p, *q;
 

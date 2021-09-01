@@ -55,7 +55,7 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 
 /*
   According to Unix-FAQ maintained by Andrew Gierth:
@@ -104,7 +104,7 @@
 #define MAXFD 64
 
 void
-waitdaemon_timeout (int signo _GL_UNUSED_PARAMETER)
+waitdaemon_timeout (int signo MAYBE_UNUSED)
 {
   int left;
 

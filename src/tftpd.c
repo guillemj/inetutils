@@ -85,7 +85,7 @@
 
 #include "tftpsubs.h"
 
-#include <unused-parameter.h>
+#include <attribute.h>
 #include <xalloc.h>
 #include <argp.h>
 #include <progname.h>
@@ -165,7 +165,7 @@ static struct argp_option options[] = {
 
 static error_t
 parse_opt (int key, char *arg,
-	   struct argp_state *state _GL_UNUSED_PARAMETER)
+	   struct argp_state *state MAYBE_UNUSED)
 {
   switch (key)
     {
@@ -636,7 +636,7 @@ int timeout;
 sigjmp_buf timeoutbuf;
 
 void
-timer (int sig _GL_UNUSED_PARAMETER)
+timer (int sig MAYBE_UNUSED)
 {
 
   timeout += rexmtval;
@@ -716,7 +716,7 @@ abort:
 }
 
 void
-justquit (int sig _GL_UNUSED_PARAMETER)
+justquit (int sig MAYBE_UNUSED)
 {
   exit (EXIT_SUCCESS);
 }

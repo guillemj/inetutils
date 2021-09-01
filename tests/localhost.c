@@ -23,11 +23,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 #include <progname.h>
 
 int
-main (int argc _GL_UNUSED_PARAMETER, char **argv)
+main (int argc MAYBE_UNUSED, char **argv)
 {
   char *p = localhost ();
   set_program_name (argv[0]);

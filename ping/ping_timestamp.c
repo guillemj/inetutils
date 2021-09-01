@@ -40,7 +40,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <errno.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 
 #include <ping.h>
 #include <ping_impl.h>
@@ -91,10 +91,10 @@ recv_timestamp (int code, void *closure,
 
 
 void
-print_timestamp (int dupflag, void *closure _GL_UNUSED_PARAMETER,
-		 struct sockaddr_in *dest _GL_UNUSED_PARAMETER,
+print_timestamp (int dupflag, void *closure MAYBE_UNUSED,
+		 struct sockaddr_in *dest MAYBE_UNUSED,
 		 struct sockaddr_in *from,
-		 struct ip *ip _GL_UNUSED_PARAMETER,
+		 struct ip *ip MAYBE_UNUSED,
 		 icmphdr_t * icmp, int datalen)
 {
   char timestr[16];

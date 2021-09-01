@@ -25,7 +25,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <syslog.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 #include "extern.h"
 
 #ifdef HAVE_SECURITY_PAM_APPL_H
@@ -314,7 +314,7 @@ pam_pass (const char *passwd, struct credentials *pcred)
 }
 
 void
-pam_end_login (struct credentials * pcred _GL_UNUSED_PARAMETER)
+pam_end_login (struct credentials * pcred MAYBE_UNUSED)
 {
   int error;
 

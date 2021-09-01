@@ -88,7 +88,7 @@
 
 #include <argp.h>
 #include <progname.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 #include <libinetutils.h>
 
 void dologin (struct passwd *pw, struct sockaddr *sap, socklen_t salen);
@@ -119,7 +119,7 @@ static struct argp_option argp_options[] = {
 
 static error_t
 parse_opt (int key, char *arg,
-	   struct argp_state *state _GL_UNUSED_PARAMETER)
+	   struct argp_state *state MAYBE_UNUSED)
 {
   switch (key)
     {

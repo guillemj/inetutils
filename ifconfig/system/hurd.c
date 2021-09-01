@@ -27,7 +27,7 @@
 #include <net/if_arp.h>
 #include "../ifconfig.h"
 
-#include <unused-parameter.h>
+#include <attribute.h>
 
 
 /* Output format stuff.  */
@@ -44,9 +44,9 @@ const char *system_help = "NAME [ADDR]\
 struct argp_child system_argp_child;
 
 int
-system_parse_opt (struct ifconfig **ifp _GL_UNUSED_PARAMETER,
-		  char option _GL_UNUSED_PARAMETER,
-		  char *optarg _GL_UNUSED_PARAMETER)
+system_parse_opt (struct ifconfig **ifp MAYBE_UNUSED,
+		  char option MAYBE_UNUSED,
+		  char *optarg MAYBE_UNUSED)
 {
   return 0;
 }
@@ -158,9 +158,9 @@ system_parse_opt_rest (struct ifconfig **ifp, int argc, char *argv[])
 }
 
 int
-system_configure (int sfd _GL_UNUSED_PARAMETER,
-		  struct ifreq *ifr _GL_UNUSED_PARAMETER,
-		  struct system_ifconfig *ifs _GL_UNUSED_PARAMETER)
+system_configure (int sfd MAYBE_UNUSED,
+		  struct ifreq *ifr MAYBE_UNUSED,
+		  struct system_ifconfig *ifs MAYBE_UNUSED)
 {
   return 0;
 }
@@ -168,7 +168,7 @@ system_configure (int sfd _GL_UNUSED_PARAMETER,
 struct if_nameindex* (*system_if_nameindex) (void) = if_nameindex;
 
 static void
-print_hwaddr_ether (format_data_t form _GL_UNUSED_PARAMETER,
+print_hwaddr_ether (format_data_t form MAYBE_UNUSED,
 		    unsigned char *data)
 {
   *column += printf ("%02X:%02X:%02X:%02X:%02X:%02X",
@@ -236,8 +236,8 @@ system_fh_hwaddr_query (format_data_t form, int argc, char *argv[])
 }
 
 void
-system_fh_hwaddr (format_data_t form, int argc _GL_UNUSED_PARAMETER,
-		  char *argv[] _GL_UNUSED_PARAMETER)
+system_fh_hwaddr (format_data_t form, int argc MAYBE_UNUSED,
+		  char *argv[] MAYBE_UNUSED)
 {
 #ifdef SIOCGIFHWADDR
   if (ioctl (form->sfd, SIOCGIFHWADDR, form->ifr) < 0)
@@ -273,8 +273,8 @@ system_fh_hwtype_query (format_data_t form, int argc, char *argv[])
 }
 
 void
-system_fh_hwtype (format_data_t form, int argc _GL_UNUSED_PARAMETER,
-		  char *argv[] _GL_UNUSED_PARAMETER)
+system_fh_hwtype (format_data_t form, int argc MAYBE_UNUSED,
+		  char *argv[] MAYBE_UNUSED)
 {
 #ifdef SIOCGIFHWADDR
   if (ioctl (form->sfd, SIOCGIFHWADDR, form->ifr) < 0)

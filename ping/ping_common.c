@@ -31,7 +31,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <xalloc.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 
 #include "ping_common.h"
 

@@ -64,7 +64,7 @@
 #include <progname.h>
 #include <error.h>
 #include <argp.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 #include <libinetutils.h>
 
 #include <arpa/telnet.h>
@@ -201,7 +201,7 @@ static struct argp_option argp_options[] = {
 };
 
 static error_t
-parse_opt (int key, char *arg, struct argp_state *state _GL_UNUSED_PARAMETER)
+parse_opt (int key, char *arg, struct argp_state *state MAYBE_UNUSED)
 {
   switch (key)
     {

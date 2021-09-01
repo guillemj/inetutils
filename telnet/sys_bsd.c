@@ -64,7 +64,7 @@
 #include <errno.h>
 #include <arpa/telnet.h>
 #include <sys/select.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 
 #include "ring.h"
 
@@ -942,7 +942,7 @@ NetSetPgrp (int fd)
  */
 
 void
-deadpeer (int sig _GL_UNUSED_PARAMETER)
+deadpeer (int sig MAYBE_UNUSED)
 {
   setcommandmode ();
   longjmp (peerdied, -1);
@@ -950,7 +950,7 @@ deadpeer (int sig _GL_UNUSED_PARAMETER)
 
 
 void
-intr (int sig _GL_UNUSED_PARAMETER)
+intr (int sig MAYBE_UNUSED)
 {
   if (localchars)
     {
@@ -963,7 +963,7 @@ intr (int sig _GL_UNUSED_PARAMETER)
 
 
 void
-intr2 (int sig _GL_UNUSED_PARAMETER)
+intr2 (int sig MAYBE_UNUSED)
 {
   if (localchars)
     {
@@ -979,7 +979,7 @@ intr2 (int sig _GL_UNUSED_PARAMETER)
 
 #ifdef	SIGTSTP
 void
-susp (int sig _GL_UNUSED_PARAMETER)
+susp (int sig MAYBE_UNUSED)
 {
   if ((rlogin != _POSIX_VDISABLE) && rlogin_susp ())
     return;
@@ -990,7 +990,7 @@ susp (int sig _GL_UNUSED_PARAMETER)
 
 #ifdef	SIGWINCH
 void
-sendwin (int sig _GL_UNUSED_PARAMETER)
+sendwin (int sig MAYBE_UNUSED)
 {
   if (connected)
     {
@@ -1001,7 +1001,7 @@ sendwin (int sig _GL_UNUSED_PARAMETER)
 
 #ifdef	SIGINFO
 void
-ayt (int sig _GL_UNUSED_PARAMETER)
+ayt (int sig MAYBE_UNUSED)
 {
   if (connected)
     sendayt ();

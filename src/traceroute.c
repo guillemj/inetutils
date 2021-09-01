@@ -49,7 +49,7 @@
 #include <limits.h>
 #include <assert.h>
 #include <argp.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 #include <icmp.h>
 #ifdef HAVE_LOCALE_H
 # include <locale.h>
@@ -354,7 +354,7 @@ main (int argc, char **argv)
 
 void
 do_try (trace_t * trace, const int hop,
-	const int max_hops _GL_UNUSED_PARAMETER,
+	const int max_hops MAYBE_UNUSED,
 	const int max_tries)
 {
   fd_set readset;

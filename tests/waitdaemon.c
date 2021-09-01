@@ -34,18 +34,18 @@
 #include <error.h>
 #include <progname.h>
 #include <libinetutils.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 
 extern int waitdaemon (int nochdir, int noclose, int maxwait);
 
 void
-doexit (int signo _GL_UNUSED_PARAMETER)
+doexit (int signo MAYBE_UNUSED)
 {
   _exit (EXIT_SUCCESS);
 }
 
 int
-main (int argc _GL_UNUSED_PARAMETER, char *argv[])
+main (int argc MAYBE_UNUSED, char *argv[])
 {
   pid_t ppid;
 

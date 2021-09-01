@@ -81,7 +81,7 @@
 # include <idna.h>
 #endif
 
-#include <unused-parameter.h>
+#include <attribute.h>
 #include <libinetutils.h>
 
 #include "general.h"
@@ -1567,7 +1567,7 @@ suspend (void)
 
 #if !defined TN3270
 int
-shell (int argc, char *argv[] _GL_UNUSED_PARAMETER)
+shell (int argc, char *argv[] MAYBE_UNUSED)
 {
   long oldrows, oldcols, newrows, newcols, err;
 

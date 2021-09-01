@@ -39,7 +39,7 @@
 #include <sys/socket.h>
 #include <net/if.h>
 
-#include <unused-parameter.h>
+#include <attribute.h>
 
 #include "ifconfig.h"
 
@@ -380,7 +380,7 @@ void parse_opt_set_af (struct ifconfig *ifp, char *af)
 }
 
 void
-parse_opt_set_flag (struct ifconfig *ifp _GL_UNUSED_PARAMETER,
+parse_opt_set_flag (struct ifconfig *ifp MAYBE_UNUSED,
 		    int flag, int rev)
 {
   if (ifp)
@@ -614,7 +614,7 @@ parse_opt (int key, char *arg, struct argp_state *state)
 
 static char *
 default_help_filter (int key, const char *text,
-		     void *input _GL_UNUSED_PARAMETER)
+		     void *input MAYBE_UNUSED)
 {
   char *s;
 

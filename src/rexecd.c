@@ -112,7 +112,7 @@
 #include <progname.h>
 #include <argp.h>
 #include <error.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 #include "libinetutils.h"
 
 void die (int code, const char *fmt, ...);
@@ -137,8 +137,8 @@ static struct argp_option options[] = {
 };
 
 static error_t
-parse_opt (int key, char *arg _GL_UNUSED_PARAMETER,
-	   struct argp_state *state _GL_UNUSED_PARAMETER)
+parse_opt (int key, char *arg MAYBE_UNUSED,
+	   struct argp_state *state MAYBE_UNUSED)
 {
   switch (key)
     {
@@ -730,7 +730,7 @@ getstr (const char *err)
 static int
 rexec_conv (int num, const struct pam_message **pam_msg,
 	    struct pam_response **pam_resp,
-	    void *data _GL_UNUSED_PARAMETER)
+	    void *data MAYBE_UNUSED)
 {
   struct pam_response *resp;
 

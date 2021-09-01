@@ -137,7 +137,7 @@
 #include <progname.h>
 #include <libinetutils.h>
 #include <readutmp.h>		/* May define UTMP_NAME_FUNCTION.  */
-#include "unused-parameter.h"
+#include "attribute.h"
 #include "xalloc.h"
 
 /* A mask of all facilities mentioned explicitly in the configuration file
@@ -1744,7 +1744,7 @@ cvthname (struct sockaddr *f, socklen_t len)
 }
 
 void
-domark (int signo _GL_UNUSED_PARAMETER)
+domark (int signo MAYBE_UNUSED)
 {
   struct filed *f;
 
@@ -1793,7 +1793,7 @@ logerror (const char *type)
 }
 
 void
-doexit (int signo _GL_UNUSED_PARAMETER)
+doexit (int signo MAYBE_UNUSED)
 {
   _exit (EXIT_SUCCESS);
 }
@@ -2090,7 +2090,7 @@ load_confdir (const char *dirname, struct filed **nextp)
 
 /* INIT -- Initialize syslogd from configuration table.  */
 void
-init (int signo _GL_UNUSED_PARAMETER)
+init (int signo MAYBE_UNUSED)
 {
   int rc, ret;
   struct filed *f, *next, **nextp;
@@ -2487,7 +2487,7 @@ decode (const char *name, CODE * codetab)
 }
 
 void
-dbg_toggle (int signo _GL_UNUSED_PARAMETER)
+dbg_toggle (int signo MAYBE_UNUSED)
 {
   int dbg_save = dbg_output;
 
@@ -2523,7 +2523,7 @@ dbg_printf (const char *fmt, ...)
    set a flag variable which will tell the main loop to go through a
    restart.  */
 void
-trigger_restart (int signo _GL_UNUSED_PARAMETER)
+trigger_restart (int signo MAYBE_UNUSED)
 {
   restart = 1;
 #ifndef HAVE_SIGACTION

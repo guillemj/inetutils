@@ -46,7 +46,7 @@
 #include <net/if_arp.h>
 #include <netinet/if_ether.h>
 
-#include <unused-parameter.h>
+#include <attribute.h>
 
 #include "../ifconfig.h"
 
@@ -65,9 +65,9 @@ NAME [ADDR [DSTADDR]] [broadcast BRDADDR] [netmask MASK] "
 struct argp_child system_argp_child;
 
 int
-system_parse_opt (struct ifconfig **ifp _GL_UNUSED_PARAMETER,
-		  char option _GL_UNUSED_PARAMETER,
-		  char *optarg _GL_UNUSED_PARAMETER)
+system_parse_opt (struct ifconfig **ifp MAYBE_UNUSED,
+		  char option MAYBE_UNUSED,
+		  char *optarg MAYBE_UNUSED)
 {
   return 0;
 }

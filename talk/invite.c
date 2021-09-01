@@ -62,7 +62,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <setjmp.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 #include "talk_ctl.h"
 #include "talk.h"
 
@@ -117,7 +117,7 @@ announce_invite (void)
  * Routine called on interupt to re-invite the callee
  */
 void
-re_invite (int sig _GL_UNUSED_PARAMETER)
+re_invite (int sig MAYBE_UNUSED)
 {
 
   message ("Ringing your party again");

@@ -83,7 +83,7 @@
 #endif
 
 #include <argp.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 
 #include <libinetutils.h>
 
@@ -516,13 +516,13 @@ modecmd (int argc, char *argv[])
 }
 
 void
-setbinary (int argc _GL_UNUSED_PARAMETER, char *argv[] _GL_UNUSED_PARAMETER)
+setbinary (int argc MAYBE_UNUSED, char *argv[] MAYBE_UNUSED)
 {
   settftpmode ("octet");
 }
 
 void
-setascii (int argc _GL_UNUSED_PARAMETER, char *argv[] _GL_UNUSED_PARAMETER)
+setascii (int argc MAYBE_UNUSED, char *argv[] MAYBE_UNUSED)
 {
   settftpmode ("netascii");
 }
@@ -792,7 +792,7 @@ settimeout (int argc, char *argv[])
 }
 
 void
-status (int argc _GL_UNUSED_PARAMETER, char *argv[] _GL_UNUSED_PARAMETER)
+status (int argc MAYBE_UNUSED, char *argv[] MAYBE_UNUSED)
 {
   if (connected)
     printf ("Connected to %s.\n", hostname);
@@ -805,7 +805,7 @@ status (int argc _GL_UNUSED_PARAMETER, char *argv[] _GL_UNUSED_PARAMETER)
 }
 
 void
-intr (int signo _GL_UNUSED_PARAMETER)
+intr (int signo MAYBE_UNUSED)
 {
   signal (SIGALRM, SIG_IGN);
   alarm (0);
@@ -929,7 +929,7 @@ makeargv (void)
 }
 
 void
-quit (int argc _GL_UNUSED_PARAMETER, char *argv[] _GL_UNUSED_PARAMETER)
+quit (int argc MAYBE_UNUSED, char *argv[] MAYBE_UNUSED)
 {
   exit (EXIT_SUCCESS);
 }
@@ -966,14 +966,14 @@ help (int argc, char *argv[])
 }
 
 void
-settrace (int argc _GL_UNUSED_PARAMETER, char *argv[] _GL_UNUSED_PARAMETER)
+settrace (int argc MAYBE_UNUSED, char *argv[] MAYBE_UNUSED)
 {
   trace = !trace;
   printf ("Packet tracing %s.\n", trace ? "on" : "off");
 }
 
 void
-setverbose (int argc _GL_UNUSED_PARAMETER, char *argv[] _GL_UNUSED_PARAMETER)
+setverbose (int argc MAYBE_UNUSED, char *argv[] MAYBE_UNUSED)
 {
   verbose = !verbose;
   printf ("Verbose mode %s.\n", verbose ? "on" : "off");
@@ -1378,7 +1378,7 @@ printstats (const char *direction, unsigned long amount)
 }
 
 static void
-timer (int sig _GL_UNUSED_PARAMETER)
+timer (int sig MAYBE_UNUSED)
 {
   timeout += rexmtval;
   if (timeout >= maxtimeout)

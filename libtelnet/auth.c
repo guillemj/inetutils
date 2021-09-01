@@ -70,7 +70,7 @@
 
 #include <config.h>
 
-#include "unused-parameter.h"
+#include "attribute.h"
 
 #if defined AUTHENTICATION
 # include <stdio.h>
@@ -665,7 +665,7 @@ auth_finished (TN_Authenticator * ap, int result)
 }
 
 static void
-auth_intr (int sig _GL_UNUSED_PARAMETER)
+auth_intr (int sig MAYBE_UNUSED)
 {
   auth_finished (0, AUTH_REJECT);
 }

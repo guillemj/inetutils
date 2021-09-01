@@ -48,7 +48,7 @@
 #endif
 
 #include <argp.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 #include <ping.h>
 #include "ping_impl.h"
 #include "libinetutils.h"
@@ -377,7 +377,7 @@ decode_ip_timestamp (char *arg)
 int volatile stop = 0;
 
 void
-sig_int (int signal _GL_UNUSED_PARAMETER)
+sig_int (int signal MAYBE_UNUSED)
 {
   stop = 1;
 }

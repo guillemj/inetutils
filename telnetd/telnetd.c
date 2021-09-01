@@ -27,7 +27,7 @@
 #include <argp.h>
 #include <progname.h>
 #include <error.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 #include <libinetutils.h>
 
 #if defined AUTHENTICATION || defined ENCRYPTION
@@ -145,7 +145,7 @@ static struct argp_option argp_options[] = {
 };
 
 static error_t
-parse_opt (int key, char *arg, struct argp_state *state _GL_UNUSED_PARAMETER)
+parse_opt (int key, char *arg, struct argp_state *state MAYBE_UNUSED)
 {
   switch (key)
     {
@@ -796,7 +796,7 @@ print_hostinfo (void)
 }
 
 static void
-chld_is_done (int sig _GL_UNUSED_PARAMETER)
+chld_is_done (int sig MAYBE_UNUSED)
 {
   pending_sigchld = 1;
 }

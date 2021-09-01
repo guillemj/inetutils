@@ -41,7 +41,7 @@
 #include <ctype.h>
 #include <errno.h>
 #include <limits.h>
-#include <unused-parameter.h>
+#include <attribute.h>
 
 #include <ping.h>
 #include "ping_impl.h"
@@ -174,7 +174,7 @@ handler (int code, void *closure,
 
 int
 print_echo (int dupflag, struct ping_stat *ping_stat,
-	    struct sockaddr_in *dest _GL_UNUSED_PARAMETER,
+	    struct sockaddr_in *dest MAYBE_UNUSED,
 	    struct sockaddr_in *from,
 	    struct ip *ip, icmphdr_t * icmp, int datalen)
 {
@@ -339,7 +339,7 @@ print_ip_header (struct ip *ip)
 }
 
 void
-print_ip_data (icmphdr_t * icmp, void *data _GL_UNUSED_PARAMETER)
+print_ip_data (icmphdr_t * icmp, void *data MAYBE_UNUSED)
 {
   int hlen;
   unsigned char *cp;

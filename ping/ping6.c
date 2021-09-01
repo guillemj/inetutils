@@ -52,7 +52,7 @@
 # include <idna.h>
 #endif
 
-#include <unused-parameter.h>
+#include <attribute.h>
 #include <xalloc.h>
 #include "ping6.h"
 #include "libinetutils.h"
@@ -310,7 +310,7 @@ main (int argc, char **argv)
 static volatile int stop = 0;
 
 static void
-sig_int (int signal _GL_UNUSED_PARAMETER)
+sig_int (int signal MAYBE_UNUSED)
 {
   stop = 1;
 }
@@ -546,7 +546,7 @@ ping_reset (PING * p)
 
 static int
 print_echo (int dupflag, int hops, struct ping_stat *ping_stat,
-	    struct sockaddr_in6 *dest _GL_UNUSED_PARAMETER,
+	    struct sockaddr_in6 *dest MAYBE_UNUSED,
 	    struct sockaddr_in6 *from,
 	    struct icmp6_hdr *icmp6, int datalen)
 {
@@ -823,7 +823,7 @@ echo_finish (void)
 }
 
 static PING *
-ping_init (int type _GL_UNUSED_PARAMETER, int ident)
+ping_init (int type MAYBE_UNUSED, int ident)
 {
   int fd, err;
   const int on = 1;

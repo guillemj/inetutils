@@ -24,7 +24,7 @@
 #include <signal.h>
 #include <libinetutils.h>
 #include <progname.h>
-#include "unused-parameter.h"
+#include "attribute.h"
 
 #ifndef LOG_FACILITY
 # define LOG_FACILITY LOG_DAEMON
@@ -67,7 +67,7 @@ static struct argp_option argp_options[] = {
 
 static error_t
 parse_opt (int key, char *arg,
-	   struct argp_state *state _GL_UNUSED_PARAMETER)
+	   struct argp_state *state MAYBE_UNUSED)
 {
   switch (key)
     {
@@ -138,7 +138,7 @@ talkd_init (void)
 time_t last_msg_time;
 
 static void
-alarm_handler (int err _GL_UNUSED_PARAMETER)
+alarm_handler (int err MAYBE_UNUSED)
 {
   int oerrno = errno;
 

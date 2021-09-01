@@ -117,7 +117,7 @@
 #include <progname.h>
 #include <argp.h>
 #include <libinetutils.h>
-#include "unused-parameter.h"
+#include "attribute.h"
 #include "xalloc.h"
 
 /*
@@ -309,7 +309,7 @@ void prevent_routing (int fd, struct auth_data *ap);
 #endif
 
 void
-rlogind_sigchld (int signo _GL_UNUSED_PARAMETER)
+rlogind_sigchld (int signo MAYBE_UNUSED)
 {
   pid_t pid;
   int status;
@@ -488,7 +488,7 @@ static struct argp_option options[] = {
 
 static error_t
 parse_opt (int key, char *arg,
-	   struct argp_state *state _GL_UNUSED_PARAMETER)
+	   struct argp_state *state MAYBE_UNUSED)
 {
   switch (key)
     {
@@ -2230,7 +2230,7 @@ do_pam_check (int infd, struct auth_data *ap, const char *service)
 static int
 rlogin_conv (int num, const struct pam_message **pam_msg,
 	     struct pam_response **pam_resp,
-	     void *data _GL_UNUSED_PARAMETER)
+	     void *data MAYBE_UNUSED)
 {
   struct pam_response *resp;
 

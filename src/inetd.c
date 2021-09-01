@@ -137,7 +137,7 @@
 #include "libinetutils.h"
 #include "argcv.h"
 #include "version-etc.h"
-#include "unused-parameter.h"
+#include "attribute.h"
 
 #ifndef EAI_ADDRFAMILY
 # define EAI_ADDRFAMILY 1
@@ -203,7 +203,7 @@ static struct argp_option argp_options[] = {
 
 static error_t
 parse_opt (int key, char *arg,
-	   struct argp_state *state _GL_UNUSED_PARAMETER)
+	   struct argp_state *state MAYBE_UNUSED)
 {
   char *p;
   int number;
@@ -490,7 +490,7 @@ run_service (int ctrl, struct servtab *sep)
 }
 
 void
-reapchild (int signo _GL_UNUSED_PARAMETER)
+reapchild (int signo MAYBE_UNUSED)
 {
   int status;
   pid_t pid;
@@ -692,7 +692,7 @@ servent_setup (struct servtab *sep)
 }
 
 void
-retry (int signo _GL_UNUSED_PARAMETER)
+retry (int signo MAYBE_UNUSED)
 {
   struct servtab *sep;
 
@@ -1525,7 +1525,7 @@ echo_stream (int s, struct servtab *sep)
 
 /* Echo service -- echo data back */
 void
-echo_dg (int s, struct servtab *sep _GL_UNUSED_PARAMETER)
+echo_dg (int s, struct servtab *sep MAYBE_UNUSED)
 {
   char buffer[BUFSIZE];
   int i;
@@ -1563,7 +1563,7 @@ discard_stream (int s, struct servtab *sep)
 
 void
 /* Discard service -- ignore data */
-discard_dg (int s, struct servtab *sep _GL_UNUSED_PARAMETER)
+discard_dg (int s, struct servtab *sep MAYBE_UNUSED)
 {
   char buffer[BUFSIZE];
 
@@ -1624,7 +1624,7 @@ chargen_stream (int s, struct servtab *sep)
 
 /* Character generator */
 void
-chargen_dg (int s, struct servtab *sep _GL_UNUSED_PARAMETER)
+chargen_dg (int s, struct servtab *sep MAYBE_UNUSED)
 {
 #ifdef IPV6
   struct sockaddr_storage sa;
@@ -1686,7 +1686,7 @@ machtime (void)
 }
 
 void
-machtime_stream (int s, struct servtab *sep _GL_UNUSED_PARAMETER)
+machtime_stream (int s, struct servtab *sep MAYBE_UNUSED)
 {
   long result;
 
@@ -1695,7 +1695,7 @@ machtime_stream (int s, struct servtab *sep _GL_UNUSED_PARAMETER)
 }
 
 void
-machtime_dg (int s, struct servtab *sep _GL_UNUSED_PARAMETER)
+machtime_dg (int s, struct servtab *sep MAYBE_UNUSED)
 {
   long result;
 #ifdef IPV6
@@ -1716,7 +1716,7 @@ machtime_dg (int s, struct servtab *sep _GL_UNUSED_PARAMETER)
 
 void
 /* Return human-readable time of day */
-daytime_stream (int s, struct servtab *sep _GL_UNUSED_PARAMETER)
+daytime_stream (int s, struct servtab *sep MAYBE_UNUSED)
 {
   char buffer[256];
   time_t lclock;
@@ -1729,7 +1729,7 @@ daytime_stream (int s, struct servtab *sep _GL_UNUSED_PARAMETER)
 
 /* Return human-readable time of day */
 void
-daytime_dg (int s, struct servtab *sep _GL_UNUSED_PARAMETER)
+daytime_dg (int s, struct servtab *sep MAYBE_UNUSED)
 {
   char buffer[256];
   time_t lclock;
