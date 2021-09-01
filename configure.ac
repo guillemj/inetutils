@@ -745,15 +745,6 @@ IU_CHECK_MEMBERS([struct tftphdr.th_u], , ,
 		  #include <sys/socket.h>
 		  #include <arpa/tftp.h>])
 
-### Checks for compiler characteristics.
-
-# See if `weak refs' are possible; these make it possible (with shared
-# libraries) to check for the existance of a standard function at
-# run-time instead of compile time, which is very handy for
-# distributing binary version programs that automatically adapt -- in
-# inetutils case, to whether or not crypt is available.
-IU_CHECK_WEAK_REFS
-
 ### Checks for library functions.
 AC_FUNC_CLOSEDIR_VOID
 AC_FUNC_FORK
