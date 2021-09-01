@@ -21,7 +21,7 @@ manual_title = GNU Network Utilities
 
 bootstrap-tools = gnulib,autoconf,automake,bison,m4,makeinfo,help2man,make,gzip,tar
 
-old_NEWS_hash = 201ce074704595e403c6614987d484e4
+old_NEWS_hash = 9e58290a292044bd6de634f52f6ed940
 
 _makefile_at_at_check_exceptions = ' && !/PATHDEFS_MAKE/'
 
