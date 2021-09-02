@@ -143,7 +143,7 @@ Appendix
 @chapter Introduction
 @cindex introduction
 
-The GNU Network Utilities is a distribution of common networking
+The GNU Networking Utilities is a distribution of common networking
 utilities and servers, including for example ping, traceroute and ftp.
 
 This manual is a work in progress: many sections make no attempt to

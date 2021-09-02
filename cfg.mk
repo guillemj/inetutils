@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see `http://www.gnu.org/licenses/'.
 
-manual_title = GNU Network Utilities
+manual_title = GNU Networking Utilities
 
 bootstrap-tools = gnulib,autoconf,automake,bison,m4,makeinfo,help2man,make,gzip,tar
 
