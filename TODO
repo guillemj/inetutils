@@ -118,20 +118,17 @@ Add more utilities:
 Add internationalization, read: gettext support, and provide
 translations, especially for the clients.
 
-3.0 will be a release that tries to put as much as possible into
-libraries (startup code, etc).  We would also like to try and write
-(or convince someone else to write) a gopher and gopherd pair.
+Try to put as much as possible into libraries (startup code, etc).
+
+gopher and gopherd?
 
 Make src/hostname.c handle missing 'sethostname' functions on
 platforms that doesn't have them (it could just print an error
 message).
 
-Fix all warnings with autoconf 2.71+
-
 enhance man pages so they fully supersede NetKit and BSD man pages
 
 generally use gnulib for portability more than we use today:
-  - gnulib has fts.c that we have a custom libls/ for
   - getaddrinfo/getnameinfo with IDN support to simplify IDN complexity
   - more system header files replacements
   - ruserok/wtmp stuff
