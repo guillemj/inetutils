@@ -37,7 +37,7 @@ struct system_ifconfig
 
 /* Output format support.  */
 
-/* Set this to a comma seperated, comma terminated list of struct
+/* Set this to a comma separated, comma terminated list of struct
    format_handler entries.  They are inserted at the beginning of the
    default list, so they override generic implementations if they have
    the same name.  For example:

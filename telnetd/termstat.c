@@ -628,7 +628,7 @@ clientstat (register int code, register int parm1, register int parm2)
 	/*
 	 * Change terminal speed as requested by client.
 	 * We set the receive speed first, so that if we can't
-	 * store seperate receive and transmit speeds, the transmit
+	 * store separate receive and transmit speeds, the transmit
 	 * speed will take precedence.
 	 */
 	tty_rspeed (parm2);

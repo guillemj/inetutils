@@ -48,7 +48,7 @@
 
 /* Return the name corresponding to the interface flag FLAG.
    If FLAG is unknown, return NULL.
-   AVOID contains a ':' surrounded and seperated list of flag names
+   AVOID contains a ':' surrounded and separated list of flag names
    that should be avoided if alternative names with the same flag value
    exists.  The first unavoided match is returned, or the first avoided
    match if no better is available.  */
