@@ -47,7 +47,7 @@ local-checks-to-skip = \
 	sc_prohibit_xalloc_without_use \
 	sc_error_message_period \
 	sc_error_message_uppercase \
-	sc_immutable_NEWS \
+	sc_indent \
 	sc_m4_quote_check \
 	sc_prohibit_atoi_atof \
 	sc_prohibit_stat_st_blocks \
