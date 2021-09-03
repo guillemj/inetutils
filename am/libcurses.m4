@@ -175,9 +175,7 @@ AC_DEFUN([IU_LIB_CURSES], [
       AC_CACHE_CHECK(whether curses needs $LIBTERMCAP,
 		     inetutils_cv_curses_needs_termcap,
 	LIBS="$LIBCURSES"
-	AC_TRY_LINK([#include <curses.h>], [initscr ();],
-		    [inetutils_cv_curses_needs_termcap=no],
-		    [inetutils_cv_curses_needs_termcap=yes]))
+	AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <curses.h>]], [[initscr ();]])],[inetutils_cv_curses_needs_termcap=no],[inetutils_cv_curses_needs_termcap=yes]))
       if test $inetutils_cv_curses_needs_termcap = yes; then
 	  LIBCURSES="$LIBCURSES $LIBTERMCAP"
       fi

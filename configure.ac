@@ -591,9 +591,10 @@ if test "$with_wrap" = yes; then
   AC_MSG_CHECKING(hosts_ctl in -lwrap);
   save_LIBS=$LIBS
   LIBS="$save_LIBS -lwrap"
-  AC_TRY_LINK([int allow_severity = 1; int deny_severity = 1;],
-              hosts_ctl(), eval "ac_cv_lib_wrap_hosts_ctl=yes",
-              eval "ac_cv_lib_wrap_hosts_ctl=no")
+  AC_LINK_IFELSE([AC_LANG_PROGRAM([[int allow_severity = 1; int deny_severity = 1;]],
+                                  [[hosts_ctl()]])],
+                 [eval "ac_cv_lib_wrap_hosts_ctl=yes"],
+		 [eval "ac_cv_lib_wrap_hosts_ctl=no"])
   LIBS=$save_LIBS
   if test "$ac_cv_lib_wrap_hosts_ctl" = yes \
       && test "$ac_cv_header_tcpd_h" = yes; then
@@ -880,9 +881,7 @@ AC_CHECK_DECLS(htons, , ,
 # See if we have h_errno (the test is here so we can use -lresolv if
 # necessary).
 AC_CACHE_CHECK([for h_errno], inetutils_cv_var_h_errno,
-  AC_TRY_COMPILE([#include <netdb.h>],
-    [ extern int h_errno; int iu_x = h_errno; ],
-    inetutils_cv_var_h_errno=yes, inetutils_cv_var_h_errno=no))
+  AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <netdb.h>]], [[ extern int h_errno; int iu_x = h_errno; ]])],[inetutils_cv_var_h_errno=yes],[inetutils_cv_var_h_errno=no]))
 if test "$inetutils_cv_var_h_errno" = yes; then
   # FIXME: Isn't this wrong? Shouldn't the declaration check define
   #        this if we find h_errno?
