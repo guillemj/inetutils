@@ -1,11 +1,11 @@
---- README-release.orig	2021-07-24 15:01:40.637006120 +0200
-+++ README-release	2021-07-24 15:05:35.687402132 +0200
+--- README-release.orig	2021-09-03 22:57:19.292207913 +0200
++++ README-release	2021-09-03 22:57:45.732425524 +0200
 @@ -21,7 +21,7 @@
  
  * Check that the NixOS/Hydra autobuilder is reporting all is well:
  
 -    https://hydra.nixos.org/project/gnu/@PACKAGE@-master
-+    https://hydra.nixos.org/project/gnu/inetutils-master
++    https://hydra.nixos.org/jobset/gnu/inetutils-master
  
  * Run the following command to download any new translations:
  
@@ -28,34 +28,36 @@
    that was just created by that "make" command.
  
  Once all the builds and tests have passed,
-@@ -73,22 +72,22 @@
+@@ -68,28 +67,6 @@
+     v=$(cat .prev-version)
+     git push origin master tag v$v
  
-   Go to the news-submission form:
- 
+-* Announce it on Savannah first, so you can include the savannah.org
+-  announcement link in the email message.
+-
+-  Go to the news-submission form:
+-
 -    https://savannah.gnu.org/news/submit.php?group=@PACKAGE@
-+    https://savannah.gnu.org/news/submit.php?group=inetutils
- 
-   If it does not work, then enable "News" for the project via this link:
- 
+-
+-  If it does not work, then enable "News" for the project via this link:
+-
 -    https://savannah.gnu.org/project/admin/editgroupfeatures.php?group=@PACKAGE@
-+    https://savannah.gnu.org/project/admin/editgroupfeatures.php?group=inetutils
- 
-   Write something like the following:
- 
+-
+-  Write something like the following:
+-
 -    Subject: @PACKAGE@-X.Y released [stable]
-+    Subject: inetutils-X.Y released [stable]
-     +verbatim+
-     ...paste the announcement here...
-     -verbatim-
- 
-   Then go here to approve it:
- 
+-    +verbatim+
+-    ...paste the announcement here...
+-    -verbatim-
+-
+-  Then go here to approve it:
+-
 -    https://savannah.gnu.org/news/approve.php?group=@PACKAGE@
-+    https://savannah.gnu.org/news/approve.php?group=inetutils
- 
+-
  * Send the announcement email message.
  
-@@ -98,4 +97,4 @@
+ * After each non-alpha release, run
+@@ -98,4 +75,4 @@
  
    to update the on-line manual accessible at
  
