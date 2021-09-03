@@ -1,6 +1,5 @@
 #
-# Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017,
-# 2018, 2019, 2020, 2021 Free Software Foundation, Inc.
+# Copyright (C) 2009-2021 Free Software Foundation, Inc.
 #
 # This file is part of GNU Inetutils.
 #
@@ -26,6 +25,12 @@ old_NEWS_hash = 9e58290a292044bd6de634f52f6ed940
 translation_project_ =
 
 _makefile_at_at_check_exceptions = ' && !/PATHDEFS_MAKE/'
+
+VC_LIST_ALWAYS_EXCLUDE_REGEX = ^doc/fdl-1.3.texi$$
+update-copyright-env = \
+  UPDATE_COPYRIGHT_FORCE=1 \
+  UPDATE_COPYRIGHT_USE_INTERVALS=2 \
+  UPDATE_COPYRIGHT_MAX_LINE_LENGTH=79
 
 local-checks-to-skip = \
 	sc_cast_of_x_alloc_return_value \
