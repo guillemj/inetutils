@@ -7,6 +7,11 @@ GNU inetutils NEWS -- history of user-visible changes.
 Don't infloop when (malicious) server sends too large terminal value,
 see: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=945861
 
+** Various bugs fixes, internal improvements and clean ups.
+
+Further cleanup of configure.ac, updates to modern autoconf releases,
+and improved gnulib usage.
+
 * Noteworthy changes in release 2.2 (2021-09-01) [stable]
 
 ** ftp
