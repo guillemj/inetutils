@@ -2,6 +2,10 @@ GNU inetutils NEWS -- history of user-visible changes.
 
 * Noteworthy changes in release ?.? (????-??-??) [?]
 
+** telnet
+
+Don't infloop when (malicious) server sends too large terminal value,
+see: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=945861
 
 * Noteworthy changes in release 2.2 (2021-09-01) [stable]
 

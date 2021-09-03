@@ -1063,7 +1063,6 @@ Exit (int returnCode)
 void
 ExitString (char *string, int returnCode)
 {
-  SetForExit ();
   fwrite (string, 1, strlen (string), stderr);
   exit (returnCode);
 }
